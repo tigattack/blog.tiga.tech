@@ -5,7 +5,7 @@ pre[class*="language-"] {
     color: #fff;
     background: 0 0;
     font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
-    font-size: 1em;
+    font-size: 0.9em;
     text-align: left;
     text-shadow: 0 -0.1em 0.2em #000;
     white-space: pre;
@@ -20,6 +20,10 @@ pre[class*="language-"] {
     -moz-hyphens: none;
     -ms-hyphens: none;
     hyphens: none;
+
+    /* https://peterdaugaardrasmussen.com/2020/09/12/how-to-make-prism-js-word-wrap-code-snippets/ */
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
 }
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
@@ -32,6 +36,7 @@ pre[class*="language-"] {
     margin: 0.5em 0;
     overflow: auto;
     padding: 1em;
+    padding-bottom: 0em;
 }
 pre[class*="language-"]::-moz-selection {
     background: #27292a;
@@ -197,7 +202,7 @@ pre[id].linkable-line-numbers span.line-numbers-rows > span:hover:before {
 }
 pre[class*="language-"].line-numbers {
     position: relative;
-    padding-left: 3.8em;
+    padding-left: 3.0em;
     counter-reset: linenumber;
 }
 pre[class*="language-"].line-numbers > code {
