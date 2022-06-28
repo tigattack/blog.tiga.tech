@@ -14,3 +14,48 @@ To disable line numbers for specific element:
 ```
 
 Custom changes have been made to [prism.css](static/css/prism.css).
+
+## Shortcodes
+
+Not installed but could be useful:
+
+* <https://github.com/rvanhorn/hugo-dynamic-tabs>
+* <https://github.com/statropy/github-button-hugo-shortcode>
+
+
+### Table of contents
+
+Add a ToC anywhere in a page with:
+
+```text
+{{< toc >}}
+```
+
+Source: <https://ruddra.com/hugo-add-toc-anywhere/>
+
+### Notice boxes
+
+Usage, where `TYPE` is one of `info`, `warning`, `critical`:
+
+```text
+{{< notice TYPE >}} This is a TYPE notice. {{< /notice >}}
+```
+
+Source: Part of Coder theme.
+
+### Tab groups
+
+```text
+{{< tabgroup >}}
+  {{< tab name="Hello" >}}
+  Hello World!
+  {{< /tab >}}
+
+  {{< tab name="Goodbye" >}}
+  Goodbye World!
+  {{< /tab >}}
+{{< /tabgroup >}}
+```
+
+Source: Part of Coder theme.
+
