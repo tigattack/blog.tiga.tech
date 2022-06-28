@@ -127,16 +127,28 @@ type = "application/rss+xml"
 # ---
 [params.csp]
 childsrc = ["'self'"]
-fontsrc = ["'self'", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net/"]
+fontsrc = [
+  "'self'",
+  "https://fonts.gstatic.com",
+  "https://cdn.jsdelivr.net/",
+  "https://maxcdn.bootstrapcdn.com" # Required by gh-card shortcode
+]
 formaction = ["'self'"]
 framesrc = ["'self'"]
-imgsrc = ["'self'", "https://img.tiga.tech", "https://i.tiga.tech"]
+imgsrc = [
+  "'self'",
+  "https://img.tiga.tech",
+  "https://i.tiga.tech",
+  "https://avatars.githubusercontent.com", # Required by gh-card shortcode
+  "https://opengraph.githubassets.com" # Required by gh-card shortcode
+]
 objectsrc = ["'none'"]
 stylesrc = [
   "'self'",
   "'unsafe-inline'",
   "https://fonts.googleapis.com/",
-  "https://cdn.jsdelivr.net/"
+  "https://cdn.jsdelivr.net/",
+  "https://maxcdn.bootstrapcdn.com" # Required by gh-card shortcode
 ]
 scriptsrc = [
   "'self'",
@@ -146,4 +158,8 @@ scriptsrc = [
 ]
 prefetchsrc = ["'self'"]
 # connect-src directive – defines valid targets for to XMLHttpRequest (AJAX), WebSockets or EventSource
-connectsrc = ["'self'", "https://www.google-analytics.com"]
+connectsrc = [
+  "'self'",
+  "https://www.google-analytics.com",
+  "https://api.github.com" # Required by gh-card shortcode
+]

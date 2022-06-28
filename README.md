@@ -59,3 +59,19 @@ Source: Part of Coder theme.
 
 Source: Part of Coder theme.
 
+### GitHub cards
+
+Parameters:
+* `size`: One of `small`, `medium`, `large`.
+* `repo`: `username/repo-name`
+* `image`: Image URL to use as the banner. Optional, will use user avatar if not specified. If set to `opengraph`, an OpenGraph card for the repository will be used for the image.
+
+Parameters can be named or positional, in the order listed above.
+
+```text
+{{< gh-card large "tigattack/VeeamNotify" "opengraph" >}}
+{{< gh-card size=large repo="tigattack/VeeamNotify" image="opengraph" >}}
+{{< gh-card size=large repo="tigattack/VeeamNotify" image="https://some.url.to/banner.png" >}}
+```
+
+Source: <https://codepen.io/aranscope/pen/RZazrK> (Shortcode is self-created).
