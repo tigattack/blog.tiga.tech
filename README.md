@@ -35,7 +35,7 @@ Source: <https://ruddra.com/hugo-add-toc-anywhere/>
 
 ### Notice boxes
 
-Usage, where `TYPE` is one of `info`, `warning`, `critical`:
+Usage, where `TYPE` is one of `note`, `type`, `example`, `question`, `info`, `warning`, `error`:
 
 ```text
 {{< notice TYPE >}} This is a TYPE notice. {{< /notice >}}
