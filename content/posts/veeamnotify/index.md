@@ -113,8 +113,7 @@ Copy that output, then repeat the following steps for each job that you want to 
     * Paste the launch command we generated above.
     * Ensure "Run scripts every X backup session" is set to 1.
   {{< notice example >}}
-  # TODO: REPLACE THIS
-  ![Veeam-config](https://img.tiga.tech/946fff5199115636)
+  ![Veeam-config](vbr-job-settings.png)
   {{< /notice >}}
 
 5. Click "OK", then click "Finish".
