@@ -1,0 +1,108 @@
++++
+draft = false
+date = 2018-01-08T10:16:31+00:00
+title = "Discord notifications 2: Veeam Backup & Replication"
+description = "Part 2 of a Discord notifications series.  Part 1 details notifications for Sonarr, Radarr and Lidarr.  In a similar fashion to part 1, this setup has been running for a while and I'm very pleased with it's flawless functionality."
+featuredImage = "header.png"
+slug = "veeam-b-r-notifications-in-discord"
+authors = ["tigattack"]
+tags = []
+categories = ["technology"]
+series = ["Discord Notifications"]
++++
+
+<p>Part 2 of a Discord notifications series.</p>
+<p><a href="https://blog.tiga.tech/discord-notifications-for-sonarr-radarr-and-lidarr/">Part 1 details notifications for Sonarr, Radarr and Lidarr.</a><br>
+In a similar fashion to part 1, this setup has been running for a while and I'm very pleased with it's flawless functionality.</p>
+<p>I started off by attempting to make my own scripts for this, but that didn't go so well, so I tried again.<br>
+Version 2 was using some of my own code and some code from scripts I found on the internet. I thought this was running well as it looked good from the reports I was seeing. A couple of months down the line I had a look in the logs, reviewed my scripts and realised it was actually an absolute mess and frankly quite shit.</p>
+<p>I've now found a set of scripts that do what I did better and have forked <a href="https://github.com/TheSageColleges/VeeamSlackNotifications">the project</a> to make a number of <a href="https://github.com/tigattack/VeeamSlackNotifications">my own improvements to the Slack project</a>.</p>
+<p>As of 06/12/2018, I've adapted it for Discord and re-released it under it's <a href="https://github.com/tigattack/VeeamDiscordNotifications">own repository</a>.</p>
+<p>If I were Tim Cook, I would tell you that the project has been reinvented.</p>
+<h4 id="update01022019">Update (01/02/2019):</h4>
+<p>I will keep these instructions updated and in-line with current release as much as possible, but if something is out of date then please <a href="https://blog.tiga.tech/about-contact/">contact me.</a></p>
+<hr>
+<h3 id="1makeascriptsdirectory">1. Make a scripts directory</h3>
+<p>The directory should be <code>C:\VeeamScripts</code>.<br>
+To make the directory run the following command in PowerShell:</p>
+<pre class="command-line language-powershell" data-prompt="PS>">
+<code>New-Item C:\VeeamScripts -Type directory</code>
+</pre>
+<h3 id="2downloadtheproject">2. Download the project</h3>
+<p>There may be later releases so <a href="https://github.com/tigattack/VeeamDiscordNotifications/releases">take a look</a> and replace the version number in the commands below with the latest if applicable.</p>
+<pre class="command-line language-powershell" data-prompt="PS>">
+<code>Invoke-WebRequest -Uri https://github.com/tigattack/VeeamDiscordNotifications/releases/download/v1.5/VeeamDiscordNotifications-v1.5.zip -OutFile C:\VeeamScripts\VeeamDiscordNotifications-v1.5.zip</code>
+</pre>
+<p>You may recieve an SSL error as in some cases winhttp uses TLS1 by default (depends on a few things), and GitHub appears to no longer accept TLS1. If you receive this error, run the following command and then re-issue the above command.</p>
+<pre class="command-line language-powershell" data-prompt="PS>">
+<code>[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12</code>
+</pre>
+<h3 id="3extractandcleanup">3. Extract and clean up</h3>
+<pre class="command-line language-powershell" data-prompt="PS>">
+<code>Expand-Archive C:\VeeamScripts\VeeamDiscordNotifications-v1.5.zip -DestinationPath C:\VeeamScripts
+Rename-Item C:\VeeamScripts\VeeamDiscordNotifications-v1.5 C:\VeeamScripts\VeeamDiscordNotifications
+Remove-Item C:\VeeamScripts\VeeamDiscordNotifications-v1.5.zip</code>
+</pre>
+<p>You've now extracted the release and cleaned up the download.</p>
+<h3 id="4createadiscordwebhook">4. Create a Discord webhook</h3>
+<p>Open Discord and go to the settings of the channel that you want Veeam to report to. I created a channel called &quot;backups&quot; for this service.<br>
+<img src="https://img.tiga.tech/0c41a84cb8e5d493.png" alt="Channel-edit" loading="lazy"><br>
+Click &quot;Edit Channel&quot;, then navigate to the &quot;Webhooks&quot; section and click &quot;Create Webhook&quot;. You'll see something similar to the following:<br>
+<img src="https://img.tiga.tech/5c4a70e84dec96d1.png" alt="Config-webhook" loading="lazy"><br>
+As you can see mine has already been configured, but all you need to do is set the name, upload an image for the avatar if you'd like, then copy the webhook URL.<br>
+If you'd like to use the avatar that I used, <a href="https://raw.githubusercontent.com/tigattack/VeeamDiscordNotifications/master/asset/thumb01.png">here it is.</a></p>
+<h3 id="5prepareforuse">5. Prepare for use</h3>
+<p>Open the configuration file:</p>
+<pre class="command-line language-powershell" data-prompt="PS>">
+<code>notepad.exe C:\VeeamScripts\VeeamDiscordNotifications\config\conf.json</code>
+</pre>
+<p>Older versions of Notepad don't support LF line endings, so this file may look pretty fucked up, but it doesn't really matter in this case. All you have to do here is replace the webhook URL with your own from step 3. Just make sure you replace <em>only</em> the Discord URL and nothing else.</p>
+<p>You may also need to set your PowerShell execution policy to Unrestricted.</p>
+<pre class="command-line language-powershell" data-prompt="PS>">
+<code>Set-ExecutionPolicy Unrestricted</code>
+</pre>
+<p>If you don't want to do that, replace the script path in section 5 below with the following</p>
+<pre class="command-line language-powershell" data-prompt="PS>">
+<code>Powershell.exe -ExecutionPolicy Bypass -File C:\VeeamScripts\VeeamDiscordNotifications\DiscordNotificationBootstrap.ps1</code>
+</pre>
+<p>Unblock the script files. The reason you may need to do this is Windows often blocks execution of downloaded scripts.</p>
+<pre class="command-line language-powershell" data-prompt="PS>">
+<code>Unblock-File C:\VeeamScripts\VeeamDiscordNotifications\DiscordNotificationBootstrap.ps1
+Unblock-File C:\VeeamScripts\VeeamDiscordNotifications\DiscordVeeamAlertSender.ps1
+Unblock-File C:\VeeamScripts\VeeamDiscordNotifications\resources\logger.psm1</code>
+</pre>
+<h3 id="6configureinveeam">6. Configure in Veeam</h3>
+<p>Repeat this for each job that you want to be reported into Discord.</p>
+<ul>
+<li>Right click the job and click &quot;Edit&quot;.</li>
+<li>Go to the &quot;Storage&quot; section and click on the &quot;Advanced&quot; button.</li>
+<li>Go to the &quot;Scripts&quot; tab and configure as shown below.<br>
+<img src="https://img.tiga.tech/946fff5199115636" alt="Veeam-config" loading="lazy"></li>
+</ul>
+<pre class="command-line language-powershell" data-prompt="PS>">
+<code>Powershell.exe -File C:\VeeamScripts\VeeamDiscordNotifications\DiscordNotificationBootstrap.ps1</code>
+</pre>
+<p>Success! <em>Hopefully.</em><br>
+Run a job and find out. This is what mine looks like.</p>
+<p><img src="https://img.tiga.tech/be80deaa6d9a0c13" alt="Discord-report" loading="lazy"></p>
+<hr>
+<h5 id="updates">Updates</h5>
+<h4 id="15022018"><a href="https://github.com/tigattack/VeeamSlackNotifications/releases/tag/v2.0">15/02/2018</a></h4>
+<p>I've made a number of improvements to the way backups are reported, resulting in reports that look better and are much easier to understand.</p>
+<h4 id="15022018"><a href="https://github.com/tigattack/VeeamSlackNotifications/releases/tag/v2.1">15/02/2018</a></h4>
+<p>Minor changes, mostly to config template.</p>
+<h4 id="19022018"><a href="https://github.com/tigattack/VeeamSlackNotifications/releases/tag/v2.2">19/02/2018</a></h4>
+<p>Fixed transferred data and total data stats.<br>
+Embarrassingly basic error.</p>
+<h4 id="16112018"><a href="https://github.com/tigattack/VeeamSlackNotifications/releases/tag/v2.3">16/11/2018</a></h4>
+<p>Changed name of configuration file and cleaned up the alert sender.</p>
+<h4 id="30112018"><a href="https://github.com/tigattack/VeeamSlackNotifications/releases/tag/v2.4">30/11/2018</a></h4>
+<p>Fixed bugs introduced in the last release and updated instructions.</p>
+<h4 id="06122018"><a href="https://github.com/tigattack/VeeamDiscordNotifications/releases/tag/v1.0">06/12/2018</a></h4>
+<p>Adapted my other project (<a href="https://github.com/tigattack/VeeamSlackNotifications">VeeamSlackNotifications</a>) for Discord with various improvements and Discord-specific changes.</p>
+<h4 id="01022019"><a href="https://github.com/tigattack/VeeamDiscordNotifications/releases/tag/v1.5">01/02/2019</a></h4>
+<p>This release adds the job's processing speed to the report, adds an update checker, and brings an option (disabled by default) to mention the specified Discord user when a job fails.</p>
+<hr>
+<p>If you have any problems with the script, please <a href="https://github.com/tigattack/VeeamDiscordNotifications/issues/new?assignees=&amp;labels=bug&amp;template=bug_report.md&amp;title=%5BBUG%5D+">open an issue</a> on the GitHub project.</p>
+<p>I always welcome feedback on my posts, please <a href="https://blog.tiga.tech/about-contact">contact me</a> if you have any. I'm also happy to answer any related questions if I know the answer.</p>
+

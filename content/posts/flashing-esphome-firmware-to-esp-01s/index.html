@@ -1,0 +1,236 @@
++++
+draft = false
+date = 2020-05-21T17:15:25+01:00
+title = "Flashing ESPHome Firmware to ESP-01S"
+description = "In this post I'll run through how to create and flash ESPHome firmware for an ESP8266-based temperature sensor."
+featuredImage = "header.jpg"
+slug = "flashing-esphome-firmware-to-esp-01s"
+authors = ["tigattack"]
+tags = ["home assistant", "hass", "esp", "esphome"]
+categories = ["technology"]
+series = []
++++
+
+<p>I recently came across a <a href="https://www.aliexpress.com/item/32956461021.html">listing on AliExpress</a> for an ESP-01S (an ESP8266-based chip) and AM2302 combination. You'll want the option named &quot;AM2302 ESP-01S&quot;. This is also available <a href="https://amzn.to/3hcKhef">here, on Amazon UK</a>, for a little more, if you'd like to get it faster.<br>
+At $4.38/ea (~£3.60) plus shipping I couldn't say no, so I decided to buy a bunch of them to monitor the temperature and humidity in various locations around the house.<br>
+I also bought one of these <a href="https://www.aliexpress.com/item/1000007049130.html">USB dupont cables</a> from AliExpress for each unit; since I have a bunch of old USB power blocks lying around, this was the easiest way for me to power them. You can get an alternative <a href="https://amzn.to/2WA77mF">here, on Amazon UK</a>. It's actually a serial adaptor but since we only need to provide power, it will work.</p>
+<p>In this post I'll run through how to create an ESPHome configuration for an ESP8266-based temperature sensor and how to flash the firmware.</p>
+<p>If you already have your firmware and just want to know how to flash it, you can skip down to the <a href="#flashingthefirmware">&quot;flashing the firmware&quot;</a> section.</p>
+<hr>
+<h3 id="tableofcontents">Table of Contents</h3>
+<ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#esphomeconfiguration">ESPHome configuration</a></li>
+<li><a href="#compilingthefirmware">Compiling the firmware</a></li>
+<li><a href="#flashingthefirmware">Flashing the firmware</a>
+<ul>
+<li><a href="#preparingtheesp">Preparing the ESP</a></li>
+<li><a href="#preparingthepi">Preparing the Pi</a></li>
+<li><a href="#copyingandflashing">Copying and flashing</a></li>
+</ul>
+</li>
+<li><a href="#homeassistantconfiguration">Home Assistant configuration</a></li>
+<li><a href="#calibratingthesensor">Calibrating the sensor</a></li>
+<li><a href="#issues">Issues</a>
+<ul>
+<li><a href="#updatesandselfreset">Updates and self-reset</a></li>
+<li><a href="#connectivity">Connectivity</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>Home Assistant (HASS) with the <a href="https://esphome.io/guides/getting_started_hassio.html">ESPHome plugin installed</a>.</li>
+<li>A Raspberry Pi running Linux. Instructions for installing Raspbian on a Pi can be found <a href="https://www.raspberrypi.org/documentation/installation/installing-images/README.md">here</a>.</li>
+<li>5 jumper wires.</li>
+</ul>
+<figure class="kg-card kg-gallery-card kg-width-wide"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"><img src="https://blog.tiga.tech/content/images/2020/05/5D3_6712-Blog-Watermark.jpg" width="2000" height="1333" loading="lazy" alt srcset="https://blog.tiga.tech/content/images/size/w600/2020/05/5D3_6712-Blog-Watermark.jpg 600w, https://blog.tiga.tech/content/images/size/w1000/2020/05/5D3_6712-Blog-Watermark.jpg 1000w, https://blog.tiga.tech/content/images/size/w1600/2020/05/5D3_6712-Blog-Watermark.jpg 1600w, https://blog.tiga.tech/content/images/size/w2400/2020/05/5D3_6712-Blog-Watermark.jpg 2400w" sizes="(min-width: 720px) 720px"></div><div class="kg-gallery-image"><img src="https://blog.tiga.tech/content/images/2020/05/5D3_6714-Blog-Watermark.jpg" width="2000" height="1333" loading="lazy" alt srcset="https://blog.tiga.tech/content/images/size/w600/2020/05/5D3_6714-Blog-Watermark.jpg 600w, https://blog.tiga.tech/content/images/size/w1000/2020/05/5D3_6714-Blog-Watermark.jpg 1000w, https://blog.tiga.tech/content/images/size/w1600/2020/05/5D3_6714-Blog-Watermark.jpg 1600w, https://blog.tiga.tech/content/images/size/w2400/2020/05/5D3_6714-Blog-Watermark.jpg 2400w" sizes="(min-width: 720px) 720px"></div></div></div></figure><h2 id="esphomeconfiguration">ESPHome configuration</h2>
+<ol>
+<li>Navigate to the ESPHome plugin in HASS.</li>
+<li>Click the + button.</li>
+<li>Run through the configuration steps as follows:
+<ul>
+<li><strong>Name:</strong> Anything you wish. We'll call it &quot;espName&quot; from now on.</li>
+<li><strong>Device Type:</strong> Generic ESP8266.</li>
+<li><strong>WiFi and Over-The-Air Updates:</strong> WiFi is self-explanatory so I won't explain that. The access password is the password which will be used by ESPHome to flash updates over the air to the ESP and authenticate with the ESPHome API on the ESP.</li>
+</ul>
+</li>
+<li>This step will depend on how you modify your HASS configuration; I use the VS Code plugin.<br>
+Open the following file in HASS: <code>/config/esphome/espName.yaml</code><br>
+<em>Unless you're running your own router and/or DNS server, you can skip steps 5-6 and proceed to step 7.</em></li>
+<li>In the <code>wifi</code> section of the file you just opened, add the following: <code>domain: .&lt;your-internal-domain-name&gt;</code>.<br>
+This is what mine looks like, see line 10:</li>
+</ol>
+<pre><code class="language-YAML">esphome:
+  name: espName
+  platform: ESP8266
+  board: esp01_1m
+
+wifi:
+  ssid: &quot;MySSID&quot;
+  password: &quot;WiFiPassw0rd&quot;
+
+  domain: .int.tiga.tech
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: &quot;Espname Fallback Hotspot&quot;
+    password: &quot;HotspotPassw0rd&quot;
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: &quot;OTAPassw0rd&quot;
+
+ota:
+  password: &quot;OTAPassw0rd&quot;
+</code></pre>
+<ol start="6">
+<li>Now open: <code>/config/esphome/.esphome/espName.yaml.json</code>.<br>
+Change the address from <code>espName.local</code> to <code>espName.&lt;your-internal-domain-name&gt;</code>.<br>
+This is what mine looks like, see line 8:</li>
+</ol>
+<pre><code class="language-YAML">{
+  &quot;storage_version&quot;: 1,
+  &quot;name&quot;: &quot;espName&quot;,
+  &quot;comment&quot;: null,
+  &quot;esphome_version&quot;: &quot;1.14.3&quot;,
+  &quot;src_version&quot;: 1,
+  &quot;arduino_version&quot;: null,
+  &quot;address&quot;: &quot;espName.int.tiga.tech&quot;,
+  &quot;esp_platform&quot;: &quot;ESP8266&quot;,
+  &quot;board&quot;: &quot;esp01_1m&quot;,
+  &quot;build_path&quot;: null,
+  &quot;firmware_bin_path&quot;: null,
+  &quot;loaded_integrations&quot;: []
+}
+</code></pre>
+<p>Please <strong>do not</strong> copy this since your ESPHome version may be different if you're following this in the future, and copying this could lead to issues.</p>
+<ol start="7">
+<li>In <code>/config/esphome/espName.yaml</code> you need to add the following:</li>
+</ol>
+<pre><code class="language-YAML"># Web server
+web_server:
+  port: 80
+  auth:
+    username: admin
+    password: MyWebPassw0rd
+
+# Sensors config
+sensor:
+  - platform: dht
+    pin: GPIO2
+    model: AM2302
+    temperature:
+      name: espName Temperature
+      force_update: true
+    humidity:
+      name: espName Humidity
+      force_update: true
+
+  - platform: uptime
+    name: espName ESP Uptime
+
+  - platform: wifi_signal
+    name: espName ESP Signal Strength
+
+text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: espName ESP IP Address
+</code></pre>
+<p>This is what mine looks like:<br>
+<img src="https://blog.tiga.tech/content/images/2020/05/ESPConfig.PNG" alt="ESPConfig" loading="lazy"></p>
+<h2 id="compilingthefirmware">Compiling the firmware</h2>
+<ol>
+<li>Navigate to the ESPHome plugin in HASS.</li>
+<li>Click the 3-dots menu button and &quot;Compile&quot;.</li>
+<li>Once compiled, click the &quot;Download binary&quot; button in the bottom right.</li>
+<li>Save the binary to your machine.</li>
+</ol>
+<h2 id="flashingthefirmware">Flashing the firmware</h2>
+<h3 id="preparingtheesp">Preparing the ESP</h3>
+<p>Connect 5 jumper wires between the Raspberry Pi's GPIO and the ESP's pins, as per the diagram below.<br>
+<em>Make sure that you connect the 3v3&lt;-&gt;VCC wire last of all.</em></p>
+<p><img src="https://blog.tiga.tech/content/images/2020/05/Wiring.png" alt="Wiring" loading="lazy"><br>
+<img src="https://blog.tiga.tech/content/images/2020/05/5D3_6723-Blog-Watermark.jpg" alt="5D3_6723-Blog-Watermark" loading="lazy"></p>
+<h3 id="preparingthepi">Preparing the Pi</h3>
+<ol>
+<li>SSH to your Pi or connect a keyboard and display.</li>
+<li>In the terminal run: <code>sudo raspi-config</code></li>
+<li>Select &quot;5 Interfacing Options&quot;, &quot;P6 Serial&quot;, &quot;No&quot;, &quot;Yes&quot;, and finally &quot;Finish&quot;.</li>
+<li>Restart the Pi with <code>sudo reboot</code></li>
+<li>In the terminal run: <code>pip install esptool</code>. This will install <a href="https://github.com/espressif/esptool">esptool</a>, a Python utility to interact with ESP8366 &amp; ESP32 chips.<br>
+If the result of this command is <em>&quot;pip: command not found&quot;</em>, run <code>sudo apt install python-pip</code> and try again.</li>
+<li>Test esptool by running: <code>esptool.py --port /dev/ttyS0 flash_id</code><br>
+If successful, this will return some information about your ESP chip. You should now pull the wire connected to GPIO1 (3v3 or VCC) on your Pi to restart the ESP.<br>
+If unsuccessful, there is a communication issue with your ESP. Start by checking the wiring.</li>
+</ol>
+<h3 id="copyingandflashing">Copying and flashing</h3>
+<ol>
+<li>Copy the firmware file to the Pi. I used <a href="https://linux.die.net/man/1/scp">SCP</a> to do this - <code>scp ~/Downloads/espName.bin pi@raspberrypi:/home/pi/</code></li>
+<li>SSH to your Pi or connect a keyboard and display.</li>
+<li>In the terminal run: <code>esptool.py --port /dev/ttyS0 write_flash 0x0000 ~/espName.bin</code><br>
+If successful, you'll see a similar output to this:<br>
+<img src="https://blog.tiga.tech/content/images/2020/05/Flash.png" alt="Flash" loading="lazy"></li>
+</ol>
+<p>As you can see, the MAC address of the chip has been printed as part of the ouput. You can use this to create a DHCP reservation for the ESP, if you so wish.</p>
+<p>You may now connect the ESP to the AM2302 sensor and power it up.<br>
+If you're using the <a href="https://www.aliexpress.com/item/1000007049130.html">USB dupont cables</a> I mentioned at the beginning, red is VCC and black is GND. The pins for power are labeled as such on the AM2302.</p>
+<h2 id="homeassistantconfiguration">Home Assistant configuration</h2>
+<p>Once you've connected the ESP to the sensor and powered it up, you should see it come online in the ESPHome interface in HASS. If not, you may have a communication issue. Double check the address in HASS file <code>/config/esphome/.esphome/espName.yaml.json</code> and make sure you can resolve it.</p>
+<p>HASS should now discover the device automatically and create a notification to alert you of this. It will also be visible in Configuration-&gt;Integrations.<br>
+Click the notification or navigate to Integrations, then click &quot;Configure&quot; on the discovered entity.</p>
+<p>If the entity is not discovered, go to Integrations, hhit the + in the bottom right, select ESPHome, then enter the IP or DNS address of your ESP.</p>
+<p>You will now have 5 new entities:</p>
+<ul>
+<li>espName Temperature</li>
+<li>espName Humidity</li>
+<li>espName ESP IP Address</li>
+<li>espName ESP Signal Strength</li>
+<li>espName ESP Uptime</li>
+</ul>
+<h2 id="calibratingthesensor">Calibrating the sensor</h2>
+<p>You may need to calibrate your temperature sensors. I used a room temperature &amp; humidity sensor to find the delta between the ESP reported values and real values. Once you've found your deltas, record them to use in the following steps.</p>
+<p><img src="https://blog.tiga.tech/content/images/2020/05/5D3_6725-Blog-Watermark.jpg" alt="5D3_6725-Blog-Watermark" loading="lazy"></p>
+<ol>
+<li>Open the following file in HASS: <code>/config/esphome/espName.yaml</code></li>
+<li>Replace lines 41-46 with the following, inputting your own offsets.</li>
+</ol>
+<pre><code class="language-YAML">    temperature:
+      name: espName Temperature
+      force_update: true
+      filters:
+        - offset: -7.4
+    humidity:
+      name: espName Humidity
+      force_update: true
+      filters:
+        - offset: 6
+</code></pre>
+<p>Note that these values are my own and may not be correct for you. The temperature reported by my ESP was 7.4 degrees higher than actual, and the reported humidity was 6% lower than actual.</p>
+<h2 id="issues">Issues</h2>
+<p>There are a few issues that can occur with these ESP8266/AM2302 sensor packs.<br>
+One is where HASS will shoow <code>NaN</code> as the value for temperature and humidity. If you check the ESP logs, it will look something like this:</p>
+<pre><code>[08:39:11][W][dht:126]: Requesting data from DHT failed!
+[08:39:11][W][dht:060]: Invalid readings! Please check your wiring (pull-up resistor, pin number).
+</code></pre>
+<p>There are a few possible solutions to this, but it depends on the root cause of the issue.</p>
+<h3 id="updatesandselfreset">Updates and self-reset</h3>
+<p><strong>Note:</strong> This issue seems to have been fixed in ESPHome 1.15.0. <a href="https://github.com/esphome/esphome/pull/1185">Related pull request.</a><br>
+I'm leaving this here since some people still see this issue on occasion.</p>
+<p>One causation of the above is an issue with the self-reset functionality which is triggered after an OTA update or network connection failure.</p>
+<p>There is no automated solution to this when seen after an OTA unfortunately; you need to manually power-cycle the ESP. Just unplug it for a few seconds.</p>
+<p>The self-reset issue has also been seen with what is, at the time of writing, the latest UniFi firmware. In these cases a static IP has proven to help with reliability.<br>
+The issue is triggered by the ESP not picking up an IP from your DHCP server fast enough, so it self-resets a few times and eventually gets an IP.<br>
+This then triggers the issue with self-resets which I described above. To stop this happening you can try <a href="https://esphome.io/components/wifi.html#manual-ips">giving your ESP a static IP</a>.</p>
+<h3 id="connectivity">Connectivity</h3>
+<p>Sometimes the ESP will disconnect or reconnect WiFi after a while. There's a few things which can help this, all of which are documented in <a href="https://esphome.io/guides/faq.html#my-node-keeps-reconnecting-randomly">ESPHome's FAQ section</a>.</p>
+<hr>
+<p>Credit is due to my friend <a href="https://github.com/dantho281/">Dan</a> for pointing me to esptool and helping with the wiring for some of this procedure.</p>
+<p>I always welcome feedback on my posts, please <a href="https://blog.tiga.tech/about">contact me</a> if you have any. I'm also happy to answer any related questions if I know the answer.</p>
+

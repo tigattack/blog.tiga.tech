@@ -1,0 +1,37 @@
++++
+draft = false
+date = 2018-01-15T16:00:48+00:00
+title = "Install Windows Server on the HPE Microserver G8 in AHCI mode"
+description = "My problem was that once the server was put into AHCI mode instead of using the RAID configuration, the Windows Server installer would complain that it couldn't install to any of the disks as they were not compatible."
+featuredImage = "header.png"
+slug = "installing-windows-server-on-the-hpe-microserver-g8-in-ahci-mode"
+authors = ["tigattack"]
+tags = []
+categories = ["technology"]
+series = []
++++
+
+<p>I'm making this post because I spent half a day trying to work this out, it was a pain in the arse.</p>
+<p>My problem was that once the server was put into AHCI mode instead of using the RAID configuration, the Windows Server installer would complain that it couldn't install to any of the disks as they were not compatible.</p>
+<p>As you'll see the solution turned out to be quite simple.</p>
+<p>I tried lots of things, including but not limited to:</p>
+<ul>
+<li>Copying driver files to the installation media</li>
+<li>Using the BIOS option (<mark>BIOS -&gt; Advanced Options -&gt; Advanced System ROM Options -&gt;  Virtual Install Disk</mark>) to mount a virtual disk that contains most drivers for the system.</li>
+<li>Creating and booting from different types of media.</li>
+</ul>
+<p>Note: I am writing this after the fact, so please forgive me if selection names are incorrect.</p>
+<hr>
+<p>When the server is going through POST there'll be an option for Intelligent Provisioning (F10).</p>
+<ol>
+<li>Enter Intelligent Provisioning</li>
+<li>Select Configure and Install</li>
+<li>Once on the second step (OS Selection) choose the &quot;Windows Server&quot; OS family.</li>
+<li>Choose &quot;Manual&quot;  for the install method.</li>
+<li>Fill out any further required options until you get to the point of rebooting, where you must ensure that you boot to your Windows Server installation media.</li>
+</ol>
+<p>Note: If the disk that the OS will be installed on is not in bay 1 (far left) then please ensure that there are no other disks connected to the server, otherwise the System Reserved partition is sometimes put on a separate disk to the rest of the OS.</p>
+<p>The Windows Server installer should now run fine.</p>
+<hr>
+<p>I always welcome feedback on my posts, please <a href="https://blog.tiga.tech/about-contact">contact me</a> if you have any. I'm also happy to answer any related questions if I know the answer.</p>
+
