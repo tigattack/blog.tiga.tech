@@ -56,6 +56,7 @@ let style = `
   transition: 0.3s;
   display: block;
   margin: auto;
+  margin-top: 2em;
   border-radius: 5px;
 }
 
@@ -104,7 +105,7 @@ for (let card of cards) {
       if (image == 'opengraph') {
         let id = makeid(7)
         card.innerHTML = `
-        <a class="gh" href="https://github.com/tigattack/${repo}"">
+        <a class="gh" href="https://github.com/tigattack/${repo}">
         <img class="gh_og" src="https://opengraph.githubassets.com/${id}/${repo}">
         <div class="gh container">
           <h4 class="gh">
