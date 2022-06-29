@@ -75,3 +75,16 @@ Parameters can be named or positional, in the order listed above.
 ```
 
 Source: <https://codepen.io/aranscope/pen/RZazrK> (Shortcode is self-created).
+
+### Image gallery
+
+Usage:
+
+```html
+<figure>
+  {{< gallery match="DIR/*" sortOrder="asc" rowHeight="250" margins="5" thumbnailResizeOptions="600x600 q90 Lanczos" showExif=false previewType="blur" embedPreview="true" loadJQuery=true >}}
+  <figcaption>Gallery caption.</figcaption>
+</figure>
+```
+
+Source: <https://github.com/mfg92/hugo-shortcode-gallery>

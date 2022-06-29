@@ -3,7 +3,7 @@
 # -----------
 baseURL = "https://www.blog.tiga.tech"
 title = "tig's Blog"
-theme = "hugo-coder"
+theme = ["hugo-coder", "hugo-shortcode-gallery"]
 languageCode = "en"
 defaultContentLanguage = "en"
 paginate = 20
@@ -140,7 +140,9 @@ imgsrc = [
   "https://img.tiga.tech",
   "https://i.tiga.tech",
   "https://avatars.githubusercontent.com", # Required by gh-card shortcode
-  "https://opengraph.githubassets.com" # Required by gh-card shortcode
+  "https://opengraph.githubassets.com", # Required by gh-card shortcode
+  "https://blog.tiga.tech",
+  "data:"
 ]
 objectsrc = ["'none'"]
 stylesrc = [
