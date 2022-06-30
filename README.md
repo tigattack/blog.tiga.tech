@@ -4,7 +4,31 @@ tig's Blog, powered by [Hugo](https://gohugo.io/) and a customised version of [C
 
 ## PrismJS
 
-[Download page for current selection](https://prismjs.com/download.html#themes=prism-twilight&languages=markup+css+clike+javascript+bash+diff+docker+hcl+json+json5+nginx+powershell+python+regex+yaml&plugins=line-highlight+line-numbers+autolinker+highlight-keywords+command-line+toolbar+copy-to-clipboard).
+[Download page for current selection](https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+clike+javascript+bash+diff+docker+hcl+json+json5+nginx+powershell+python+regex+yaml&plugins=line-highlight+line-numbers+autolinker+command-line+toolbar+copy-to-clipboard).
+
+* Theme: Tomorrow Night
+* Languages
+    * Markup + HTML + XML + SVG + MathML + SSML + Atom + RSS
+    * CSS
+    * CLike
+    * JavaScript
+    * Bash
+    * Diff
+    * Docker
+    * HCL
+    * JSON/JSON5
+    * NGINX
+    * PowerShell
+    * Python
+    * RegEx
+    * YAML
+* Plugins
+    * Line highlight
+    * Line numbers
+    * Autolinker (MD-syntax links within codeblocks)
+    * Command line (not working, plugin compatibility issue?)
+    * Toolbar
+    * Copy to clipboard button
 
 Line numbers are enabled globally in `<theme>/layouts/_default/baseof.html`.
 
@@ -13,7 +37,7 @@ To disable line numbers for specific element:
 <pre class="no-line-numbers"><code>...</code></pre>
 ```
 
-Custom changes have been made to [prism.css](static/css/prism.css).
+Custom changes have been made to [prism.css](static/css/prism.css), such as [unminify](https://unminify.com/) and some style changes.
 
 ## Shortcodes
 
