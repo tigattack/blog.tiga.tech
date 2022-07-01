@@ -7,9 +7,14 @@ slug = "veeamnotify"
 authors = ["tigattack"]
 tags = ["project", "PowerShell"]
 categories = ["technology"]
-#externalLink = "https://github.com/tigattack/VeeamNotify"
 series = []
 +++
+
+{{< gallery match="images/*" sortOrder="asc" rowHeight="200" margins="5"
+    thumbnailResizeOptions="600x600 q90 Lanczos" showExif=false
+    previewType="blur" embedPreview="true" loadJQuery=true >}}
+
+---
 
 VeeamNotify sends Veeam Backup & Replication session summary notifications to Discord, Microsoft Teams, and Slack, detailing the session result, various statistics, and optionally alerting you via @mention when a job finishes in a warning or failed state.  
 
@@ -18,13 +23,15 @@ VeeamNotify features improvements across the board and support for all the afore
 
 If you're not here for manual installation instructions, I suggest you have a look at some of the simpler installation methods in the [VeeamNotify wiki](https://github.com/tigattack/VeeamNotify/wiki).
 
+{{< notice info >}}
 I will keep these instructions updated and in-line with current release as much as possible, but if something is out of date then please submit an issue in the [GitHub repository](https://github.com/tigattack/VeeamNotify).
+{{< /notice >}}
 
 ---
 
-# Manual Install Instructions
-
 {{< toc >}}
+
+# Manual Install Instructions
 
 ## Preparation
 
@@ -53,7 +60,7 @@ The second command downloads the VeeamNotify v1.0 release ZIP.
 Invoke-WebRequest -Uri https://github.com/tigattack/VeeamNotify/releases/download/v1.0/VeeamNotify-v1.0.zip -OutFile C:\VeeamScripts\VeeamNotify-v1.0.zip
 ```
 
-## Extract and clean up
+## Extract and Clean Up
 
 You can now extract the release and remove the downloaded ZIP:
 
@@ -99,7 +106,7 @@ Run the following command:
 
 This should return something like this:
 
-```plaintext
+```powershell
 C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File 'C:\VeeamScripts\VeeamNotify\Bootstrap.ps1'
 ```
 
