@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Discord Notifications on tig&#39;s Blog</title>
-    <link>https://www.blog.tiga.tech/series/discord-notifications/</link>
+    <link>https://tigattack.github.io/blog.tiga.tech/series/discord-notifications/</link>
     <description>Recent content in Discord Notifications on tig&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 08 Jan 2018 10:16:31 +0000</lastBuildDate><atom:link href="https://www.blog.tiga.tech/series/discord-notifications/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 08 Jan 2018 10:16:31 +0000</lastBuildDate><atom:link href="https://tigattack.github.io/blog.tiga.tech/series/discord-notifications/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Discord notifications: Veeam Backup &amp; Replication</title>
-      <link>https://www.blog.tiga.tech/posts/veeam-b-r-notifications-in-discord/</link>
+      <link>https://tigattack.github.io/blog.tiga.tech/posts/veeam-b-r-notifications-in-discord/</link>
       <pubDate>Mon, 08 Jan 2018 10:16:31 +0000</pubDate>
       
-      <guid>https://www.blog.tiga.tech/posts/veeam-b-r-notifications-in-discord/</guid>
+      <guid>https://tigattack.github.io/blog.tiga.tech/posts/veeam-b-r-notifications-in-discord/</guid>
       <description>Part 2 of a Discord notifications series.
 In a similar fashion to part 1, this setup has been running for a while and I&amp;rsquo;m very pleased with it&amp;rsquo;s flawless functionality.
 Warning This project is no longer maintained; it has been superseded by my new project, VeeamNotify.
@@ -21,10 +21,10 @@ You can read more about it here. Background Update (01/02/2019): Setup 1. Make a
     
     <item>
       <title>Discord notifications: Sonarr, Radarr and Lidarr</title>
-      <link>https://www.blog.tiga.tech/posts/discord-notifications-for-sonarr-radarr-and-lidarr/</link>
+      <link>https://tigattack.github.io/blog.tiga.tech/posts/discord-notifications-for-sonarr-radarr-and-lidarr/</link>
       <pubDate>Sat, 06 Jan 2018 15:47:33 +0000</pubDate>
       
-      <guid>https://www.blog.tiga.tech/posts/discord-notifications-for-sonarr-radarr-and-lidarr/</guid>
+      <guid>https://tigattack.github.io/blog.tiga.tech/posts/discord-notifications-for-sonarr-radarr-and-lidarr/</guid>
       <description>Part 1 of a Discord notifications series.
 I&amp;rsquo;ve had this running for a while and it works flawlessly, I&amp;rsquo;m very pleased with it.
 After having a few people ask me how it&amp;rsquo;s done I decided it&amp;rsquo;d be best to make a post.

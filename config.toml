@@ -1,7 +1,7 @@
 # -----------
 # Site config
 # -----------
-baseURL = "https://tigattack.github.io/blog.tiga.tech"
+baseURL = "https://tigattack.github.io/blog.tiga.tech/"
 title = "tig's Blog"
 theme = ["hugo-coder", "hugo-shortcode-gallery"]
 languageCode = "en"

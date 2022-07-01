@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>telegraf on tig&#39;s Blog</title>
-    <link>https://www.blog.tiga.tech/tags/telegraf/</link>
+    <link>https://tigattack.github.io/blog.tiga.tech/tags/telegraf/</link>
     <description>Recent content in telegraf on tig&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 11 May 2021 02:33:55 +0100</lastBuildDate><atom:link href="https://www.blog.tiga.tech/tags/telegraf/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 11 May 2021 02:33:55 +0100</lastBuildDate><atom:link href="https://tigattack.github.io/blog.tiga.tech/tags/telegraf/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Dynamically Deploy Telegraf and Windows Monitoring Configurations with PowerShell</title>
-      <link>https://www.blog.tiga.tech/posts/install-telegraf-posh/</link>
+      <link>https://tigattack.github.io/blog.tiga.tech/posts/install-telegraf-posh/</link>
       <pubDate>Tue, 11 May 2021 02:33:55 +0100</pubDate>
       
-      <guid>https://www.blog.tiga.tech/posts/install-telegraf-posh/</guid>
+      <guid>https://tigattack.github.io/blog.tiga.tech/posts/install-telegraf-posh/</guid>
       <description>I recently made this script to deploy the Telegraf metrics agent to Windows systems.
 This is primarily designed for Windows Server but can also be pushed to workstations.
 Overview Requirements Setup Usage Example Screenshots Commands Parameters Overview This is a Telegraf deployment script for Windows Server* environments.

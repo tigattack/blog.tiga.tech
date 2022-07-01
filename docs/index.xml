@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>tig&#39;s Blog</title>
-    <link>https://www.blog.tiga.tech/</link>
+    <link>https://tigattack.github.io/blog.tiga.tech/</link>
     <description>Recent content on tig&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 28 Jun 2022 00:09:55 +0100</lastBuildDate><atom:link href="https://www.blog.tiga.tech/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 28 Jun 2022 00:09:55 +0100</lastBuildDate><atom:link href="https://tigattack.github.io/blog.tiga.tech/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About</title>
-      <link>https://www.blog.tiga.tech/about/</link>
+      <link>https://tigattack.github.io/blog.tiga.tech/about/</link>
       <pubDate>Tue, 28 Jun 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://www.blog.tiga.tech/about/</guid>
+      <guid>https://tigattack.github.io/blog.tiga.tech/about/</guid>
       <description>Hi, I&amp;rsquo;m tigattack.
 I live in Bristol, UK and work from home as a Systems Engineer.
 I have a keen interested in technology, almost anything automotive, mountain biking, and surfing, but I&amp;rsquo;ll probably only post about the first two here.
@@ -21,20 +21,20 @@ Growing up in Devon, UK in a low-tech family, I had little exposure to technolog
     
     <item>
       <title>Contact</title>
-      <link>https://www.blog.tiga.tech/contact/</link>
+      <link>https://tigattack.github.io/blog.tiga.tech/contact/</link>
       <pubDate>Tue, 28 Jun 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://www.blog.tiga.tech/contact/</guid>
+      <guid>https://tigattack.github.io/blog.tiga.tech/contact/</guid>
       <description>The best place to contact me is on Discord at tigattack &amp;lt;hash&amp;gt; 7987.
 I&amp;rsquo;m also available at blog &amp;lt;at&amp;gt; tiga &amp;lt;dot&amp;gt; tech, but responses may be slower.</description>
     </item>
     
     <item>
       <title>VeeamNotify -  Veeam B&amp;R session notifications</title>
-      <link>https://www.blog.tiga.tech/posts/veeamnotify/</link>
+      <link>https://tigattack.github.io/blog.tiga.tech/posts/veeamnotify/</link>
       <pubDate>Tue, 28 Jun 2022 00:09:55 +0100</pubDate>
       
-      <guid>https://www.blog.tiga.tech/posts/veeamnotify/</guid>
+      <guid>https://tigattack.github.io/blog.tiga.tech/posts/veeamnotify/</guid>
       <description>VeeamNotify sends Veeam Backup &amp;amp; Replication session summary notifications to Discord, Microsoft Teams, and Slack, detailing the session result, various statistics, and optionally alerting you via @mention when a job finishes in a warning or failed state.
 VeeamNotify is a replacement for my previous VeeamDiscordNotifications project, and the respective Teams and Slack projects. You may have seen my previous blog post about VeeamDiscordNotifications.
 VeeamNotify features improvements across the board and support for all the aforementioned messaging services in one place.</description>
@@ -42,10 +42,10 @@ VeeamNotify features improvements across the board and support for all the afore
     
     <item>
       <title>Dynamically Deploy Telegraf and Windows Monitoring Configurations with PowerShell</title>
-      <link>https://www.blog.tiga.tech/posts/install-telegraf-posh/</link>
+      <link>https://tigattack.github.io/blog.tiga.tech/posts/install-telegraf-posh/</link>
       <pubDate>Tue, 11 May 2021 02:33:55 +0100</pubDate>
       
-      <guid>https://www.blog.tiga.tech/posts/install-telegraf-posh/</guid>
+      <guid>https://tigattack.github.io/blog.tiga.tech/posts/install-telegraf-posh/</guid>
       <description>I recently made this script to deploy the Telegraf metrics agent to Windows systems.
 This is primarily designed for Windows Server but can also be pushed to workstations.
 Overview Requirements Setup Usage Example Screenshots Commands Parameters Overview This is a Telegraf deployment script for Windows Server* environments.
@@ -55,10 +55,10 @@ Telegraf agent as system service (configurable). Your pre-configured output plug
     
     <item>
       <title>Deleting Devices and Entities in Home Assistant</title>
-      <link>https://www.blog.tiga.tech/posts/deleting-devices-and-entities-in-home-assistant/</link>
+      <link>https://tigattack.github.io/blog.tiga.tech/posts/deleting-devices-and-entities-in-home-assistant/</link>
       <pubDate>Fri, 12 Jun 2020 21:00:24 +0100</pubDate>
       
-      <guid>https://www.blog.tiga.tech/posts/deleting-devices-and-entities-in-home-assistant/</guid>
+      <guid>https://tigattack.github.io/blog.tiga.tech/posts/deleting-devices-and-entities-in-home-assistant/</guid>
       <description>One of my major bugbears in Home Assistant (HASS) has always been that some integrations offer no proper way to completely delete a device or entity.
 It seems so odd to me that in some cases there is no functionality beyond &amp;ldquo;disable&amp;rdquo;.
 Info It&amp;rsquo;s been pointed out to me that this is only true for entities which are available. For those which are marked &amp;ldquo;unavailable&amp;rdquo;, there is an option to delete.</description>
@@ -66,20 +66,20 @@ Info It&amp;rsquo;s been pointed out to me that this is only true for entities w
     
     <item>
       <title>Flashing ESPHome Firmware to ESP-01S</title>
-      <link>https://www.blog.tiga.tech/posts/flashing-esphome-firmware-to-esp-01s/</link>
+      <link>https://tigattack.github.io/blog.tiga.tech/posts/flashing-esphome-firmware-to-esp-01s/</link>
       <pubDate>Thu, 21 May 2020 17:15:25 +0100</pubDate>
       
-      <guid>https://www.blog.tiga.tech/posts/flashing-esphome-firmware-to-esp-01s/</guid>
+      <guid>https://tigattack.github.io/blog.tiga.tech/posts/flashing-esphome-firmware-to-esp-01s/</guid>
       <description>I recently came across a listing on AliExpress for an ESP-01S (an ESP8266-based chip) and AM2302 combination. You&amp;rsquo;ll want the option named &amp;ldquo;AM2302 ESP-01S&amp;rdquo;. This is also available here, on Amazon UK, for a little more, if you&amp;rsquo;d like to get it faster.
 At $4.38/ea (~£3.60) plus shipping I couldn&amp;rsquo;t say no, so I decided to buy a bunch of them to monitor the temperature and humidity in various locations around the house.</description>
     </item>
     
     <item>
       <title>Invite users to a Ghost blog without sending an email</title>
-      <link>https://www.blog.tiga.tech/posts/invite-users-to-a-ghost-blog-without-sending-an-email/</link>
+      <link>https://tigattack.github.io/blog.tiga.tech/posts/invite-users-to-a-ghost-blog-without-sending-an-email/</link>
       <pubDate>Tue, 29 Oct 2019 11:31:25 +0000</pubDate>
       
-      <guid>https://www.blog.tiga.tech/posts/invite-users-to-a-ghost-blog-without-sending-an-email/</guid>
+      <guid>https://tigattack.github.io/blog.tiga.tech/posts/invite-users-to-a-ghost-blog-without-sending-an-email/</guid>
       <description>The Ghost platform makes it all but impossible to add new users if you don&amp;rsquo;t have a mail server configured.
 In this post, I will show you how to work around this and add new users without needing to send an email.
 Requirements Invite the User Get the Invitation Requirements SELECT and UPDATE permissions on the database backing Ghost.
@@ -88,10 +88,10 @@ If you set Ghost up yourself, you will have this. Invite the User Log into your 
     
     <item>
       <title>MacBook Pro Touch Bar - Fix stuck keys</title>
-      <link>https://www.blog.tiga.tech/posts/macbook-pro-touchbar-fix-stuck-jammed-hung-keys/</link>
+      <link>https://tigattack.github.io/blog.tiga.tech/posts/macbook-pro-touchbar-fix-stuck-jammed-hung-keys/</link>
       <pubDate>Mon, 28 Oct 2019 15:25:20 +0000</pubDate>
       
-      <guid>https://www.blog.tiga.tech/posts/macbook-pro-touchbar-fix-stuck-jammed-hung-keys/</guid>
+      <guid>https://tigattack.github.io/blog.tiga.tech/posts/macbook-pro-touchbar-fix-stuck-jammed-hung-keys/</guid>
       <description>Those of you who rarely perform a full shutdown or reboot on your MacBook may occasionally encounter issues with the Touch Bar.
 One such issue is stuck//frozen keys.
 Unfortunately for me, my escape key happened to become stuck &amp;ldquo;on&amp;rdquo;, persistently spamming the escape keycode to the foremost application.
@@ -101,10 +101,10 @@ Thankfully, there is a fix for this:</description>
     
     <item>
       <title>Upgrading and Repairing the Bora</title>
-      <link>https://www.blog.tiga.tech/posts/upgrading-and-fixing-the-bora/</link>
+      <link>https://tigattack.github.io/blog.tiga.tech/posts/upgrading-and-fixing-the-bora/</link>
       <pubDate>Mon, 18 Feb 2019 18:49:09 +0000</pubDate>
       
-      <guid>https://www.blog.tiga.tech/posts/upgrading-and-fixing-the-bora/</guid>
+      <guid>https://tigattack.github.io/blog.tiga.tech/posts/upgrading-and-fixing-the-bora/</guid>
       <description>After buying my Bora, which I wrote about here, I decided to carry out a number of repairs and upgrades.
 The end goal was to resolve the issues I identified before purchase and de-chav it.
 Modifications &amp;amp; Upgrades Repairs Future Plans Modifications &amp;amp; Upgrades Replaced rear shocks and top mounts with Bilstein and OEM parts respectively. Cost-free as these were from my Golf and had only seen ~100 miles. Fitted Passat auto-dimming rearview mirror as an upgrade to the Bora auto-dimming mirror.</description>
@@ -112,10 +112,10 @@ Modifications &amp;amp; Upgrades Repairs Future Plans Modifications &amp;amp; Up
     
     <item>
       <title>New car - VW Bora Sport</title>
-      <link>https://www.blog.tiga.tech/posts/new-car-bora/</link>
+      <link>https://tigattack.github.io/blog.tiga.tech/posts/new-car-bora/</link>
       <pubDate>Sat, 12 Jan 2019 22:39:07 +0000</pubDate>
       
-      <guid>https://www.blog.tiga.tech/posts/new-car-bora/</guid>
+      <guid>https://tigattack.github.io/blog.tiga.tech/posts/new-car-bora/</guid>
       <description>About a month and a half after the Golf was taken out, I bought a new car.
 So remember how like four months ago I said &amp;ldquo;Next up&amp;hellip; Watch this space&amp;rdquo;? This took a little longer to put together than I hoped it would because&amp;hellip; Well, I&amp;rsquo;m lazy, but here it is.
 TL;DR - I bought a 2004 VW Bora Sport with a PD130 engine. It was a bit of a chavved up mess and I fixed it.</description>
@@ -123,10 +123,10 @@ TL;DR - I bought a 2004 VW Bora Sport with a PD130 engine. It was a bit of a cha
     
     <item>
       <title>Goodbye to the Golf</title>
-      <link>https://www.blog.tiga.tech/posts/goodbye-to-the-golf/</link>
+      <link>https://tigattack.github.io/blog.tiga.tech/posts/goodbye-to-the-golf/</link>
       <pubDate>Wed, 19 Sep 2018 16:42:52 +0100</pubDate>
       
-      <guid>https://www.blog.tiga.tech/posts/goodbye-to-the-golf/</guid>
+      <guid>https://tigattack.github.io/blog.tiga.tech/posts/goodbye-to-the-golf/</guid>
       <description>The Crash History of the Golf The Crash 8th September 2018
 The day started pretty normally, we were woken up by the cat walking all over us in a beg for attention.
 I had no idea this was coming, but I suppose you never do.
@@ -135,10 +135,10 @@ We were leaving for my girlfriend&amp;rsquo;s little brother&amp;rsquo;s hockey 
     
     <item>
       <title>Install Windows Server on the HPE Microserver G8 in AHCI mode</title>
-      <link>https://www.blog.tiga.tech/posts/installing-windows-server-on-the-hpe-microserver-g8-in-ahci-mode/</link>
+      <link>https://tigattack.github.io/blog.tiga.tech/posts/installing-windows-server-on-the-hpe-microserver-g8-in-ahci-mode/</link>
       <pubDate>Mon, 15 Jan 2018 16:00:48 +0000</pubDate>
       
-      <guid>https://www.blog.tiga.tech/posts/installing-windows-server-on-the-hpe-microserver-g8-in-ahci-mode/</guid>
+      <guid>https://tigattack.github.io/blog.tiga.tech/posts/installing-windows-server-on-the-hpe-microserver-g8-in-ahci-mode/</guid>
       <description>I&amp;rsquo;m making this post because I spent half a day trying to work this out and it was a pain in the arse.
 My problem was that once the server was put into AHCI mode instead of using the RAID configuration, the Windows Server installer would complain that it couldn&amp;rsquo;t install to any of the disks as they were not compatible.
 As you&amp;rsquo;ll see the solution turned out to be quite simple.</description>
@@ -146,10 +146,10 @@ As you&amp;rsquo;ll see the solution turned out to be quite simple.</description
     
     <item>
       <title>How to install Lidarr on Ubuntu</title>
-      <link>https://www.blog.tiga.tech/posts/how-to-install-lidarr-on-ubuntu/</link>
+      <link>https://tigattack.github.io/blog.tiga.tech/posts/how-to-install-lidarr-on-ubuntu/</link>
       <pubDate>Mon, 08 Jan 2018 15:05:06 +0000</pubDate>
       
-      <guid>https://www.blog.tiga.tech/posts/how-to-install-lidarr-on-ubuntu/</guid>
+      <guid>https://tigattack.github.io/blog.tiga.tech/posts/how-to-install-lidarr-on-ubuntu/</guid>
       <description>Update As of 4th June 2022, Lidarr has a stable release available. It&amp;rsquo;s also highly documented now, rendering this post pretty much entirely redundant.
 I suggest you follow their instructions for installing on Ubuntu or, even better, running in Docker. Lidarr is still in alpha, but you can install it on Ubuntu with some ease.
 Credit for much of this process goes to my friend Dan.
@@ -158,10 +158,10 @@ Add the mono repo and install mono.</description>
     
     <item>
       <title>Discord notifications: Veeam Backup &amp; Replication</title>
-      <link>https://www.blog.tiga.tech/posts/veeam-b-r-notifications-in-discord/</link>
+      <link>https://tigattack.github.io/blog.tiga.tech/posts/veeam-b-r-notifications-in-discord/</link>
       <pubDate>Mon, 08 Jan 2018 10:16:31 +0000</pubDate>
       
-      <guid>https://www.blog.tiga.tech/posts/veeam-b-r-notifications-in-discord/</guid>
+      <guid>https://tigattack.github.io/blog.tiga.tech/posts/veeam-b-r-notifications-in-discord/</guid>
       <description>Part 2 of a Discord notifications series.
 In a similar fashion to part 1, this setup has been running for a while and I&amp;rsquo;m very pleased with it&amp;rsquo;s flawless functionality.
 Warning This project is no longer maintained; it has been superseded by my new project, VeeamNotify.
@@ -170,10 +170,10 @@ You can read more about it here. Background Update (01/02/2019): Setup 1. Make a
     
     <item>
       <title>Discord notifications: Sonarr, Radarr and Lidarr</title>
-      <link>https://www.blog.tiga.tech/posts/discord-notifications-for-sonarr-radarr-and-lidarr/</link>
+      <link>https://tigattack.github.io/blog.tiga.tech/posts/discord-notifications-for-sonarr-radarr-and-lidarr/</link>
       <pubDate>Sat, 06 Jan 2018 15:47:33 +0000</pubDate>
       
-      <guid>https://www.blog.tiga.tech/posts/discord-notifications-for-sonarr-radarr-and-lidarr/</guid>
+      <guid>https://tigattack.github.io/blog.tiga.tech/posts/discord-notifications-for-sonarr-radarr-and-lidarr/</guid>
       <description>Part 1 of a Discord notifications series.
 I&amp;rsquo;ve had this running for a while and it works flawlessly, I&amp;rsquo;m very pleased with it.
 After having a few people ask me how it&amp;rsquo;s done I decided it&amp;rsquo;d be best to make a post.
@@ -182,30 +182,30 @@ This is made extremely simple thanks to Sonarr&amp;rsquo;s built-in support for 
     
     <item>
       <title>Disable the password complexity for Active Directory on a Domain Controller</title>
-      <link>https://www.blog.tiga.tech/posts/disable-the-password-complexity-for-active-directory-on-a-domain-controller/</link>
+      <link>https://tigattack.github.io/blog.tiga.tech/posts/disable-the-password-complexity-for-active-directory-on-a-domain-controller/</link>
       <pubDate>Thu, 04 Jan 2018 12:34:52 +0000</pubDate>
       
-      <guid>https://www.blog.tiga.tech/posts/disable-the-password-complexity-for-active-directory-on-a-domain-controller/</guid>
+      <guid>https://tigattack.github.io/blog.tiga.tech/posts/disable-the-password-complexity-for-active-directory-on-a-domain-controller/</guid>
       <description>I recently ran into an issue where I couldn&amp;rsquo;t change the password of an account in AD from one of the Domain Controllers. I realised it&amp;rsquo;s because it has a different Group Policy than other computers.
 Open Group Policy Management (gpmc.msc). Expand your forest, expand the Domains container, expand your domain, and then right click on the Domain Controllers container. Pick &amp;ldquo;Create a GPO in this domain, and Link it here&amp;hellip;&amp;rdquo;.</description>
     </item>
     
     <item>
       <title>Rebuilding the BCD with BCDEdit</title>
-      <link>https://www.blog.tiga.tech/posts/rebuilding-the-bcd-with-bcdedit/</link>
+      <link>https://tigattack.github.io/blog.tiga.tech/posts/rebuilding-the-bcd-with-bcdedit/</link>
       <pubDate>Thu, 04 Jan 2018 11:43:18 +0000</pubDate>
       
-      <guid>https://www.blog.tiga.tech/posts/rebuilding-the-bcd-with-bcdedit/</guid>
+      <guid>https://tigattack.github.io/blog.tiga.tech/posts/rebuilding-the-bcd-with-bcdedit/</guid>
       <description>The BCD file lives in a folder called &amp;ldquo;boot&amp;rdquo; on the active partition of your hard drive. It contains information that instructs the computer on how to load the OS.
 A working BCD file usually has at least two things: 1) One or more OS entries and 2) the Boot Manager, which contains general boot info such as which OS to boot by default and, when more than one OS is present, the amount of seconds to wait for user input.</description>
     </item>
     
     <item>
       <title>Projects</title>
-      <link>https://www.blog.tiga.tech/projects/</link>
+      <link>https://tigattack.github.io/blog.tiga.tech/projects/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://www.blog.tiga.tech/projects/</guid>
+      <guid>https://tigattack.github.io/blog.tiga.tech/projects/</guid>
       <description>If you know me, you&amp;rsquo;ll know I often spend far too much time solving simple problems with less simple solutions.
 Luckily for you, the reader, most of these projects are available on my GitHub. Hopefully some of them can help you.
 Here are some of my favourites:</description>
