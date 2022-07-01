@@ -140,5 +140,5 @@ If you have any problems with the script, please [open an issue](https://github.
 
 ---
 
-I always welcome feedback on my posts; please [contact me](https://blog.tiga.tech/about-contact) if you have any.  
+I always welcome feedback on my posts; please [contact me](/contact) if you have any.  
 I'm also happy to answer any related questions if I know the answer.

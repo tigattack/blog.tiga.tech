@@ -40,7 +40,7 @@ If I were Tim Cook, I would tell you that the project has been reinvented.
 
 ## Update (01/02/2019):
 
-I will keep these instructions updated and in-line with current release as much as possible, but if something is out of date then please [contact me.](https://blog.tiga.tech/about-contact/)
+I will keep these instructions updated and in-line with current release as much as possible, but if something is out of date then please [contact me](/contact/).
 
 ---
 
@@ -182,4 +182,4 @@ This release adds the job's processing speed to the report, adds an update check
 If you have any problems with the script, please [open an issue](https://github.com/tigattack/VeeamDiscordNotifications/issues/new?assignees=&labels=bug&template=bug_report.md&title=%5BBUG%5D+)
 on the GitHub project.
 
-I always welcome feedback on my posts, please [contact me](https://blog.tiga.tech/about-contact) if you have any. I'm also happy to answer any related questions if I know the answer.
+I always welcome feedback on my posts, please [contact me](/contact) if you have any. I'm also happy to answer any related questions if I know the answer.

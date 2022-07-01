@@ -294,4 +294,4 @@ Enjoy, and feel free to let me know if you have any suggestions or face any issu
 
 ---
 
-I always welcome feedback and questions. Please [contact me](https://blog.tiga.tech/about) if you have any.
+I always welcome feedback and questions. Please [contact me](/contact) if you have any.

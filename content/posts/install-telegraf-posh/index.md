@@ -158,4 +158,4 @@ Automated Deployment:
 
 ---
 
-I always welcome feedback on my posts, please [contact me](https://blog.tiga.tech/about) if you have any. I'm also happy to answer any related questions if I know the answer.
+I always welcome feedback on my posts, please [contact me](/contact) if you have any. I'm also happy to answer any related questions if I know the answer.
