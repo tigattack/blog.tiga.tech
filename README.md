@@ -46,7 +46,6 @@ Not installed but could be useful:
 * <https://github.com/rvanhorn/hugo-dynamic-tabs>
 * <https://github.com/statropy/github-button-hugo-shortcode>
 
-
 ### Table of contents
 
 Add a ToC anywhere in a page with:
@@ -112,3 +111,13 @@ Usage:
 ```
 
 Source: <https://github.com/mfg92/hugo-shortcode-gallery>
+
+### Spoiler
+
+Usage:
+
+``html
+{{< spoiler "Optional spoiler title" >}}
+Spoiler content
+{{< /spoiler >}}
+```
