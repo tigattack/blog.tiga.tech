@@ -100,12 +100,12 @@ However, please also feel free to perform a manual download of all the files in 
 
 First install:
 
-<img src="https://i.tiga.tech/LUlo2/RaFEbuju26.png/raw"
+<img src="RaFEbuju26.png"
     title="First install" loading="lazy" />
 
 Update:
 
-<img src="https://i.tiga.tech/LUlo2/zovUBIVo22.png/raw"
+<img src="zovUBIVo22.png"
     title="Update" loading="lazy" />
 
 ### Commands
