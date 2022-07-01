@@ -25,10 +25,7 @@ favicon_16 = "assets/tigattack-16.png"
 dateFormat = "2 January 2006"
 since = 2016
 # Specify light/dark colorscheme
-# Supported values:
-# "auto" (use preference set by browser)
-# "dark" (dark background, light foreground)
-# "light" (light background, dark foreground) (default)
+# "auto" (use browser preference) / "dark" / "light"
 colorScheme = "dark"
 # Hide the toggle button, along with the associated vertical divider
 hideColorSchemeToggle = false
@@ -137,11 +134,8 @@ formaction = ["'self'"]
 framesrc = ["'self'"]
 imgsrc = [
   "'self'",
-  "https://img.tiga.tech",
-  "https://i.tiga.tech",
   "https://avatars.githubusercontent.com", # Required by gh-card shortcode
   "https://opengraph.githubassets.com", # Required by gh-card shortcode
-  "https://blog.tiga.tech",
   "data:"
 ]
 objectsrc = ["'none'"]
