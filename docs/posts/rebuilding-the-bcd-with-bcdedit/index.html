@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; block-all-mixed-content; default-src 'self'; child-src 'self'; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net/ https://maxcdn.bootstrapcdn.com; form-action 'self'; frame-src 'self'; img-src 'self' https://avatars.githubusercontent.com https://opengraph.githubassets.com data:; object-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com/ https://cdn.jsdelivr.net/ https://maxcdn.bootstrapcdn.com; script-src 'self' 'unsafe-inline' https://www.google-analytics.com https://cdn.jsdelivr.net/; prefetch-src 'self'; connect-src 'self' https://www.google-analytics.com https://api.github.com;">
+
+
+
+
+<meta name="author" content="tigattack">
+<meta name="description" content="BCD stands for Boot Configuration Data. The BCD file lives in a folder called &#34;boot&#34; on the active partition of your hard drive. It contains information that instructs the computer on how to load the OS.">
+<meta name="keywords" content="blog,personal,homelab,technology,automotive,cars">
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Rebuilding the BCD with BCDEdit"/>
+<meta name="twitter:description" content="BCD stands for Boot Configuration Data. The BCD file lives in a folder called &#34;boot&#34; on the active partition of your hard drive. It contains information that instructs the computer on how to load the OS."/>
+
+<meta property="og:title" content="Rebuilding the BCD with BCDEdit" />
+<meta property="og:description" content="BCD stands for Boot Configuration Data. The BCD file lives in a folder called &#34;boot&#34; on the active partition of your hard drive. It contains information that instructs the computer on how to load the OS." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.blog.tiga.tech/posts/rebuilding-the-bcd-with-bcdedit/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-01-04T11:43:18+00:00" />
+<meta property="article:modified_time" content="2018-01-04T11:43:18+00:00" />
+
+
+
+
+  <title>tig&#39;s Blog</title>
+
+  
+  <link rel="canonical" href="https://www.blog.tiga.tech/posts/rebuilding-the-bcd-with-bcdedit/">
+  
+
+  <link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.min.5d4238f600e7014868f3e2e45433715d023320c118030c361103618253315b32.css" integrity="sha256-XUI49gDnAUho8&#43;LkVDNxXQIzIMEYAww2EQNhglMxWzI=" crossorigin="anonymous" media="screen" />
+
+
+
+
+
+  
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.min.39e41a7f16bdf8cb16e43cae7d714fa1016f1d2d2898a5b3f27f42c9979204e2.css" integrity="sha256-OeQafxa9&#43;MsW5DyufXFPoQFvHS0omKWz8n9CyZeSBOI=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+   
+
+
+
+
+  <link rel="icon" type="image/png" href="/assets/tigattack-32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/assets/tigattack-16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+  
+
+  <meta name="generator" content="Hugo 0.101.0" />
+
+
+  
+
+<link rel="stylesheet" href="/css/prism.css" />
+
+</head>
+
+
+
+
+
+
+
+<body class="preload-transitions line-numbers colorscheme-dark">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      tig&#39;s Blog
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">Posts</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="https://www.blog.tiga.tech/posts/rebuilding-the-bcd-with-bcdedit/">
+              Rebuilding the BCD with BCDEdit
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <time datetime="2018-01-04T11:43:18Z">
+                4 January 2018
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              4-minute read
+            </span>
+          </div>
+          <div class="authors">
+  <i class="fa fa-user" aria-hidden="true"></i>
+    <a href="/about">tigattack</a></div>
+
+          <div class="categories">
+  <i class="fa fa-folder" aria-hidden="true"></i>
+    <a href="/categories/technology/">technology</a></div>
+
+          
+          <hr>
+        </div>
+      </header>
+
+      <div>
+        
+          <img src="header.jpg" alt="Featured image"/>
+          <hr>
+        
+        <p>The BCD file lives in a folder called &ldquo;boot&rdquo; on the active partition of your hard drive. It contains information that instructs the computer on how to load the OS.<br>
+A working BCD file usually has at least two things: 1) One or more OS entries and 2) the Boot Manager, which contains general boot info such as which OS to boot by default and, when more than one OS is present,
+the amount of seconds to wait for user input.<br>
+So if your computer cannot locate this information then chances are it either doesn&rsquo;t exist or it&rsquo;s corrupted, therefore the computer will not know how or what to boot.</p>
+<p>Unfortunately it&rsquo;s not unheard of for the BCD to become corrupted one way or another. That&rsquo;s why I&rsquo;ve made this post.</p>
+<div class="notice tip">
+  <div class="notice-title">
+    <i class="fa fa-lightbulb-o" aria-hidden="true"></i>Tip
+  </div>
+  <div class="notice-content">BCD stands for Boot Configuration Data.</div>
+</div>
+
+<p>Small disclaimer: While this has always worked for me, I cannot guarantee it&rsquo;ll work for you. I take no responsibility if this breaks your computer or sets your cat on fire.</p>
+<hr>
+<p>First of all what you need to do is boot your computer from your recovery/install media. This may be the disc you used to install Windows on your computer or a CD or USB stick that came with your computer when you bought it.<br>
+Once you&rsquo;ve booted from that, open a command prompt. You can find out how to do this on your version of Windows using Google.</p>
+<p>Before we do anything else you need to find out which volume your OS is installed on.<br>
+To do this run these commands:</p>
+<pre class="language-shell">
+<code>> diskpart
+> list volume
+</code></pre>
+<p>Find the volume that matches the size and label of the volume that Windows is installed on and remember the letter, you&rsquo;ll need it later.
+This can be found in the &ldquo;Ltr&rdquo; column of the output of the command.<br>
+Now run <code>exit</code> to leave the DISKPART utility.</p>
+<p>So after you&rsquo;ve got the OS volume letter you need to create a new, empty BCD file using these two commands:</p>
+<pre class="language-shell">
+<code>> bcdedit /createstore bcd
+> bcdedit /import bcd
+</code></pre>
+<p>Then delete the old one:</p>
+<pre class="language-shell">
+<code>> del bcd
+</code></pre>
+<p>Now what you need to do is create a part of the BCD file known as the Boot Manager</p>
+<pre class="language-shell">
+<code>> bcdedit /create {bootmgr}
+</code></pre>
+<p>There isn&rsquo;t much else you need to do with the Boot Manager but it does need to know what volume to boot the OS from and how long to wait for user input on the OS choice screen. Replace 30 with the amount of seconds you want it to wait. If you&rsquo;re not sure what to do, just use 30 as that is the default.</p>
+<pre class="language-shell">
+<code>> bcdedit /set {bootmgr} device boot
+> bcdedit /timeout 30
+</code></pre>
+<p>After you&rsquo;ve created and configured the boot manager, as above, you need to create the OS entry object in the BCD file. This will tell the boot manager to boot Windows from files in the \Windows folder on one of the systems volumes.<br>
+So run this command:</p>
+<pre class="language-shell">
+<code>> bcdedit /create /d "Your OS name here (e.g. Windows 10 Pro)" /application osloader
+</code></pre>
+<p>The command you just ran will spit out a response that looks something like this:<br>
+<code>The entry {aecb8aac-61ac-11e5-8614-99c411b05d8b} was successfully created.</code></p>
+<p>The GUID (the bit that looks like
+<code>{aecb8aac-61ac-11e5-8614-99c411b05d8b}</code>) will need to be used in to the next command.</p>
+<pre class="language-shell">
+<code>> bcdedit /default {GUID-HERE}
+</code></pre>
+<p>So now the object needs some values in it so it knows what to do. To get a rough idea for these next commands, try and run the command &ldquo;<code>bcdedit</code>&rdquo; on a healthy computer and use the output from that as a model. In my case the OS volume was C, so I entered these:</p>
+<pre class="language-shell">
+<code>> bcdedit /set {default} device partition=c:
+> bcdedit /set {default} path \windows\system32\boot\winload.exe
+> bcdedit /set {default} osdevice partition=c:
+> bcdedit /set {default} systemroot \Windows
+> bcdedit /set {default} detecthal yes
+</code></pre>
+<p>Lastly you must run this command so that your computer can see your OS when booting:</p>
+<pre class="language-shell">
+<code>> bcdedit /displayorder {default} /addlast
+</code></pre>
+<p>Here is the output from my friends computer when I fixed his corrupted BCD. Sorry for the potato quality!<br>
+<img src="7b136f2c24e105d14bd17aff877d37b5.png"
+loading="lazy" alt="Windows-10-Pro-New-BCD" /></p>
+<hr>
+<p>I always welcome feedback on my posts, please <a href="/contact">contact me</a> if you have any. I&rsquo;m also happy to answer any related questions if I know the answer.</p>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2016 -
+    
+    2022
+     tigattack 
+    ·
+    
+      Licensed under <a rel="license" href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPL-3.0</a>
+    ·
+    
+    Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Code</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+  
+  <script src="/js/coder.min.236049395dc3682fb2719640872958e12f1f24067bb09c327b233e6290c7edac.js" integrity="sha256-I2BJOV3DaC&#43;ycZZAhylY4S8fJAZ7sJwyeyM&#43;YpDH7aw="></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src='/js/prism.js'></script>
+<script src='/js/gh-card.js'></script>
+</body>
+
+</html>

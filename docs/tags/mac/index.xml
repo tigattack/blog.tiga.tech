@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mac on tig&#39;s Blog</title>
+    <link>https://www.blog.tiga.tech/tags/mac/</link>
+    <description>Recent content in mac on tig&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 28 Oct 2019 15:25:20 +0000</lastBuildDate><atom:link href="https://www.blog.tiga.tech/tags/mac/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MacBook Pro Touch Bar - Fix stuck keys</title>
+      <link>https://www.blog.tiga.tech/posts/macbook-pro-touchbar-fix-stuck-jammed-hung-keys/</link>
+      <pubDate>Mon, 28 Oct 2019 15:25:20 +0000</pubDate>
+      
+      <guid>https://www.blog.tiga.tech/posts/macbook-pro-touchbar-fix-stuck-jammed-hung-keys/</guid>
+      <description>Those of you who rarely perform a full shutdown or reboot on your MacBook may occasionally encounter issues with the Touch Bar.
+One such issue is stuck//frozen keys.
+Unfortunately for me, my escape key happened to become stuck &amp;ldquo;on&amp;rdquo;, persistently spamming the escape keycode to the foremost application.
+This rendered many applications entirely useless, and stopped me even being able to access the Apple menu to perform power operations!
+Thankfully, there is a fix for this:</description>
+    </item>
+    
+  </channel>
+</rss>
