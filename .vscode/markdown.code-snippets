@@ -1,0 +1,97 @@
+{
+  "Prism Code Block": {
+    "prefix": "codeblock",
+    "body": [
+      "<pre class=\"language-${1:language}\">",
+      "<code>${2:code}",
+      "</code></pre>$0"
+    ],
+    "description": "Insert a default PrismJS code block."
+  },
+  "Prism Code Block (with label)": {
+    "prefix": "codeblock",
+    "body": [
+      "<pre class=\"language-${1:language}\" data-label=\"$2{:label}\">",
+      "<code>${2:code}",
+      "</code></pre>$0"
+    ],
+    "description": "Insert a PrismJS code block with a label in the toolbar."
+  },
+  "Prism Code Block (no line numbers)": {
+    "prefix": "codeblock-nolinenum",
+    "body": [
+      "<pre",
+      "  class=\"language-${1:language}\"",
+      "  class=\"no-line-numbers\"",
+      "  id=\"${3:id for linking (remove if unused)}\">",
+      "<code>${2:code}",
+      "</code></pre>$0"
+    ],
+    "description": "Insert a PrismJS code block without line numbers."
+  },
+  "Prism Code Block (line highlight)": {
+    "prefix": "codeblock-linehighlight",
+    "body": [
+      "<pre",
+      "  class=\"language-${1:language}\"",
+      "  data-line=\"${1:1 / 2-3 / 4,6 / 7,9-10,12}\"",
+      "  id=\"${3:id for linking (remove if unused)}\">",
+      "<code>${2:code}",
+      "</code></pre>$0"
+    ],
+    "description": "Insert a PrismJS code block without line numbers."
+  },
+  "Code line link": {
+    "prefix": "code-line-link",
+    "body": [
+      "[${1:link text}](#${2:codeblock id}.${3:line(s) examples: 1 / 2-3 / 4,6 / 7,9-10,12 })",
+      "$0"
+    ],
+    "description": "Insert a link to a line or selection of lines in an existing code block."
+  },
+  "Table of contents": {
+    "prefix": "toc",
+    "body": "{{< toc >}}",
+    "description": "Insert a table of contents.",
+  },
+  "Notice box": {
+    "prefix": "notice",
+    "body": [
+      "{{< notice ${1|note,tip,example,question,info,warning,error|} >}}",
+      "${2:notice}",
+      "{{< /notice >}}",
+      "$0"
+    ],
+    "description": "Insert a notice box of any type"
+  },
+  "Tab group": {
+    "prefix": "tab-group",
+    "body": [
+      "{{< tabgroup >}}",
+      "\t{{< tab name=\"${1:tab name}\"",
+      "\t${2:tab contents}",
+      "\t{{< /tab >}}",
+      "\t{{< tab name=\"${3:tab name}\"",
+      "\t${4:tab contents}",
+      "\t{{< /tab >}}",
+      "{{< /tabgroup >}}",
+      "$0"
+    ],
+    "description": "Insert a tab group."
+  },
+  "GitHub card": {
+    "prefix": "gh-card",
+    "body": "{{< gh-card size=\"${1|small,medium,large|}\" repo=\"${2:username/repo-name}\" image=\"${3:image URL or 'opengraph'}\" >}}",
+    "description": "Insert a GitHub repository card."
+  },
+  "Spoiler": {
+    "prefix": "spoiler",
+    "body": [
+      "{{< spoiler \"${1:spoiler title}\" >}}",
+      "${2:spoiler content}",
+      "{{< /spoiler >}}",
+      "$0"
+    ],
+    "description": "Insert a spoiler section."
+  }
+}
