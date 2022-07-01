@@ -181,6 +181,7 @@ pre[class*="language-"].line-numbers > code {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    line-height: 2.0em;
 }
 .line-numbers-rows > span {
     display: block;
