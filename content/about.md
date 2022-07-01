@@ -1,8 +1,9 @@
 +++
 title = "About"
 description = "About me"
+slug = "about"
 date = "2022-06-28"
-aliases = ["about", "about-me", "about-tig"]
+aliases = ["about-me", "about-tig"]
 author = "tigattack"
 +++
 
