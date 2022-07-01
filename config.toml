@@ -1,7 +1,7 @@
 # -----------
 # Site config
 # -----------
-baseURL = "https://www.blog.tiga.tech"
+baseURL = "https://tigattack.github.io/blog.tiga.tech"
 title = "tig's Blog"
 theme = ["hugo-coder", "hugo-shortcode-gallery"]
 languageCode = "en"
@@ -9,6 +9,7 @@ defaultContentLanguage = "en"
 paginate = 20
 pygmentsCodeFences = false
 enableEmoji = true
+publishDir = "docs"
 
 # Enable Disqus comments
 # disqusShortname = ""
