@@ -4,7 +4,7 @@ tig's Blog, powered by [Hugo](https://gohugo.io/) and a customised version of [C
 
 ## PrismJS
 
-[Download page for current selection](https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+clike+javascript+bash+diff+docker+hcl+json+json5+nginx+powershell+python+regex+yaml&plugins=line-highlight+line-numbers+autolinker+command-line+toolbar+copy-to-clipboard).
+[Download page for current selection](https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+clike+javascript+bash+diff+docker+hcl+json+json5+makefile+nginx+powershell+python+regex+systemd+toml+yaml&plugins=line-highlight+line-numbers+autolinker+command-line+normalize-whitespace+toolbar+copy-to-clipboard).
 
 * Theme: Tomorrow Night
 * Languages
@@ -17,16 +17,20 @@ tig's Blog, powered by [Hugo](https://gohugo.io/) and a customised version of [C
     * Docker
     * HCL
     * JSON/JSON5
+    * Makefile
     * NGINX
     * PowerShell
     * Python
     * RegEx
+    * Systemd
+    * TOML
     * YAML
 * Plugins
     * Line highlight
     * Line numbers
     * Autolinker (MD-syntax links within codeblocks)
     * Command line (not working, plugin compatibility issue?)
+    * Normalise whitespace
     * Toolbar
     * Copy to clipboard button
 
