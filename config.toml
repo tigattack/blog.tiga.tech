@@ -103,7 +103,7 @@ url = "https://reddit.com/u/tigattack/"
 name = "Discord"
 icon = "fa fa-2x fa-discord"
 weight = 1
-url = "https://discord.com/users/251776415735873537/"
+url = "/contact"
 
 [[params.social]]
 name = "RSS"
