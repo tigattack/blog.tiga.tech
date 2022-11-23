@@ -41,6 +41,13 @@ jobs:
         with:
           token: ${{ secrets.SUBMODULE_PAT }}
           submodules: recursive
+      - name: Checkout submodules
+        run: |
+              git submodule sync
+              git submodule update --init --recursive
+      - name: tree
+        run: |
+          ls -lR .
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v2
