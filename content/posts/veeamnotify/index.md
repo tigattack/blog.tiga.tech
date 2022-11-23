@@ -1,4 +1,4 @@
-+++ 
++++
 draft = false
 date = 2022-06-28T00:09:55+01:00
 title = "VeeamNotify -  Veeam B&R session notifications"
@@ -8,18 +8,55 @@ authors = ["tigattack"]
 tags = ["project", "PowerShell"]
 categories = ["technology"]
 series = []
+featuredImage = "images/header.png"
 +++
 
-{{< gallery match="images/*" sortOrder="asc" rowHeight="200" margins="5"
-    thumbnailResizeOptions="600x600 q90 Lanczos" showExif=false
-    previewType="blur" embedPreview="true" loadJQuery=true >}}
-
----
-
-VeeamNotify sends Veeam Backup & Replication session summary notifications to Discord, Microsoft Teams, and Slack, detailing the session result, various statistics, and optionally alerting you via @mention when a job finishes in a warning or failed state.  
+VeeamNotify sends Veeam Backup & Replication session summary notifications to Discord, Microsoft Teams, and Slack, detailing the session result, various statistics, and optionally alerting you via @mention when a job finishes in a warning or failed state.
 
 VeeamNotify is a replacement for my previous [VeeamDiscordNotifications](https://github.com/tigattack/VeeamDiscordNotifications) project, and the respective [Teams](https://github.com/tigattack/VeeamTeamsNotifications) and [Slack](https://github.com/tigattack/VeeamSlackNotifications) projects. You may have seen my [previous blog post](https://blog.tiga.tech/veeam-b-r-notifications-in-discord/) about VeeamDiscordNotifications.  
 VeeamNotify features improvements across the board and support for all the aforementioned messaging services in one place.
+
+---
+
+{{< toc >}}
+
+# VeeamNotify Compatibility
+
+Supported Notification Services:
+
+* Discord
+* Slack
+* Microsoft Teams
+
+Please create a [feature request](https://github.com/tigattack/VeeamNotify/issues/new?assignees=tigattack&labels=enhancement&template=feature_request.yml&title=[FEAT]+New+service:+) if your preferred service isn't listed here.
+
+Supported Veeam Job Types:
+
+* VM Backup
+* VM Replication
+* Windows & Linux Agent Backup jobs*
+
+ue to limitations in Veeam, only some types of Agent jobs are supported.
+
+**Supported** jobs are referred to as "Agent Backup" or "Managed by backup server".  
+**Unsupported** jobs are referred to as "Agent policy" or "Managed by agent".  
+See the spoilered illustration below if this isn't clear to you.
+
+<details>
+<summary>Illustrated screenshot showing an example of supported types</summary>
+<img src="images/agent-types.png" width="75%"></img>
+
+**Note:** Linux Agent Backup jobs are also supported, this image is only an example.
+</details>
+
+You can read about the difference between these two Agent job types [here](https://helpcenter.veeam.com/docs/backup/agents/agent_job_protection_mode.html?ver=110#selecting-job-mode).
+
+Unfortunately, even supported Agent jobs return a reduced amount of session information, so you won't see as much detail in the notification (see the example screenshots at the top).
+
+I've included as much relevant information as I've been able to discover in the notifications, but I welcome any suggestions for improvement in this area.
+
+
+# Manual Install Instructions
 
 If you're not here for manual installation instructions, I suggest you have a look at some of the simpler installation methods in the [VeeamNotify wiki](https://github.com/tigattack/VeeamNotify/wiki).
 
@@ -27,11 +64,10 @@ If you're not here for manual installation instructions, I suggest you have a lo
 I will keep these instructions updated and in-line with current release as much as possible, but if something is out of date then please submit an issue in the [GitHub repository](https://github.com/tigattack/VeeamNotify).
 {{< /notice >}}
 
----
+## Requirements
 
-{{< toc >}}
-
-# Manual Install Instructions
+* Veeam Backup & Replication 11 or higher.
+* PowerShell 5.1 or higher.
 
 ## Preparation
 
@@ -51,7 +87,7 @@ New-Item 'C:\VeeamScripts' -Type Directory
 
 ## Download VeeamNotify
 
-The first command, in simple terms, instructs PowerShell to use TLS 1.2, as it uses TLS 1.0 by default, which GitHub no longer accepts.
+The first command, in simple terms, instructs PowerShell to use TLS 1.2 for web requests. It uses TLS 1.0 by default, which GitHub no longer accepts.
 
 The second command downloads the VeeamNotify v1.0 release ZIP.
 
