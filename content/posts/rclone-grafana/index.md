@@ -1,4 +1,4 @@
-+++ 
++++
 draft = true
 date = 2021-08-29T00:00:00+01:00
 title = "Monitoring Rclone with Grafana and InfluxDB"
@@ -14,7 +14,7 @@ In this post, we'll look at monitoring some important metrics from Rclone using 
 
 I started looking into this after I followed a blog post that a good friend of mine recently published: [MonsterMuffin - Unlimited Plex Storage via Google Drive And Rclone](https://blog.muffn.io/unlimited-plex-storage-via-google-drive-and-rclone/).
 
-Having a clear point of observation for these metrics will aid in identifying and troubleshooting issues, track data usage over any given times pan, identify peak usage periods, and so on.
+Having a clear point of observation for these metrics is often invaluable when identifying and troubleshooting issues and is also useful for tracking data usage over any given time span, identifying peak usage periods, and so on.
 
 Also, data is cool.
 
@@ -22,10 +22,10 @@ Also, data is cool.
 
 {{< toc >}}
 
-Before we jump in, let's talk a little about Rclone's [`rc` mode](https://rclone.org/rc/), which we'll be using for this.
+Before we jump in, we'll be using Rclone's [`rc` mode](https://rclone.org/rc/) for this, so let's talk a little about that first.
 
 Rclone exposes some handy metrics through its `rc` mode.
-In short, there are two ways of doing this: 
+In short, there are two ways of doing this:
 
 [1](#option-1add-rclone-rc-to-your-existing-setup): Add the relevant `rc` flags to your existing service or script.
 
@@ -64,7 +64,7 @@ The flags you will need are:
 * Enable the Rclone metrics endpoint: [`--rc-enable-metrics`](https://rclone.org/rc/#rc-enable-metrics)
 * Bind to all live interfaces on port 5572: [`--rc-addr=0.0.0.0:5572`](https://rclone.org/rc/#rc-addr-ip)
 
-I highly recommend configuration authentication. Destructive actions are not possible without authentication, but there is sizable scope for information gathering and inconvenient actions. You can see each support rc command and whether it requires authentication [here](https://rclone.org/rc/#supported-commands).
+I highly recommend configuring authentication. Destructive actions are not possible without authentication, but there is scope for information gathering and potential inconvenience. You can see all rc commands and whether they require authentication [here](https://rclone.org/rc/#supported-commands).
 
 You can use either of the following flags to enable HTTP authentication:
 * Plaintext: `--rc-user=<username> --rc-pass=<password>`
@@ -77,19 +77,22 @@ As I mentioned above, there are two routes you can take when configuring this; I
 The first and simplest option is to simply add the flags above to your mount (or other) command.
 
 Example command:
-<pre class="command-line language-bash" data-prompt="$">
+<pre class="command-line language-bash no-line-numbers" data-prompt="$">
 <code>rclone mount --rc --rc-addr=0.0.0.0:5572 --rc-enable-metrics \
     --rc-user='username' --rc-password='password' \
     &lt;your-remote&gt;: /your/mount/point</code>
 </pre>
 
-<p class="callout">If you have multiple mounts, you can add these flags to all of them, but you will need to change the port since multiple Rclone processes cannot bind to the same port.</p>
+{{< notice tip >}}
+If you have multiple mounts, you can add these flags to all of them, but you will need to change the port since multiple processes cannot bind to the same port.
+{{< /notice >}}
 
-## Option 2 - Run Rclone `rcd` as a daemon
 
-For this option, we'll look at running `rcd` as a daemon.
+## Option 2 - Run Rclone `rcd` as a service
 
-You may remember what I said earlier about `rc` commands sometimes not being particularly user-friendly, how they're fine for scripts and services, but can make one-off commands quite difficult unless you're experienced with it.  Well, this is where you may see that.
+For this option, we'll look at running `rcd`. When you run `rclone rcd`, rclone will run as a daemon with the sole purpose of listening for `rc` commands.
+
+You may remember what I said earlier about `rc` commands sometimes not being particularly user-friendly. They're fine for scripts and services, but can make one-off commands quite difficult unless you're experienced with `rc`.  Well, this is where you may see that.
 
 In the second service definition you will notice that the global options are specified differently when using `rc`. Global options are exactly the same as Rclone's global flags in functionality, but all key:value pairs must be specified as JSON, and both the key and value names differ slightly in some cases.
 
@@ -103,18 +106,19 @@ Some examples:
 * An example of some of the oddities:
     `--cache-mode full` becomes `{"vfs": {"CacheMode": 3}}`.
 
-You can see all available options like so:
+You can see all available options without needing to run rcd first like so:
 
-<pre class="command-line language-bash" data-prompt="$">
+<pre class="command-line language-bash no-line-numbers" data-prompt="$">
 <code>rclone rc options/get --rc-user='username' --rc-pass='password'</code>
 </pre>
 
+You'll notice that some of the values turn from shorthand to longhand (e.g. `1h` becomes `3600000000000`). You can find more information on this [here](https://rclone.org/rc/#data-types). The documentation states that shorthand syntax can be used, but I've not had promising experience with this.
 
 In the standalone service definition below, we want to focus on 2 things:
 
 1. `ExecStart` - This command launches Rclone's `rcd` using the specified configuration flags.
 
-3. `ExecStop` - This command runs when you stop the service and will unmount all remotes.
+2. `ExecStop` - This command runs when you stop the service and will unmount all remotes.
 
 <details>
 <summary>rclone-rcd.service standalone</summary>
@@ -197,7 +201,9 @@ WantedBy=multi-user.target</code>
 
 We're going to use Telegraf to read Rclone's `/metrics` endpoint.
 
-<p class="callout">For those of you who prefer Prometheus, Rclone's `/metrics` endpoint is Prometheus-compatible, so it will be pretty easy for you to get going with this too.</p>
+{{< notice tip >}}
+For those of you who prefer Prometheus, Rclone's `/metrics` endpoint is Prometheus-compatible, so it will be pretty easy for you to get going with this too.
+{{< /notice >}}
 
 I won't cover installation of [InfluxDB](https://docs.influxdata.com/influxdb) or [Telegraf](https://docs.influxdata.com/telegraf/) since both are highly documented and have been covered by many other people.
 
