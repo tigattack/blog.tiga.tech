@@ -9,7 +9,7 @@ defaultContentLanguage = "en"
 paginate = 20
 pygmentsCodeFences = false
 enableEmoji = true
-publishDir = "docs"
+publishDir = "public"
 
 # Enable Disqus comments
 # disqusShortname = ""
