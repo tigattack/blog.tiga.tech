@@ -23,7 +23,7 @@ tig's Blog, powered by [Hugo](https://gohugo.io/) and a customised version of [C
     * Python
     * RegEx
     * Systemd
-    * TOML
+    * TOML/INI
     * YAML
 * Plugins
     * Line highlight
@@ -118,10 +118,20 @@ Source: <https://github.com/mfg92/hugo-shortcode-gallery>
 
 ### Spoiler
 
+Parameters:
+- `title`: The spoiler title/summary.
+- `open`: Whether the spoiler will default-open or not. One of `true` or `false`. If this parameter is omitted, it will default closed.
+
 Usage:
 
 ``html
-{{< spoiler "Optional spoiler title" >}}
+{{< spoiler "Optional spoiler title" [true|false] >}}
+Spoiler content
+{{< /spoiler >}}
+```
+
+``html
+{{< spoiler title="Optional spoiler title" open=true >}}
 Spoiler content
 {{< /spoiler >}}
 ```

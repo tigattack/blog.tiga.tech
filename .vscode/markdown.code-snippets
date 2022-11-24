@@ -68,10 +68,10 @@
     "prefix": "tab-group",
     "body": [
       "{{< tabgroup >}}",
-      "\t{{< tab name=\"${1:tab name}\"",
+      "\t{{< tab name=\"${1:tab name}\" >}}",
       "\t${2:tab contents}",
       "\t{{< /tab >}}",
-      "\t{{< tab name=\"${3:tab name}\"",
+      "\t{{< tab name=\"${3:tab name}\" >}}",
       "\t${4:tab contents}",
       "\t{{< /tab >}}",
       "{{< /tabgroup >}}",
@@ -87,8 +87,8 @@
   "Spoiler": {
     "prefix": "spoiler",
     "body": [
-      "{{< spoiler \"${1:spoiler title}\" >}}",
-      "${2:spoiler content}",
+      "{{< spoiler title=\"${1:spoiler title}\" open=${2|false,true|} >}}",
+      "${3:spoiler content}",
       "{{< /spoiler >}}",
       "$0"
     ],
