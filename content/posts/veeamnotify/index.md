@@ -4,6 +4,7 @@ date = 2022-06-28T00:09:55+01:00
 title = "VeeamNotify -  Veeam B&R session notifications"
 description = "VeeamNotify sends Veeam Backup & Replication session summary notifications to Discord, Microsoft Teams, and Slack, detailing the session result and various statistics."
 slug = "veeamnotify"
+aliases = ["/veeamnotify"]
 authors = ["tigattack"]
 tags = ["project", "PowerShell"]
 categories = ["technology"]

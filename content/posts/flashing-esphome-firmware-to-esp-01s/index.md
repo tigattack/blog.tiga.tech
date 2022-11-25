@@ -5,6 +5,7 @@ title = "Flashing ESPHome Firmware to ESP-01S"
 description = "In this post I'll run through how to create and flash ESPHome firmware for an ESP8266-based temperature sensor."
 featuredImage = "header.jpg"
 slug = "flashing-esphome-firmware-to-esp-01s"
+aliases = ["/flashing-esphome-firmware-to-esp-01s"]
 authors = ["tigattack"]
 tags = ["home assistant", "hass", "esp", "esphome"]
 categories = ["technology"]

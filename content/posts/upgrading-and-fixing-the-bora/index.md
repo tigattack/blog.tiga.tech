@@ -5,6 +5,7 @@ title = "Upgrading and Repairing the Bora"
 description = "After buying my Bora I decided to carry out a number of repairs and upgrades. The end goal was to resolve the issues I identified before purchase and de-chav it. I have a few things planned, such as..."
 featuredImage = "header.jpg"
 slug = "upgrading-and-fixing-the-bora"
+aliases = ["/upgrading-and-fixing-the-bora"]
 authors = ["tigattack"]
 tags = []
 categories = ["automotive"]

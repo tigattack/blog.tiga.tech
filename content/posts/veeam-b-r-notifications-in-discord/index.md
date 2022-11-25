@@ -5,6 +5,7 @@ title = "Discord notifications: Veeam Backup & Replication"
 description = "Part 2 of a Discord notifications series.  Part 1 details notifications for Sonarr, Radarr and Lidarr.  In a similar fashion to part 1, this setup has been running for a while and I'm very pleased with it's flawless functionality."
 featuredImage = "header.png"
 slug = "veeam-b-r-notifications-in-discord"
+aliases = ["/veeam-b-r-notifications-in-discord"]
 authors = ["tigattack"]
 tags = []
 categories = ["technology"]

@@ -5,6 +5,7 @@ title = "How to install Lidarr on Ubuntu"
 description = "Lidarr is still in alpha, but you can install it on Ubuntu with some ease.  Credit for this goes to my friend Dan."
 featuredImage = "header.png"
 slug = "how-to-install-lidarr-on-ubuntu"
+aliases = ["/how-to-install-lidarr-on-ubuntu"]
 authors = ["tigattack"]
 tags = []
 categories = ["technology"]

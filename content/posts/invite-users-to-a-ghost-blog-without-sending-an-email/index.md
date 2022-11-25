@@ -5,6 +5,7 @@ title = "Invite users to a Ghost blog without sending an email"
 description = ""
 featuredImage = "header.png"
 slug = "invite-users-to-a-ghost-blog-without-sending-an-email"
+aliases = ["/invite-users-to-a-ghost-blog-without-sending-an-email"]
 authors = ["tigattack"]
 tags = []
 categories = ["technology"]

@@ -5,6 +5,7 @@ title = "Deleting Devices and Entities in Home Assistant"
 description = "One of my major bugbears in Home Assistant has always been that there's no proper way to completely delete a device or entity.   However, that's not quite true..."
 featuredImage = "header.png"
 slug = "deleting-devices-and-entities-in-home-assistant"
+aliases = ["/deleting-devices-and-entities-in-home-assistant"]
 authors = ["tigattack"]
 tags = ["hass", "home assistant"]
 categories = ["technology"]

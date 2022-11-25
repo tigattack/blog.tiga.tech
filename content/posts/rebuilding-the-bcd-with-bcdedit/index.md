@@ -5,6 +5,7 @@ title = "Rebuilding the BCD with BCDEdit"
 description = "BCD stands for Boot Configuration Data. The BCD file lives in a folder called \"boot\" on the active partition of your hard drive. It contains information that instructs the computer on how to load the OS."
 featuredImage = "header.jpg"
 slug = "rebuilding-the-bcd-with-bcdedit"
+aliases = ["/rebuilding-the-bcd-with-bcdedit"]
 authors = ["tigattack"]
 tags = []
 categories = ["technology"]

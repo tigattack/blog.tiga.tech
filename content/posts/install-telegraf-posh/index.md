@@ -5,6 +5,7 @@ title = "Dynamically Deploy Telegraf and Windows Monitoring Configurations with 
 description = "This is a Telegraf deployment script for Windows Server environments."
 featuredImage = "header.png"
 slug = "install-telegraf-posh"
+aliases = ["/install-telegraf-posh"]
 authors = ["tigattack"]
 tags = ["powershell", "telegraf", "monitoring", "metrics"]
 categories = ["technology"]

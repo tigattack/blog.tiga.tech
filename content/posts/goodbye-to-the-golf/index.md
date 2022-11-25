@@ -5,6 +5,7 @@ title = "Goodbye to the Golf"
 description = "I had some amazing times in and with this car. Below you can see where it started, only a few days after I bought it. Bone stock but I..."
 featuredImage = "header.jpg"
 slug = "goodbye-to-the-golf"
+aliases = ["/goodbye-to-the-golf"]
 authors = ["tigattack"]
 tags = []
 categories = ["automotive"]

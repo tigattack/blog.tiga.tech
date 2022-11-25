@@ -5,6 +5,7 @@ title = "New car - VW Bora Sport"
 description = "I went to see a VW Bora Sport. As you'll see, it had been pretty distastefully modified, but there were some silver linings to the cloud of distaste. I was happy with the car and bought it, after knocking the price down by 30% of course!"
 featuredImage = "header.jpg"
 slug = "new-car-bora"
+aliases = ["/new-car-bora"]
 authors = ["tigattack"]
 tags = []
 categories = ["automotive"]

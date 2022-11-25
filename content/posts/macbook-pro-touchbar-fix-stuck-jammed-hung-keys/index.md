@@ -5,6 +5,7 @@ title = "MacBook Pro Touch Bar - Fix stuck keys"
 description = ""
 featuredImage = "header.jpg"
 slug = "macbook-pro-touchbar-fix-stuck-jammed-hung-keys"
+aliases = ["/macbook-pro-touchbar-fix-stuck-jammed-hung-keys"]
 authors = ["tigattack"]
 tags = ["mac"]
 categories = ["technology"]

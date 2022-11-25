@@ -5,6 +5,7 @@ title = "Install Windows Server on the HPE Microserver G8 in AHCI mode"
 description = "My problem was that once the server was put into AHCI mode instead of using the RAID configuration, the Windows Server installer would complain that it couldn't install to any of the disks as they were not compatible."
 featuredImage = "header.png"
 slug = "installing-windows-server-on-the-hpe-microserver-g8-in-ahci-mode"
+aliases = ["/installing-windows-server-on-the-hpe-microserver-g8-in-ahci-mode"]
 authors = ["tigattack"]
 tags = []
 categories = ["technology"]
