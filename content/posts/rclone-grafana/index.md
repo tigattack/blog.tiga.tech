@@ -1,6 +1,6 @@
 +++
-draft = true
-date = 2022-11-25T00:00:00+01:00
+draft = false
+date = 2022-11-25T00:00:00+00:00
 title = "Monitoring Rclone with Grafana and InfluxDB"
 description = "In this post, we'll look at monitoring some important metrics from Rclone using Grafana, InfluxDB, and Telegraf."
 slug = "rclone-grafana"
@@ -191,7 +191,7 @@ WantedBy=multi-user.target</code>
 
 # Scraping the metrics
 
-We're going to use Telegraf to read Rclone's `/metrics` endpoint.
+We're going to use Telegraf to scrape Rclone's `/metrics` endpoint.
 
 {{< notice tip >}}
 For those of you who prefer Prometheus, Rclone's `/metrics` endpoint is Prometheus-compatible, so it will be pretty easy for you to get going with this too.
@@ -204,7 +204,8 @@ You will also need credentials for InfluxDB.
 
 {{< spoiler title="telegraf.conf" open=true >}}
 <pre class="language-toml line-numbers">
-<code># InfluxDB to write metrics to
+<code>
+# InfluxDB to write metrics to
 [[outputs.influxdb]]
   urls = ["http://&lt;influx-host&gt;:8086"]
   database = "&lt;database&gt;"
@@ -221,7 +222,8 @@ You will also need credentials for InfluxDB.
 
   # Rclone authentication
   username = "&lt;username&gt;"
-  password = "&lt;password&gt;"</code>
+  password = "&lt;password&gt;"
+</code>
 </pre>
 {{< /spoiler >}}
 
@@ -230,46 +232,46 @@ Simply replace the missing values, chuck this into your `telegraf.conf`, reload 
 
 # Making data beautiful
 
-Now for the fun part and, for you, the easiest part!
+Now for the fun and, for you, easy part!
 
 I've created a dashboard to display Rclone's key metrics:
 
-<details open="true">
-    <summary>Rclone Dashboard</summary>
-    <img src="images/dashboard.png">
-</details>
+![Rclone Grafana Dashboard](images/dashboard.png)
 
-Once again, I will not cover the installation of Grafana since it is relatively simple and incredibly [well documented](https://grafana.com/docs/grafana/latest/).
+I also won't cover the installation of Grafana since it is relatively simple and incredibly [well documented](https://grafana.com/docs/grafana/latest/).
 
 ## Create the data source
 
-First of all, you must create a data source in Grafana for your InfluxDB database:
+First of all, you must create a data source in Grafana for your InfluxDB database. You can find instructions for that in Grafana's documentation, [here](https://grafana.com/docs/grafana/latest/datasources/add-a-data-source/), but the process is something like this:
 
 1. Navigate to Settings -> Data sources.
 2. Select "Add data source"
 3. Fill in the FQDN/IP and port of your InfluxDB instance.
 4. Fill in the database name, username, and password.
 5. Select HTTP method "GET"
+6. Click "Save & test".
 
 It should look something like this:
 
-<details>
-    <summary>Datasource settings page</summary>
-    <img src="images/datasource.png">
-</details>
+{{< spoiler title="Datasource settings page" open=false >}}
+<img src="images/datasource-settings.png" alt="Datasource settings page">
+{{< /spoiler >}}
 
-1. Click "Save & test".
-
-Hopefully you now have a nice green tick and you can continue to importing the dashboard.
+Hopefully you now have a nice green tick and you can continue to importing the dashboard!
 
 ## Import the dashboard
 
-I've uploaded the dashboard to Grafana Dashboards, a great place for finding and sharing dashboards; you can find it [here](https://grafana.com/grafana/dashboards/someID).
+I've uploaded the dashboard to Grafana Dashboards, a great place for finding and sharing dashboards; you can find it [here](https://grafana.com/grafana/dashboards/17490).
 
-To import a dashboard, click the "+" in the sidebar in Grafana, then "Import".  
+To import a dashboard, click the dashboards button in the sidebar in Grafana, then "Import".
+
+{{< spoiler title="Import dashboard screenshot" open=false >}}
+<img src="images/import-dashboard.png" alt="Import dashboard screenshot">
+{{< /spoiler >}}
+
 You can either import it into Grafana using the ID or download the JSON file, both found at the link above.
 
-Upon import, select the datasource you just created when asked.
+During the import process, you'll need to select the datasource you just created.
 
 Once imported, you're good to go!
 
@@ -279,11 +281,14 @@ You'll notice there is a dropdown in the top left titled "Rclone". You can use t
 
 This dashboard has been pretty useful for me when troubleshooting or simply being curious about what's going on; I hope it can do the same for you.
 
-If you wish to go the extra mile, one thought I had whilst writing this was that you could run `rcd` as a daemon, as per [option 2](#option-2run-rclone-rcd-as-a-daemon) above, and then use Telegraf's [exec input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/exec) to run commands such as `rclone rc operations/size`, `rclone rc cache/stats`, `rclone rc core/stats`, `rclone rc core/memstats`, and so on.
-You could then gather the JSON-formatted output and write it to InfluxDB.  
-Combined with Telegraf's [JSON parser](https://github.com/influxdata/telegraf/tree/master/plugins/parsers/json) this could be a very strong solution.
+If you wish to go the extra mile, one thought I had whilst writing this was that you could run `rcd` as a daemon, as per [option 2](#option-2---run-rclone-rcd-as-a-service) above, and then use Telegraf's [exec input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/exec) to run commands such as `rclone rc operations/size`, `rclone rc cache/stats`, `rclone rc core/stats`, `rclone rc core/memstats`, and so on, then Telegraf will gather the JSON-formatted output and write it to InfluxDB.  
 
-There would be a vast amount of information available with that method, but the one I've written about here is quite sufficient for my current needs.  
+Although, at that point, you'd probably be better off writing your own script to gather, parse, and output the metrics for Telegraf.
+
+Combined with Telegraf's [JSON parser](https://github.com/influxdata/telegraf/tree/master/plugins/parsers/json), this could be a very strong solution.
+
+There would be a vast amount of information available with that method, but the one I've written about here is quite sufficient for my current needs.
+
 Food for thought, at least.
 
 Enjoy, and feel free to let me know if you have any suggestions or face any issues.
