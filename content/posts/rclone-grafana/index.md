@@ -1,6 +1,6 @@
 +++
 draft = true
-date = 2021-08-29T00:00:00+01:00
+date = 2022-11-25T00:00:00+01:00
 title = "Monitoring Rclone with Grafana and InfluxDB"
 description = "In this post, we'll look at monitoring some important metrics from Rclone using Grafana, InfluxDB, and Telegraf."
 slug = "rclone-grafana"
@@ -8,61 +8,59 @@ authors = ["tigattack"]
 tags = ["monitoring", "grafana", "rclone"]
 categories = ["technology"]
 series = []
+featuredImage = "images/dashboard.png"
 +++
 
 In this post, we'll look at monitoring some important metrics from Rclone using Grafana, InfluxDB, and Telegraf.
 
 I started looking into this after I followed a blog post that a good friend of mine recently published: [MonsterMuffin - Unlimited Plex Storage via Google Drive And Rclone](https://blog.muffn.io/unlimited-plex-storage-via-google-drive-and-rclone/).
 
-Having a clear point of observation for these metrics is often invaluable when identifying and troubleshooting issues and is also useful for tracking data usage over any given time span, identifying peak usage periods, and so on.
-
-Also, data is cool.
+Having a clear point of observation for these metrics is often invaluable when identifying and troubleshooting issues. It can also prove useful for tracking data usage over any given time span, identifying peak usage periods, and so on. Also, data is cool.
 
 ---
 
 {{< toc >}}
 
-Before we jump in, we'll be using Rclone's [`rc` mode](https://rclone.org/rc/) for this, so let's talk a little about that first.
+We'll be using [Rclone's `rc` mode](https://rclone.org/rc/) (remote control) for this, so, before we jump in, let's talk a little about that first.
 
-Rclone exposes some handy metrics through its `rc` mode.
-In short, there are two ways of doing this:
+Rclone exposes some handy metrics when running in `rc` mode, but we'll need a way to run Rclone like this.
 
-[1](#option-1add-rclone-rc-to-your-existing-setup): Add the relevant `rc` flags to your existing service or script.
+In short, there are two clear ways of doing this:
 
-[2](#option-2run-rclone-rcd-as-a-daemon): Run Rclone `rcd` (rc daemon) in a service and configure your mounts etc. using ExecStartPost declarations. You could also a script or some other method, but ExecStartPost is easy and functional.
+1: Add the relevant `rc` flags to your existing service or script.  
+2: Run Rclone `rcd` (rc daemon) as a service and configure your mounts etc. using `ExecStartPost` declarations. You could also use a script or something, but `ExecStartPost` is easy and does all we need here.
 
-Option 1 is very easy to get started with given Rclone's solid documentation for `rc`. You can basically be ready to go with the few command flags I'll cover in the first step.
+**Option 1** is very easy to get started with given Rclone's solid documentation for `rc`. You can basically be ready to go with the few additional parameters I'll cover in the next section.
 
-However, the downside to this option is that for each Rclone command you run, whether this is in a service, in a script, or manually, you must specify a port that is not bound by an existing Rclone process, or any process for that matter.  
+However, the downside to this option is that for each Rclone command you run, whether this is in a service, in a script, or manually, you must specify a port that is not bound by an existing Rclone process, or any process for that matter.
 
-This may sound obvious, but the result is that you will have to scrape multiple endpoints if you wish to gather metrics for more than one Rclone process. I'll cover this when we configure Telegraf later, should you wish to use this option.  
+This may sound obvious, but the result is that you will have to scrape multiple endpoints if you wish to gather metrics for more than one Rclone process. I'll cover this when we configure Telegraf later, should you wish to use this option.
 
-While this may be a significant inconvenience for some of you, if you only have a single Rclone daemon, scheduled task, or other, this is a perfectly valid option and the one you should use.
+While this may be a significant inconvenience for some of you, if you only have a single Rclone service, scheduled task, or other, this is a perfectly valid option and the one you should use.
 
-Option 2 is fantastic for unifying your metrics since all of your Rclone commands will be executed through a single process, this instance of `rcd`. Resultingly, all of your metrics will be available at a single endpoint.
+**Option 2** is fantastic for unifying your metrics since all of your Rclone commands will be executed through a single process (i.e. this instance of `rcd`). As a result, all of your metrics will be available at a single endpoint.
 
 You may have already noticed the downside; all of your Rclone commands must be executed through a single `rcd` instance for this to work.  
-In other words, you will need to run all of your Rclone commands, whether as a daemon, in a script, or manually, using `rclone rc`.
+This means that any of your auxiliary scripts, daemons, etc. (for example, a scheduled upload script) that interface with Rclone will need to do so using `rclone rc` if you wish the metrics for these operations to be included in your metrics.
 
-Having said that, you are still free to run traditional Rclone commands and you will suffer no issues; you will simply see no metrics from these commands at the designated metrics endpoint.
+To clarify, you are still free to run traditional Rclone commands and you will suffer no issues; you will simply see no metrics from these commands at the configured metrics endpoint.
 
-Whether this works for you will depend on your use case. Sometimes, `rc` commands are not particularly user-friendly. They're fine for scripts and services, but it makes one-off commands quite difficult unless you're well experienced in its usage.
+Whether this works for you will depend on your use case. Sometimes, `rc` commands are not particularly user-friendly. They're fine for scripts and services, but can make one-off commands quite difficult unless you're well experienced in its usage.
 
-As much as I like option 2, personally I use the first since some of the ways I'm using Rclone don't translate very well to `rc` commands.
+I'll be covering both of these options below, so pick your poison and keep reading!
 
 ---
 
 # Configuring Rclone
 
-I'm going to assume you are running Rclone as a daemon since that makes this a lot more straightforward.  
+I'm going to assume you are running Rclone as a systemd service, since that makes this a lot more straightforward.  
 If you're not, there are many tutorials on how to do this, or you could just bastardise [MonsterMuffin's `gmedia.service` example](https://github.com/MonsterMuffin/rclone-gmedia/blob/main/services/gmedia.service).
 
-You will need to edit your Rclone service file to add the following flags.
+You will need to edit your Rclone service file to add the following flags:
 
-The flags you will need are:
 * Enable [Rclone remote control](https://rclone.org/rc/): `--rc`
 * Enable the Rclone metrics endpoint: [`--rc-enable-metrics`](https://rclone.org/rc/#rc-enable-metrics)
-* Bind to all live interfaces on port 5572: [`--rc-addr=0.0.0.0:5572`](https://rclone.org/rc/#rc-addr-ip)
+* Bind to all interfaces on port 5572: [`--rc-addr=0.0.0.0:5572`](https://rclone.org/rc/#rc-addr-ip)
 
 I highly recommend configuring authentication. Destructive actions are not possible without authentication, but there is scope for information gathering and potential inconvenience. You can see all rc commands and whether they require authentication [here](https://rclone.org/rc/#supported-commands).
 
@@ -83,6 +81,8 @@ Example command:
     &lt;your-remote&gt;: /your/mount/point</code>
 </pre>
 
+See, I said this one was easy!
+
 {{< notice tip >}}
 If you have multiple mounts, you can add these flags to all of them, but you will need to change the port since multiple processes cannot bind to the same port.
 {{< /notice >}}
@@ -94,25 +94,22 @@ For this option, we'll look at running `rcd`. When you run `rclone rcd`, rclone 
 
 You may remember what I said earlier about `rc` commands sometimes not being particularly user-friendly. They're fine for scripts and services, but can make one-off commands quite difficult unless you're experienced with `rc`.  Well, this is where you may see that.
 
-In the second service definition you will notice that the global options are specified differently when using `rc`. Global options are exactly the same as Rclone's global flags in functionality, but all key:value pairs must be specified as JSON, and both the key and value names differ slightly in some cases.
+In the second service definition below, you will notice that the global options are specified differently when using `rc`. Global options are exactly the same as Rclone's global flags in functionality, but all key:value pairs must be specified as JSON, and both the keys and values sometimes differ from the typical flags.
 
-In some cases this can get quite complex due to differences which are occasionally difficult to work with. One such case I found is time values, which can typically be specified in shorthand (e.g. `1h`) must often be specified in nanoseconds when using `rc`, as seen in the example below.  
-Note: I later found this to not always be the case, but if anything this inconsistency worsens the matter.
+These differences can be difficult to work with in some cases. One such case I discovered is time values; these can typically be specified in shorthand (e.g. `1h`), but must be specified in nanoseconds when using `rc`, as seen in the example below.  
+Note: I later found this to not always be the case, but, if anything, this inconsistency only worsens the matter.
+
+You can find more information on this [here](https://rclone.org/rc/#data-types).
 
 Some examples:
-* Traditional flags become a JSON object:
-    `--user-agent tig --timeout 1h` would become `--json {"main": {"UserAgent": "tig"}, "Timeout": 3600000000000}`.
+* Traditional flags become a JSON object: `--user-agent tig --timeout 1h` would become `--json {"main": {"UserAgent": "tig"}, "Timeout": 3600000000000}`.
+* An example of some of the oddities: `--cache-mode full` becomes `{"vfs": {"CacheMode": 3}}`.
 
-* An example of some of the oddities:
-    `--cache-mode full` becomes `{"vfs": {"CacheMode": 3}}`.
-
-You can see all available options without needing to run rcd first like so:
+You can see all available options without needing to run `rcd` first like so:
 
 <pre class="command-line language-bash no-line-numbers" data-prompt="$">
 <code>rclone rc options/get --rc-user='username' --rc-pass='password'</code>
 </pre>
-
-You'll notice that some of the values turn from shorthand to longhand (e.g. `1h` becomes `3600000000000`). You can find more information on this [here](https://rclone.org/rc/#data-types). The documentation states that shorthand syntax can be used, but I've not had promising experience with this.
 
 In the standalone service definition below, we want to focus on 2 things:
 
@@ -120,82 +117,77 @@ In the standalone service definition below, we want to focus on 2 things:
 
 2. `ExecStop` - This command runs when you stop the service and will unmount all remotes.
 
-<details>
-<summary>rclone-rcd.service standalone</summary>
-<pre class="language-ini line-numbers">
+{{< spoiler title="rclone-rcd.service standalone" open=true >}}
+<pre class="language-toml line-numbers">
 <code>[Unit]
-Description=Rclone rcd and mount Service
+Description=Rclone rcd service
 After=network-online.target
-<br>
+
 [Service]
 Type=notify
 ExecStart=/usr/bin/rclone rcd \
-	--rc-addr=0.0.0.0:5572 \
+	--rc-addr '0.0.0.0:5572' \
 	--rc-enable-metrics \
-	--rc-user='username' \
-    --rc-pass='password' \
-	--config=/path/to/your/rclone.conf \
-	--log-level INFO \
-	--log-file=/path/to/your/rcd.log \
+	--rc-user 'username' \
+    --rc-pass 'password' \
+	--config '/path/to/your/rclone.conf' \
+	--log-level 'INFO' \
+	--log-file '/path/to/your/rcd.log'
 ExecStop=/usr/bin/rclone rc --user 'username' --pass 'password' mount/unmountall
 Restart=on-failure
 RestartSec=5
 StartLimitInterval=60s
 StartLimitBurst=3
 TimeoutStartSec=150
-<br>
+
 [Install]
 WantedBy=multi-user.target</code>
 </pre>
-</details>
+{{< /spoiler >}}
 
-In this second service definition, I've added an `ExecStartPost` to mount a remote.
-`ExecStartPost` commands run after the ExecStart command has succeeded.  This method is a good way of launching `rcd` and almost instantly mounting your remote.
+In this second service definition, I've added two `ExecStartPost` commands. `ExecStartPost` commands run after the `ExecStart` command has succeeded.  This method is a good way of launching `rcd` and almost instantly mounting your remote.
 
-The first `ExecStartPost` will set various global Rclone options that cannot be defined with the `rc mount/mount` command.  
-The second `ExecStartPost` mounts your remote.
+The first `ExecStartPost` sets various global Rclone options that cannot be defined with the `rc mount/mount` command, then the second `ExecStartPost` mounts the specified remote.
 
-<details>
-<summary>rclone-rcd.service with mount</summary>
-<pre class="language-ini line-numbers">
+{{< spoiler title="rclone-rcd.service with mount" open=true >}}
+<pre class="language-toml line-numbers">
 <code>[Unit]
-Description=Rclone rcd and mount Service
+Description=Rclone rcd service with mount
 After=network-online.target
-<br>
+
 [Service]
 Type=notify
 ExecStart=/usr/bin/rclone rcd \
-	--rc-addr=0.0.0.0:5572 \
+	--rc-addr '0.0.0.0:5572' \
 	--rc-enable-metrics \
-	--rc-user='username' \
-    --rc-pass='password' \
-	--config=/path/to/your/rclone.conf \
-	--cache-dir=&lt;optional-cache-dir&gt; \
-	--log-level INFO \
-	--log-file=/path/to/your/rcd.log \
-<br>
-&#35; Set global opts
+	--rc-user 'username' \
+    --rc-pass 'password' \
+	--config '/path/to/your/rclone.conf' \
+	--log-level 'INFO' \
+	--log-file '/path/to/your/rcd.log' \
+	--cache-dir '/path/to/optional/cache/dir'
+
+# Set global opts
 ExecStartPost=/usr/bin/rclone rc options/set \
-	--rc-user='username' --rc=pass='password' \
+	--rc-user 'username' --rc=pass 'password' \
 	--json '{"main": {"UserAgent": "someuseragenthere", "Timeout": 3600000000000}, "mount": {"AllowOther": true}, "vfs": {"Umask": 2, "UID": 1000 , "GID": 1000, "PollInterval": 15000000000, "DirCacheTime": 3600000000000000, "CacheMaxAge": 129600000000000, "CacheMaxSize": 322122547200, "CacheMode": 3}, "log": {"File": "/var/log/rclone/rclone-mount.log"}}'
-&#35; Mount remote
+
+# Mount remote
 ExecStartPost=/usr/bin/rclone rc mount/mount \
-	--rc-user='username' --rc=pass='password' \
+	--rc-user 'username' --rc=pass 'password' \
 	fs=&lt;your-remote&gt;: mountPoint=/your/mount/point
-<br>
+
 ExecStop=/usr/bin/rclone rc --user 'username' --pass 'password' mount/unmountall
 Restart=on-failure
 RestartSec=5
 StartLimitInterval=60s
 StartLimitBurst=3
 TimeoutStartSec=150
-<br>
+
 [Install]
 WantedBy=multi-user.target</code>
 </pre>
-</details>
-
----
+{{< /spoiler >}}
 
 # Scraping the metrics
 
@@ -210,33 +202,31 @@ I won't cover installation of [InfluxDB](https://docs.influxdata.com/influxdb) o
 You will need to either configure a new database in InfluxDB or use an existing one, depending on your preference, and note down the name.  
 You will also need credentials for InfluxDB.
 
-<details>
-    <summary>telegraf.conf</summary>
-<pre class="language-ini line-numbers">
-<code>&#35; InfluxDB to write metrics to
+{{< spoiler title="telegraf.conf" open=true >}}
+<pre class="language-toml line-numbers">
+<code># InfluxDB to write metrics to
 [[outputs.influxdb]]
   urls = ["http://&lt;influx-host&gt;:8086"]
   database = "&lt;database&gt;"
   username = "&lt;username&gt;"
   password = "&lt;password&gt;"
-<br>
-&#35; Pull metrics from Rclone
+
+# Pull metrics from Rclone
 [[inputs.prometheus]]
-  &#35; Single Rclone rc
+  # Single Rclone rc
   urls = ['http://&lt;rclone-host&gt;:5572/metrics']
-<br>
-  &#35; Multiple Rclone rc
-  &#35; urls = ['http://&lt;rclone-host&gt;:5572/metrics','http://&lt;rclone-host&gt;:5573/metrics']
-<br>
-  &#35; Rclone authentication
+
+  # Multiple Rclone rc
+  # urls = ['http://&lt;rclone-host&gt;:5572/metrics','http://&lt;rclone-host&gt;:5573/metrics']
+
+  # Rclone authentication
   username = "&lt;username&gt;"
   password = "&lt;password&gt;"</code>
 </pre>
-</details>
+{{< /spoiler >}}
+
 
 Simply replace the missing values, chuck this into your `telegraf.conf`, reload Telegraf, and you'll be good to go!
-
----
 
 # Making data beautiful
 
@@ -246,7 +236,7 @@ I've created a dashboard to display Rclone's key metrics:
 
 <details open="true">
     <summary>Rclone Dashboard</summary>
-    <img src="HUheSIXu23.png">
+    <img src="images/dashboard.png">
 </details>
 
 Once again, I will not cover the installation of Grafana since it is relatively simple and incredibly [well documented](https://grafana.com/docs/grafana/latest/).
@@ -265,7 +255,7 @@ It should look something like this:
 
 <details>
     <summary>Datasource settings page</summary>
-    <img src="DifAxugU91.png">
+    <img src="images/datasource.png">
 </details>
 
 1. Click "Save & test".
