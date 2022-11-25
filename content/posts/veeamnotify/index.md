@@ -156,7 +156,7 @@ Copy that output, then repeat the following steps for each job that you want to 
     * Paste the launch command we generated above.
     * Ensure "Run scripts every X backup session" is set to 1.
   {{< notice example >}}
-  ![Veeam-config](vbr-job-settings.png)
+  ![Veeam-config](images/vbr-job-settings.png)
   {{< /notice >}}
 
 5. Click "OK", then click "Finish".
@@ -168,8 +168,8 @@ All done! Start a job to test your install.
 {{< notice example >}}
 Here's some example notifications:
 
-<img width="400" alt="Discord notifications example" src="discord.png">
-<img width="400" alt="Discord notifications example" src="teams.png">
+<img width="400" alt="Discord notifications example" src="images/discord.png">
+<img width="400" alt="Discord notifications example" src="images/teams.png">
 {{< /notice >}}
 
 If you have any problems with the script, please [open an issue](https://github.com/tigattack/VeeamNotify/issues/new?assignees=tigattack&labels=bug&template=bug_report.yml&title=[BUG]+) on the GitHub project.
