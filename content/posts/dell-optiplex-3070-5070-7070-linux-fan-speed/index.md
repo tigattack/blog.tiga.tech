@@ -2,7 +2,7 @@
 title: Reading Dell Optiplex 3070, 5070, 7070 fan speed in Linux
 description: How to access the fan speed of some Dell Optiplex machines with lm-sensors on Linux
 date: 2023-05-11T09:23:57.768Z
-draft: true
+draft: false
 tags:
   - dell
   - linux
@@ -21,7 +21,7 @@ authors:
   - tigattack
 series: {}
 featuredImage: images/header.png
-lastmod: 2023-05-11T10:00:44.532Z
+lastmod: 2023-05-11T10:04:41.786Z
 ---
 
 {{< toc >}}
