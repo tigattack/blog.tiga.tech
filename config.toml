@@ -137,6 +137,7 @@ imgsrc = [
   "'self'",
   "https://avatars.githubusercontent.com", # Required by gh-card shortcode
   "https://opengraph.githubassets.com", # Required by gh-card shortcode
+  "http://gc.tiga.tech",
   "data:"
 ]
 objectsrc = ["'none'"]
