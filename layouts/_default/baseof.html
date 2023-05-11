@@ -65,7 +65,7 @@
   {{- partial "analytics/plausible" . -}}
   {{ end }}
 
-  {{ if and .Site.Params.goatCounter .Site.Params.goatCounter.code }}
+  {{ if and (.Site.Params.goatCounter) (or (.Site.Params.goatCounter.code) (.Site.Params.goatCounter.domain)) }}
   {{- partial "analytics/goatcounter" . -}}
   {{ end }}
 

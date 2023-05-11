@@ -117,8 +117,8 @@ type = "application/rss+xml"
 # Analytics
 # ---------
 # More available in theme docs.
-# [params.googleTagManager]
-# id = "gid"
+[params.goatCounter]
+domain = "gc.tiga.tech"
 
 # ---
 # CSP
@@ -150,13 +150,12 @@ stylesrc = [
 scriptsrc = [
   "'self'",
   "'unsafe-inline'",
-  "https://www.google-analytics.com",
+  "http://gc.tiga.tech/count.js",
   "https://cdn.jsdelivr.net/"
 ]
 prefetchsrc = ["'self'"]
 # connect-src directive – defines valid targets for to XMLHttpRequest (AJAX), WebSockets or EventSource
 connectsrc = [
   "'self'",
-  "https://www.google-analytics.com",
   "https://api.github.com" # Required by gh-card shortcode
 ]
