@@ -21,7 +21,7 @@ authors:
   - tigattack
 series: {}
 featuredImage: images/header.png
-lastmod: 2023-05-11T10:04:41.786Z
+lastmod: 2023-05-13T22:54:51.589Z
 ---
 
 {{< toc >}}
@@ -57,8 +57,13 @@ I also strongly suggest running `sudo sensors-detect`. The default choices from 
 
 For one-time usage, simply run this: `sudo modprobe i8k force=1`
 
-To always load the driver at boot time, add `i8k force=1` to `/etc/modules` and reboot to see the change.  
-You can do this simply like so: `echo 'i8k force=1' | sudo tee -a /etc/modules`
+If you wish to always load the driver at boot time, here's how:
+  1. `echo 'i8k' | sudo tee -a /etc/modules`  
+  By adding the line `i8k` to `/etc/modules`, we instruct the system to load the module at boot time.
+  1. `echo 'options i8k force=1' | sudo tee -a /etc/modprobe.d/i8k.conf`  
+  By adding the line `options i8k force=1` to `/etc/modprobe.d/i8k.conf`, we instruct the system which options to use when loading the module.  
+  You can name this whatever you like as long as it has a `.conf` extension.
+  1. Reboot to see the change.
 
 You will now be able to view the fan speed with `sensors`.
 
