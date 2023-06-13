@@ -7,6 +7,6 @@ aliases = ["contact-me", "contact-tig"]
 author = "tigattack"
 +++
 
-The best place to contact me is on Discord at `tigattack <hash> 7987`.
+The best place to contact me is on Discord at `tigattack`.
 
 I'm also available at `blog <at> tiga <dot> tech`, but responses may be slower.
