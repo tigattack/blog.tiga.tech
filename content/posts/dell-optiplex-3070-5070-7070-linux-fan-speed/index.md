@@ -1,6 +1,6 @@
 ---
-title: Reading Dell Optiplex 3070, 5070, 7070 fan speed in Linux
-description: How to access the fan speed of some Dell Optiplex machines with lm-sensors on Linux
+title: Reading Dell OptiPlex 3070, 5070, 7070 fan speed in Linux
+description: How to access the fan speed of some Dell OptiPlex machines with lm-sensors on Linux
 date: 2023-05-11T09:23:57.768Z
 draft: false
 tags:
@@ -9,7 +9,7 @@ tags:
   - sensors
 keywords:
   - dell
-  - Optiplex
+  - OptiPlex
   - linux
   - sensors
   - lm-sensors
@@ -21,19 +21,18 @@ authors:
   - tigattack
 series: {}
 featuredImage: images/header.png
-lastmod: 2023-05-13T22:54:51.589Z
 ---
 
 {{< toc >}}
 
 {{< notice tip >}}
-It's quite likely this could also work with similar devices, for example the Optiplex 5050, 5060, and so on (incl. variations such as 30*x*0, 70*x*0), but I cannot personally confirm this.  
+This is likely to work for other generations and classes of OptiPlex desktops (e.g. 3050, 5060, etc.), but I cannot personally confirm this. 
 Attempt at your own risk.
 {{< /notice >}}
 
 # Preamble
 
-I recently bought myself a Dell Optiplex 5070 Micro to play with. It's the first node of what will be a 3-node cluster that I will use to start playing with Kubernetes in the real (read: non-virtualised) world.
+I recently bought myself a Dell OptiPlex 5070 Micro to play with. It's the first node of what will be a 3-node cluster that I will use to start playing with Kubernetes in the real (read: non-virtualised) world.
 
 During the initial setup, I realised I couldn't see the fan speed with the `sensors` utility from the `lm-sensors` Linux package.
 
@@ -71,9 +70,9 @@ You will now be able to view the fan speed with `sensors`.
 
 During my searches, I also found [i8kutils](https://github.com/vitorafsr/i8kutils), a package containing some utilities for controlling fans accessible by the i8k[^2] driver.
 
-I haven't tested this on my Optiplex 5070 Micro, but thought it worth sharing nevertheless.
+I haven't tested this on my OptiPlex 5070 Micro, but thought it worth sharing nevertheless.
 
-There are some open issues in the i8kutils repository noting some bugs with the Optiplex 5050, suggesting it at least partially works with this machine and others similar, and I've seen reports in various places of success with the Optiplex 7060.
+There are some open issues in the i8kutils repository noting some bugs with the OptiPlex 5050, suggesting it at least partially works with this machine and others similar, and I've seen reports in various places of success with the OptiPlex 7060.
 
 [^1]: https://askubuntu.com/questions/1458266/how-can-i-view-the-cpu-fan-speed-on-a-dell-optiplex-3070
 [^2]: https://github.com/lochotzke/i8k
