@@ -1,11 +1,13 @@
-+++
-title = "Contact"
-description = "Contact me"
-slug = "contact"
-date = "2022-06-28"
-aliases = ["contact-me", "contact-tig"]
-author = "tigattack"
-+++
+---
+title: Contact
+description: Contact me
+slug: contact
+date: 2022-06-28
+aliases:
+  - contact-me
+  - contact-tig
+author: tigattack
+---
 
 The best place to contact me is on Discord at `tigattack`.
 

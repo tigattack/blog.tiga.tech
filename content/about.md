@@ -1,19 +1,21 @@
-+++
-title = "About"
-description = "About me"
-slug = "about"
-date = "2022-06-28"
-aliases = ["about-me", "about-tig"]
-author = "tigattack"
-+++
+---
+title: About
+description: About me
+slug: about
+date: 2022-06-28
+aliases:
+  - about-me
+  - about-tig
+author: tigattack
+---
 
-Hi, I'm tigattack.
+## Hi, I'm tigattack.
 
 I live in Bristol, UK and work as a Systems Engineer.
 
 I have a keen interest in technology, almost anything automotive, mountain biking, and surfing, but I'll probably only post about the first two here.
 
-Growing up in Devon, UK in a low-tech family, I had little exposure to technology until I was a young teen, at which point I dove into it head-first and haven't looked back.
+Growing up in rural Devon in a low-tech family, I had little exposure to technology until I was a young teen, at which point I dove into it head-first and haven't looked back.
 
 I discovered the concept of "[home-labbing](https://www.reddit.com/r/homelab/wiki/introduction)" by accident when I was 16, after being given a mini PC with an Intel Atom\@1.2GHz and a whole 2GB RAM! I shoved a few 120GB spinners into it, and thus it all began.
 

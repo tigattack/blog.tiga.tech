@@ -1,7 +1,7 @@
-+++
-title = "Projects"
-slug = "projects"
-+++
+---
+title: Projects
+slug: projects
+---
 
 If you know me, you'll know I often spend _far_ too much time solving simple problems with less simple solutions.
 
