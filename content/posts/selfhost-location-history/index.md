@@ -140,7 +140,6 @@ This `mosquitto.conf` allows full permissions to anyone with network access to t
 1. Go to [Google Takeout](https://takeout.google.com), deselect all options except "Location History", and generate an export.
 2. Once the Google Takeout export has been generated, download and extract it.
 3. Grab the `google-import.py` script from [here](https://github.com/owntracks/recorder/tree/master/contrib/google-import)  
-   **Note:** At the time of writing there's a small bug in this script, fixed in a [pull request I opened](https://github.com/owntracks/recorder/pull/425).
 4. Follow the instructions in the [README](https://github.com/owntracks/recorder/blob/master/contrib/google-import/README.md) file at the script link above to import your Google history to Owntracks.
 
 {{< notice tip >}}
