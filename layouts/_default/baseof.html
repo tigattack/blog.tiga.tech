@@ -58,39 +58,43 @@
   {{ end }}
   {{ end }}
 
-  {{ template "_internal/google_analytics.html" . }}
+  {{ if not (eq (printf "%v" $.Site.BaseURL) "http://localhost:1313/") }}
 
-  {{ if and .Site.Params.fathomAnalytics .Site.Params.fathomAnalytics.siteID }}
-  {{- partial "analytics/fathom" . -}}
-  {{ end }}
+    {{ template "_internal/google_analytics.html" . }}
 
-  {{ if and .Site.Params.plausibleAnalytics .Site.Params.plausibleAnalytics.domain }}
-  {{- partial "analytics/plausible" . -}}
-  {{ end }}
+    {{ if and .Site.Params.fathomAnalytics .Site.Params.fathomAnalytics.siteID }}
+    {{- partial "analytics/fathom" . -}}
+    {{ end }}
 
-  {{ if and (.Site.Params.goatCounter) (or (.Site.Params.goatCounter.code) (.Site.Params.goatCounter.domain)) }}
-  {{- partial "analytics/goatcounter" . -}}
-  {{ end }}
+    {{ if and .Site.Params.plausibleAnalytics .Site.Params.plausibleAnalytics.domain }}
+    {{- partial "analytics/plausible" . -}}
+    {{ end }}
 
-  {{ if and (.Site.Params.umami) (or .Site.Params.umami.website_id .Site.Params.umami.domain) }}
-  {{- partial "umami" . -}}
-  {{ end }}
+    {{ if and (.Site.Params.goatCounter) (or (.Site.Params.goatCounter.code) (.Site.Params.goatCounter.domain)) }}
+    {{- partial "analytics/goatcounter" . -}}
+    {{ end }}
 
-  {{ if and .Site.Params.cloudflare .Site.Params.cloudflare.token }}
-  {{- partial "analytics/cloudflare" . -}}
-  {{ end }}
+    {{ if and (.Site.Params.umami) (or .Site.Params.umami.website_id .Site.Params.umami.domain) }}
+    {{- partial "umami" . -}}
+    {{ end }}
 
-  {{ if and .Site.Params.matomo .Site.Params.matomo.serverURL }}
-  {{- partial "analytics/matomo" . -}}
-  {{ end }}
+    {{ if and .Site.Params.cloudflare .Site.Params.cloudflare.token }}
+    {{- partial "analytics/cloudflare" . -}}
+    {{ end }}
 
-  {{ if and .Site.Params.googleTagManager .Site.Params.googleTagManager.id }}
-  {{- partial "analytics/googletagmanager" . -}}
-  {{ end }}
+    {{ if and .Site.Params.matomo .Site.Params.matomo.serverURL }}
+    {{- partial "analytics/matomo" . -}}
+    {{ end }}
 
-  {{ if and .Site.Params.applicationInsights .Site.Params.applicationInsights.connectionString }}
-    {{- partial "analytics/applicationinsights" . -}}
-  {{ end }}   
+    {{ if and .Site.Params.googleTagManager .Site.Params.googleTagManager.id }}
+    {{- partial "analytics/googletagmanager" . -}}
+    {{ end }}
+
+    {{ if and .Site.Params.applicationInsights .Site.Params.applicationInsights.connectionString }}
+      {{- partial "analytics/applicationinsights" . -}}
+    {{ end }}
+
+    {{ end }}
 
   {{- partial "body/extensions" . -}}
 </body>
