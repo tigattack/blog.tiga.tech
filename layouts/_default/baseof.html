@@ -69,6 +69,10 @@
   {{- partial "analytics/goatcounter" . -}}
   {{ end }}
 
+  {{ if and (.Site.Params.umami) (or .Site.Params.umami.website_id .Site.Params.umami.domain) }}
+  {{- partial "umami" . -}}
+  {{ end }}
+
   {{ if and .Site.Params.cloudflare .Site.Params.cloudflare.token }}
   {{- partial "analytics/cloudflare" . -}}
   {{ end }}

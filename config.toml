@@ -117,8 +117,9 @@ type = "application/rss+xml"
 # Analytics
 # ---------
 # More available in theme docs.
-[params.goatCounter]
-domain = "gc.tiga.tech"
+[params.umami]
+domain = "umami.tiga.tech"
+website_id = "6f0abc38-5185-412b-93b5-f4f91309d578"
 
 # ---
 # CSP
@@ -137,7 +138,6 @@ imgsrc = [
   "'self'",
   "https://avatars.githubusercontent.com", # Required by gh-card shortcode
   "https://opengraph.githubassets.com", # Required by gh-card shortcode
-  "http://gc.tiga.tech",
   "data:"
 ]
 objectsrc = ["'none'"]
@@ -151,12 +151,13 @@ stylesrc = [
 scriptsrc = [
   "'self'",
   "'unsafe-inline'",
-  "http://gc.tiga.tech/count.js",
+  "https://umami.tiga.tech/script.js",
   "https://cdn.jsdelivr.net/"
 ]
 prefetchsrc = ["'self'"]
 # connect-src directive – defines valid targets for to XMLHttpRequest (AJAX), WebSockets or EventSource
 connectsrc = [
   "'self'",
-  "https://api.github.com" # Required by gh-card shortcode
+  "https://api.github.com", # Required by gh-card shortcode
+  "https://umami.tiga.tech/api/send"
 ]
