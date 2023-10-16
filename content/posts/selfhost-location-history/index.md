@@ -57,7 +57,7 @@ This was simple to do with Node-RED and, since Owntracks wants the same JSON for
 
 Whether you wish to use the mobile app or not, you will need to run the Recorder.
 
-The Recorder has a very simple web page which is useful during setup, testing, and debugging, but it's not a particularly nice way to view location history.
+The Recorder has a very simple web interface which is useful during setup, testing, and debugging, but it's not a particularly nice way to view location history.
 
 For a nicer way to browse through your location history, you can deploy the Owntracks Frontend, a single-page Vue.js application. This is what you see in this post's header image.
 
