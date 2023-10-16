@@ -93,7 +93,7 @@ Here are some handy links for these components:
 * Further Docker Compose examples and setup info for the Recorder in the [owntracks/docker-recorder](https://github.com/owntracks/docker-recorder) GitHub repository
 * Running, configuring, and using the frontend in the [owntracks/frontend](https://github.com/owntracks/frontend) GitHub repository
 
-## Migrating Google location history
+## Migrating Google Location History
 
 Once you have the Recorder setup and running, you may want to import your location history from Google as I did.
 
