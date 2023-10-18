@@ -1,0 +1,28 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+{{ if .Site.Params.csp }}
+{{ partial "csp.html" . }}
+{{ end }}
+
+{{ with .Site.Params.author }}
+<meta name="author" content="{{ . }}">{{ end }}
+<meta name="description" content="{{ .Description | default (.Summary | default .Site.Params.description ) }}">
+<meta name="keywords" content="{{ (delimit .Keywords ", ") | default .Site.Params.keywords }}">
+
+{{ template "_internal/twitter_cards.html" . }}
+{{ template "_internal/opengraph.html" . }}
+
+{{- /* My own version of the upstream opengraph image tag generation */}}
+{{- if $.Params.featuredImage -}}
+<meta property="og:image" content="{{ .Permalink }}{{ $.Params.featuredImage }}" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="{{ .Permalink }}{{ $.Params.featuredImage }}"/>
+{{- else -}}
+{{- with $.Site.Params.avatarURL -}}
+<meta property="og:image" content="{{ . | absURL }}"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="{{ . | absURL }}"/>
+{{- end -}}
+{{- end -}}
