@@ -53,6 +53,12 @@ Since I already run [Home Assistant](https://www.home-assistant.io), I saw no po
 
 This was simple to do with Node-RED and, since Owntracks wants the same JSON format whether MQTT or HTTP is being used, the same flow could be used to post this data to MQTT with very few changes. You can find my Node-RED flows for HTTP and MQTT in [this GitHub Gist](https://gist.github.com/tigattack/73be9f9df722b546c6ad4785957bd813).
 
+![Node-RED HTTP flow](images/nodered-http.png)  
+_Node-RED flow for updating Owntracks with an HTTP POST request._
+
+![Node-RED MQTT flow](images/nodered-mqtt.png)  
+_Node-RED flow for updating Owntracks via MQTT._
+
 ## Setting Up
 
 Whether you wish to use the mobile app or not, you will need to run the Recorder.
