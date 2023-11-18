@@ -12,6 +12,7 @@ keywords:
 categories: [technology]
 authors: [tigattack]
 featuredImage: images/header.png
+featuredImageCaption: OwnTracks Map Features via [owntracks/frontend](https://github.com/owntracks/frontend)
 ---
 
 {{< toc >}}
@@ -33,9 +34,7 @@ Enter Owntracks...
 * The backend server, known as the "Recorder", consumes the client's location from an MQTT broker or HTTP POST request.
 * The mobile app publishes its location via MQTT or HTTP periodically or based on any of a number of optional triggers (geo-fences, significant location changes, manual updates, etc.)
 
-![Owntracks architecture overview](images/owntracks-arch-overview.png)
-
-_Owntracks architecture overview. Source: https://owntracks.org/booklet/guide/whathow_
+![Owntracks architecture overview](images/owntracks-arch-overview.png "_Owntracks architecture overview via [OwnTracks Booklet](https://owntracks.org/booklet/guide/whathow)._")
 
 {{< notice info >}}
 If you choose to use MQTT, you only need to expose your MQTT broker to the internet if you want real-time tracking. Otherwise, the Owntracks mobile app will cache location records until it can reach the broker.
@@ -53,11 +52,9 @@ Since I already run [Home Assistant](https://www.home-assistant.io), I saw no po
 
 This was simple to do with Node-RED and, since Owntracks wants the same JSON format whether MQTT or HTTP is being used, the same flow could be used to post this data to MQTT with very few changes. You can find my Node-RED flows for HTTP and MQTT in [this GitHub Gist](https://gist.github.com/tigattack/73be9f9df722b546c6ad4785957bd813).
 
-![Node-RED HTTP flow](images/nodered-http.png)  
-_Node-RED flow for updating Owntracks with an HTTP POST request._
+![Node-RED HTTP flow](images/nodered-http.png "_Node-RED flow for updating Owntracks with an HTTP POST request._")
 
-![Node-RED MQTT flow](images/nodered-mqtt.png)  
-_Node-RED flow for updating Owntracks via MQTT._
+![Node-RED MQTT flow](images/nodered-mqtt.png "_Node-RED flow for updating Owntracks via MQTT._")
 
 ## Setting Up
 
