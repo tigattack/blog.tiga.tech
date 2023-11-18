@@ -33,7 +33,15 @@
       </header>
 
       <div class="post-content">
-        {{ if .Params.featuredImage }}
+        {{ if and (.Params.featuredImage) (.Params.featuredImageCaption) }}
+          <figure>
+            <img src="{{ .Params.featuredImage }}" alt="Featured image"/>
+            <figcaption style="text-align: left; width: 100%;">
+              <i>{{ .Params.featuredImageCaption | markdownify }}</i>
+            </figcaption>
+          </figure>
+          <hr>
+        {{ else if .Params.featuredImage }}
           <img src="{{ .Params.featuredImage }}" alt="Featured image"/>
           <hr>
         {{ end }}
