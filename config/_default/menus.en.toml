@@ -1,0 +1,23 @@
+[[main]]
+name = "Posts"
+pageRef = "posts"
+identifier = "pkXMN1bL1D"
+weight = 1
+
+[[main]]
+name = "Projects"
+pageRef = "projects"
+identifier = "38LVxNjcTI"
+weight = 2
+
+[[main]]
+name = "About"
+pageRef = "about"
+identifier = "qN5Kf83bPx"
+weight = 3
+
+[[main]]
+name = "Contact"
+pageRef = "contact"
+identifier = "cLgqorb3JU"
+weight = 4
