@@ -8,7 +8,6 @@ authors = ["tigattack"]
 tags = ["monitoring", "grafana", "rclone"]
 categories = ["technology"]
 series = []
-featuredImage = "images/dashboard.png"
 +++
 
 In this post, we'll look at monitoring some important metrics from Rclone using Grafana, InfluxDB, and Telegraf.
@@ -19,7 +18,6 @@ Having a clear point of observation for these metrics is often invaluable when i
 
 ---
 
-{{< toc >}}
 
 We'll be using [Rclone's `rc` mode](https://rclone.org/rc/) (remote control) for this, so, before we jump in, let's talk a little about that first.
 
@@ -83,9 +81,9 @@ Example command:
 
 See, I said this one was easy!
 
-{{< notice tip >}}
+{{< alert "lightbulb" >}}
 If you have multiple mounts, you can add these flags to all of them, but you will need to change the port since multiple processes cannot bind to the same port.
-{{< /notice >}}
+{{< /alert >}}
 
 
 ## Option 2 - Run Rclone `rcd` as a service
@@ -193,9 +191,9 @@ WantedBy=multi-user.target</code>
 
 We're going to use Telegraf to scrape Rclone's `/metrics` endpoint.
 
-{{< notice tip >}}
+{{< alert "lightbulb" >}}
 For those of you who prefer Prometheus, Rclone's `/metrics` endpoint is Prometheus-compatible, so it will be pretty easy for you to get going with this too.
-{{< /notice >}}
+{{< /alert >}}
 
 I won't cover installation of [InfluxDB](https://docs.influxdata.com/influxdb) or [Telegraf](https://docs.influxdata.com/telegraf/) since both are highly documented and have been covered by many other people.
 

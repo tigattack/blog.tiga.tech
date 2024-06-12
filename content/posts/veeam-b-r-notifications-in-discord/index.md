@@ -3,7 +3,6 @@ draft = false
 date = 2018-01-08T10:16:31+00:00
 title = "Discord notifications: Veeam Backup & Replication"
 description = "Part 2 of a Discord notifications series.  Part 1 details notifications for Sonarr, Radarr and Lidarr.  In a similar fashion to part 1, this setup has been running for a while and I'm very pleased with it's flawless functionality."
-featuredImage = "header.png"
 slug = "veeam-b-r-notifications-in-discord"
 aliases = ["/veeam-b-r-notifications-in-discord"]
 authors = ["tigattack"]
@@ -16,14 +15,13 @@ Part 2 of a [Discord notifications series](#see-also-in-discord-notifications).
 
 In a similar fashion to part 1, this setup has been running for a while and I'm very pleased with it's flawless functionality.
 
-{{< notice warning >}}
+{{< alert >}}
 This project is no longer maintained; it has been superseded by my new project, [VeeamNotify](https://github.com/titgattack/VeeamNotify).  
 You can read more about it [here](../veeamnotify).
-{{< /notice >}}
+{{< /alert >}}
 
 ---
 
-{{< toc >}}
 
 # Background
 

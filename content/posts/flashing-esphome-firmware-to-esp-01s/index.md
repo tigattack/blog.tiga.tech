@@ -3,7 +3,6 @@ draft = false
 date = 2020-05-21T17:15:25+01:00
 title = "Flashing ESPHome Firmware to ESP-01S"
 description = "In this post I'll run through how to create and flash ESPHome firmware for an ESP8266-based temperature sensor."
-featuredImage = "header.jpg"
 slug = "flashing-esphome-firmware-to-esp-01s"
 aliases = ["/flashing-esphome-firmware-to-esp-01s"]
 authors = ["tigattack"]
@@ -24,7 +23,6 @@ section.
 
 ---
 
-{{< toc >}}
 
 # Prerequisites
 
@@ -152,7 +150,10 @@ text_sensor:
 Connect 5 jumper wires between the Raspberry Pi's GPIO and the ESP's pins, as per the diagram below.  
 *Make sure that you connect the 3v3&lt;-&gt;VCC wire last of all.*
 
-{{< gallery match="wiring/*" sortOrder="desc" rowHeight="250" margins="5" thumbnailResizeOptions="600x600 q90 Lanczos" showExif=false previewType="blur" embedPreview="true" loadJQuery=true >}}
+{{< gallery >}}
+  <img src="wiring/5D3_6723-Blog-Watermark.jpg" class="grid-w33">
+  <img src="wiring/Wiring.png" class="grid-w33">
+{{< /gallery >}}
 
 ## Preparing the Pi
 
@@ -242,11 +243,11 @@ There are a few possible solutions to this, but it depends on the root cause of 
 
 ## Updates and self-reset
 
-{{< notice info >}}
+{{< alert "circle-info" >}}
 This issue seems to have been fixed in ESPHome 1.15.0 - 
 [esphome/esphome#1185](https://github.com/esphome/esphome/pull/1185)  
 I'm leaving this here since some people still see this issue on occasion.
-{{< /notice >}}
+{{< /alert >}}
 
 One root cause of the problem detailed above is an issue with the self-reset functionality which is triggered after an OTA update or network connection failure.
 

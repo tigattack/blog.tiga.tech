@@ -9,13 +9,9 @@ keywords:
   - self-hosted
   - location
   - docker
-categories: [technology]
+tags: [technology]
 authors: [tigattack]
-featuredImage: images/header.png
-featuredImageCaption: OwnTracks Map Features via [owntracks/frontend](https://github.com/owntracks/frontend)
 ---
-
-{{< toc >}}
 
 # The Problem
 
@@ -36,9 +32,9 @@ Enter Owntracks...
 
 ![Owntracks architecture overview](images/owntracks-arch-overview.png "_Owntracks architecture overview via [OwnTracks Booklet](https://owntracks.org/booklet/guide/whathow)._")
 
-{{< notice info >}}
+{{< alert "circle-info" >}}
 If you choose to use MQTT, you only need to expose your MQTT broker to the internet if you want real-time tracking. Otherwise, the Owntracks mobile app will cache location records until it can reach the broker.
-{{< /notice >}}
+{{< /alert >}}
 
 Since location data can be sent to the Recorder via MQTT or HTTP, there is actually no requirement to use the mobile app and, in my case, I've decided against it for reasons I will explain in the next section.
 
@@ -86,9 +82,9 @@ services:
       SERVER_PORT: 8083
 ```
 
-{{< notice tip >}}
+{{< alert "lightbulb" >}}
 This example doesn't include a MQTT broker. If you wish to use MQTT instead of HTTP and you do not already have a MQTT broker, the link for Docker Compose examples below includes a deployment with a MQTT broker.
-{{< /notice >}}
+{{< /alert >}}
 
 Here are some handy links for these components:
 
@@ -134,9 +130,9 @@ listener 1883 0.0.0.0
 allow_anonymous true
 ```
 
-{{< notice warning >}}
+{{< alert >}}
 This `mosquitto.conf` allows full permissions to anyone with network access to the broker. It should **not** be used in production.
-{{< /notice >}}
+{{< /alert >}}
 
 ### Import Process
 
@@ -145,10 +141,10 @@ This `mosquitto.conf` allows full permissions to anyone with network access to t
 3. Grab the `google-import.py` script from [here](https://github.com/owntracks/recorder/tree/master/contrib/google-import)  
 4. Follow the instructions in the [README](https://github.com/owntracks/recorder/blob/master/contrib/google-import/README.md) file at the script link above to import your Google history to Owntracks.
 
-{{< notice tip >}}
+{{< alert "lightbulb" >}}
 You can also run `python3 google-import.py -h` to see usage information.  
 This is the command I used: `python3 google-import.py google_export/Records.json --tid tg -t owntracks/tig/gs21u -u owntracks -P password -H localhost:1883`
-{{< /notice >}}
+{{< /alert >}}
 
 # Summary
 

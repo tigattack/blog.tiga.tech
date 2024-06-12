@@ -3,7 +3,6 @@ draft = false
 date = 2019-10-29T11:31:25+00:00
 title = "Invite users to a Ghost blog without sending an email"
 description = ""
-featuredImage = "header.png"
 slug = "invite-users-to-a-ghost-blog-without-sending-an-email"
 aliases = ["/invite-users-to-a-ghost-blog-without-sending-an-email"]
 authors = ["tigattack"]
@@ -17,7 +16,6 @@ In this post, I will show you how to work around this and add new users without 
 
 ---
 
-{{< toc >}}
 
 # Requirements
 

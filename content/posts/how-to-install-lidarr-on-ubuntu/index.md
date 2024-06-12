@@ -3,7 +3,6 @@ draft = false
 date = 2018-01-08T15:05:06+00:00
 title = "How to install Lidarr on Ubuntu"
 description = "Lidarr is still in alpha, but you can install it on Ubuntu with some ease.  Credit for this goes to my friend Dan."
-featuredImage = "header.png"
 slug = "how-to-install-lidarr-on-ubuntu"
 aliases = ["/how-to-install-lidarr-on-ubuntu"]
 authors = ["tigattack"]
@@ -12,10 +11,10 @@ categories = ["technology"]
 series = []
 +++
 
-{{< notice warning "Update" >}}
-As of 4th June 2022, Lidarr has a stable release available. It's also [highly documented](https://wiki.servarr.com/lidarr) now, rendering this post pretty much entirely redundant.  
+{{< alert >}}
+**Update:** As of 4th June 2022, Lidarr has a stable release available. It's also [highly documented](https://wiki.servarr.com/lidarr) now, rendering this post pretty much entirely redundant.  
 I suggest you follow [their instructions](https://wiki.servarr.com/lidarr/installation) for installing on Ubuntu or, even better, running in Docker.
-{{< /notice >}}
+{{< /alert >}}
 
 
 [Lidarr](https://github.com/lidarr/Lidarr) is still in alpha, but you can install it on Ubuntu with some ease.

@@ -9,7 +9,6 @@ authors = ["tigattack"]
 tags = ["project", "PowerShell"]
 categories = ["technology"]
 series = []
-featuredImage = "images/header.png"
 +++
 
 VeeamNotify sends Veeam Backup & Replication session summary notifications to Discord, Microsoft Teams, and Slack, detailing the session result, various statistics, and optionally alerting you via @mention when a job finishes in a warning or failed state.
@@ -19,7 +18,6 @@ VeeamNotify features improvements across the board and support for all the afore
 
 ---
 
-{{< toc >}}
 
 # VeeamNotify Compatibility
 
@@ -61,9 +59,9 @@ I've included as much relevant information as I've been able to discover in the 
 
 If you're not here for manual installation instructions, I suggest you have a look at some of the simpler installation methods in the [VeeamNotify wiki](https://github.com/tigattack/VeeamNotify/wiki).
 
-{{< notice info >}}
+{{< alert "circle-info" >}}
 I will keep these instructions updated and in-line with current release as much as possible, but if something is out of date then please submit an issue in the [GitHub repository](https://github.com/tigattack/VeeamNotify).
-{{< /notice >}}
+{{< /alert >}}
 
 ## Requirements
 
@@ -121,9 +119,9 @@ Open the configuration file:
 notepad.exe C:\VeeamScripts\VeeamNotify\config\conf.json
 ```
 
-{{< notice info >}}
+{{< alert "circle-info" >}}
 Old versions of Notepad don't support Unix-style line endings, so this file may look pretty fucked up. Try using another editor if Notepad is proving too difficult.
-{{< /notice >}}
+{{< /alert >}}
 
 The primary points of configuration here are webhooks, so make sure you add the webhook(s) of the service(s) you wish to notify.  
 I'll provide no specific instructions beyond that; how you configure VeeamNotify is entirely your choice.
@@ -156,9 +154,9 @@ Copy that output, then repeat the following steps for each job that you want to 
     * Check "Run the following script after the job".
     * Paste the launch command we generated above.
     * Ensure "Run scripts every X backup session" is set to 1.
-  {{< notice example >}}
+  {{< alert "circle-info" >}}
   ![Veeam-config](images/vbr-job-settings.png)
-  {{< /notice >}}
+  {{< /alert >}}
 
 5. Click "OK", then click "Finish".
 
@@ -166,12 +164,12 @@ Copy that output, then repeat the following steps for each job that you want to 
 
 All done! Start a job to test your install.
 
-{{< notice example >}}
+{{< alert "circle-info" >}}
 Here's some example notifications:
 
 <img width="400" alt="Discord notifications example" src="images/discord.png">
 <img width="400" alt="Discord notifications example" src="images/teams.png">
-{{< /notice >}}
+{{< /alert >}}
 
 If you have any problems with the script, please [open an issue](https://github.com/tigattack/VeeamNotify/issues/new?assignees=tigattack&labels=bug&template=bug_report.yml&title=[BUG]+) on the GitHub project.
 

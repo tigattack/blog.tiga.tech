@@ -3,7 +3,6 @@ draft = true
 date = 2019-12-03T00:00:00+01:00
 title = "Boot Windows from the ODD port on the HPE Microserver Gen8"
 description = "In this post, we'll learn how to get Windows booting from a disk attached to the ODD port of a HP MicroServer Gen8."
-featuredImage = "header.jpg"
 slug = "boot-windows-odd-port-microserver-gen8"
 authors = ["tigattack"]
 tags = ["windows", "microserver"]

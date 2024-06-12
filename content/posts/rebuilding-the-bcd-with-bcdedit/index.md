@@ -3,7 +3,6 @@ draft = false
 date = 2018-01-04T11:43:18+00:00
 title = "Rebuilding the BCD with BCDEdit"
 description = "BCD stands for Boot Configuration Data. The BCD file lives in a folder called \"boot\" on the active partition of your hard drive. It contains information that instructs the computer on how to load the OS."
-featuredImage = "header.jpg"
 slug = "rebuilding-the-bcd-with-bcdedit"
 aliases = ["/rebuilding-the-bcd-with-bcdedit"]
 authors = ["tigattack"]
@@ -19,9 +18,9 @@ So if your computer cannot locate this information then chances are it either do
 
 Unfortunately it's not unheard of for the BCD to become corrupted one way or another. That's why I've made this post.
 
-{{< notice tip >}}
+{{< alert "lightbulb" >}}
 BCD stands for Boot Configuration Data.
-{{< /notice >}}
+{{< /alert >}}
 
 Small disclaimer: While this has always worked for me, I cannot guarantee it'll work for you. I take no responsibility if this breaks your computer or sets your cat on fire.
 

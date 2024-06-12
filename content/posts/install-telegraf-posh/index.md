@@ -3,7 +3,6 @@ draft = false
 date = 2021-05-11T02:33:55+01:00
 title = "Dynamically Deploy Telegraf and Windows Monitoring Configurations with PowerShell"
 description = "This is a Telegraf deployment script for Windows Server environments."
-featuredImage = "header.png"
 slug = "install-telegraf-posh"
 aliases = ["/install-telegraf-posh"]
 authors = ["tigattack"]
@@ -16,7 +15,6 @@ I recently made [this script](https://github.com/tigattack/Install-Telegraf-PoSH
 
 This is primarily designed for Windows Server but can also be pushed to workstations.
 
-{{< toc >}}
 
 # Overview
 

@@ -20,15 +20,13 @@ categories:
 authors:
   - tigattack
 series: {}
-featuredImage: images/header.png
 ---
 
-{{< toc >}}
 
-{{< notice tip >}}
+{{< alert "lightbulb" >}}
 This is likely to work for other generations and classes of OptiPlex desktops (e.g. 3050, 5060, etc.), but I cannot personally confirm this. 
 Attempt at your own risk.
-{{< /notice >}}
+{{< /alert >}}
 
 # Preamble
 

@@ -3,7 +3,6 @@ draft = false
 date = 2019-01-12T22:39:07+00:00
 title = "New car - VW Bora Sport"
 description = "I went to see a VW Bora Sport. As you'll see, it had been pretty distastefully modified, but there were some silver linings to the cloud of distaste. I was happy with the car and bought it, after knocking the price down by 30% of course!"
-featuredImage = "header.jpg"
 slug = "new-car-bora"
 aliases = ["/new-car-bora"]
 authors = ["tigattack"]
@@ -22,7 +21,6 @@ If you've got some time, read on!
 
 ---
 
-{{< toc >}}
 
 # Buying the Bora
 
@@ -90,9 +88,13 @@ As you'll see in the list below, it had been pretty distastefully modified, but 
 * Dual-driver subwoofer.
 
 <figure>
-    {{< gallery match="before/*" sortOrder="asc" rowHeight="200" margins="5"
-        thumbnailResizeOptions="600x600 q90 Lanczos" showExif=false
-        previewType="blur" embedPreview="true" loadJQuery=true >}}
+    {{< gallery >}}
+        <img src="before/43485851_2087684624629362_844631299015573504_n.jpg" class="grid-w33">
+        <img src="before/43542726_2087683597962798_4181095661304807424_n.jpg" class="grid-w33">
+        <img src="before/43569456_2087683884629436_7963232605053124608_n.jpg" class="grid-w33">
+        <img src="before/43601485_2087683651296126_130388154770259968_n.jpg" class="grid-w33">
+        <img src="before/IMG_20181018_083236.jpg" class="grid-w33">
+    {{< /gallery >}}
     <figcaption>Images from before and just after purchase.</figcaption>
 </figure>
 
@@ -122,9 +124,13 @@ If you're interested then please take a look [here](https://blog.tiga.tech/upgra
 
 Anyway, here's some photos from after I fixed it up a bit and de-chavved it:
 
-{{< gallery match="after/*" sortOrder="desc" rowHeight="250" margins="5"
-    thumbnailResizeOptions="600x600 q90 Lanczos" showExif=false
-    previewType="blur" embedPreview="true" loadJQuery=true >}}
+{{< gallery >}}
+    <img src="after/DSC01182.jpg" class="grid-w33">
+    <img src="after/DSC01184.jpg" class="grid-w33">
+    <img src="after/IMG_20181202_102921.jpg" class="grid-w33">
+    <img src="after/IMG_20181205_092213.jpg" class="grid-w33">
+    <img src="after/IMG_20190215_131735.jpg" class="grid-w33">
+{{< /gallery >}}
 
 # Fin.
 

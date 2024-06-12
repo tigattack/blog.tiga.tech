@@ -12,7 +12,6 @@ series = []
 
 A.k.a. CI/CD for your Home Assistant configuration.
 
-{{< toc >}}
 
 # Introduction
 

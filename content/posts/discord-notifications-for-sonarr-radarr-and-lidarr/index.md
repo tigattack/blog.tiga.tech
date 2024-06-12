@@ -3,7 +3,6 @@ draft = false
 date = 2018-01-06T15:47:33+00:00
 title = "Discord notifications: Sonarr, Radarr and Lidarr"
 description = "This is made extremely simple thanks to Sonarr's built-in support for Slack notifications and Discord's built-in support for Slack webhooks.  Of course Radarr and Lidarr support this too, as they are forks of Sonarr."
-featuredImage = "header.png"
 slug = "discord-notifications-for-sonarr-radarr-and-lidarr"
 aliases = ["/discord-notifications-for-sonarr-radarr-and-lidarr"]
 authors = ["tigattack"]
