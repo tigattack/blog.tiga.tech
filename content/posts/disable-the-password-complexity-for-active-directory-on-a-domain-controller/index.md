@@ -3,7 +3,6 @@ draft = false
 date = 2018-01-04T12:34:52+00:00
 title = "Disable the password complexity for Active Directory on a Domain Controller"
 description = "I recently ran into an issue where I couldn't change the password of an account in AD from one of the Domain Controllers. I realised it's because it has a different Group Policy than other computers.  Run > gpmc.msc"
-featuredImage = "header.jpg"
 slug = "disable-the-password-complexity-for-active-directory-on-a-domain-controller"
 aliases = ["/disable-the-password-complexity-for-active-directory-on-a-domain-controller"]
 authors = ["tigattack"]
