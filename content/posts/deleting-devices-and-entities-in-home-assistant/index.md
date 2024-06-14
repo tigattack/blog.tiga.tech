@@ -45,7 +45,7 @@ In general it's not a good idea to modify these core files while HASS is running
 {{< alert "circle-info" >}}
 If you're running HassOS this may not be possible. I'm not familiar with the ins and outs of HassOS, having never used it myself. You could try editing these files while HASS is running and then restart it, but I can't guarantee that will work.
 {{< /alert >}}
-
+<br>
 
 # 3. Modify the files
 
