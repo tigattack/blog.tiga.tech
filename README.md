@@ -17,13 +17,13 @@ Parameters:
 
 Usage:
 
-``html
+```html
 {{< spoiler "Optional spoiler title" [true|false] >}}
 Spoiler content **here**
 {{< /spoiler >}}
 ```
 
-``html
+```html
 {{< spoiler title="Optional spoiler title" open=true >}}
 Spoiler content **here**
 {{< /spoiler >}}
