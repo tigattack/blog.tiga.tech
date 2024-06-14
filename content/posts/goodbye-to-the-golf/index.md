@@ -3,7 +3,6 @@ draft = false
 date = 2018-09-19T16:42:52+01:00
 title = "Goodbye to the Golf"
 description = "I had some amazing times in and with this car. Below you can see where it started, only a few days after I bought it. Bone stock but I..."
-featuredImage = "header.jpg"
 slug = "goodbye-to-the-golf"
 aliases = ["/goodbye-to-the-golf"]
 authors = ["tigattack"]
@@ -12,7 +11,6 @@ categories = ["automotive"]
 series = []
 +++
 
-{{< toc >}}
 
 # The Crash
 
@@ -20,11 +18,7 @@ series = []
 
 The day started pretty normally, we were woken up by the cat walking all over us in a beg for attention.
 
-I had no idea this was coming, but I suppose you never do.
-
-We were leaving for my girlfriend's little brother's hockey match. I drove down the hill, pulled out of the junction, and began heading towards \[redacted\].
-
-Within a quarter of a mile there's a section of road that splits from one lane into four, widening for a major junction ahead. Just after the lane splits to four, there's a small residential road on the right, across another two lanes of traffic coming in the other direction.
+We were leaving for my girlfriend's little brother's hockey match. Within a quarter of a mile there's a section of road that splits from one lane into four, widening for a major junction ahead. Just after the lane splits to four, there's a small residential road on the right, across another two lanes of traffic coming in the other direction.
 
 I'm doing my best to explain this in words but I've made an (admittedly shit) diagram to help illustrate.
 
@@ -41,12 +35,13 @@ I was span around by 90° and ended up 2.5 lanes over to the left, between the f
 
 Enough talking, here's the after-math.
 
-<figure>
-    {{< gallery match="crash/*" sortOrder="asc" rowHeight="150" margins="5"
-        thumbnailResizeOptions="600x600 q90 Lanczos" showExif=false
-        previewType="blur" embedPreview="true" loadJQuery=true >}}
-    <figcaption> Left to right: My car directly after the crash, the Suzuki that hit me, and a better shot of my car a few days after the crash.</figcaption>
-</figure>
+{{< gallery >}}
+    <img src="crash/IMG_20180908_113022.jpg" class="grid-w33">
+    <img src="crash/IMG_20180908_113126.jpg" class="grid-w33">
+    <img src="crash/IMG_20180915_155439.jpg" class="grid-w33">
+{{< /gallery >}}
+
+Left to right: My car directly after the crash, the Suzuki that hit me, and a better shot of my car a few days after the crash.
 
 Note the difference in colour between the front bumper of the Suzuki and the rest of the body. This makes me think this isn't the driver's first accident.
 
@@ -57,9 +52,14 @@ I had some amazing times in and with this car. Below you can see where it starte
 I had a spot of bad luck, as you can see in the fourth image. I was parked outside a friend's flat in London and somebody broke into the car overnight. Unfortunately some things were stolen from the boot, but nothing highly valuable. Live and learn.
 
 <figure>
-    {{< gallery match="car/\*" sortOrder="asc" rowHeight="250" margins="5"
-        thumbnailResizeOptions="600x600 q90 Lanczos" showExif=false
-        previewType="blur" embedPreview="true" loadJQuery=true >}}
+    {{< gallery >}}
+        <img src="car/IMG_20170605_130455.jpg" class="grid-w33">
+        <img src="car/IMG_20180302_144932.jpg" class="grid-w33">
+        <img src="car/IMG_20180505_202347.jpg" class="grid-w33">
+        <img src="car/IMG_20180701_105516.jpg" class="grid-w33">
+        <img src="car/IMG_20180720_190033.jpg" class="grid-w33">
+        <img src="car/IMG_20180904_104043.jpg" class="grid-w33">
+    {{< /gallery >}}
     <figcaption>The last image was only about a week before the accident. We were camping in Cornwall.</figcaption>
 </figure>
 
@@ -85,10 +85,8 @@ Some details of the car, for those who are interested:
 I can't remember much else right now, but as you can see I spent a lot of time on this car.
 
 <figure>
-    {{< gallery match="mods/*" sortOrder="asc" rowHeight="250" margins="5"
-        thumbnailResizeOptions="600x600 q90 Lanczos" showExif=false
-        previewType="blur" embedPreview="true" loadJQuery=true >}}
-    <figcaption>A collection of images showing some of modifications//retrofits that I did.<br>From first to last: Cruise control, Brembo discs and pads, Recaro leather heated seats, Bora Sport TDI instrument cluster with lit needles and MTE enabled, remap from Bevo Tuning at Alan Jeffery Plymouth, and finally a WIP image from the vac line simplification that I did.</figcaption>
+{{< carousel images="mods/*" >}}
+<figcaption>A collection of images showing some of modifications//retrofits that I did.<br>From first to last: Cruise control, Brembo discs and pads, Recaro leather heated seats, Bora Sport TDI instrument cluster with lit needles and MTE enabled, remap from Bevo Tuning at Alan Jeffery Plymouth, and finally a WIP image from the vac line simplification that I did.</figcaption>
 </figure>
 
 It was an amazing second car. I adored every single minute I spent working on and driving it, and it'll be hard to say goodbye, but all good things must come to an end.

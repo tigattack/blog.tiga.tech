@@ -2,11 +2,12 @@
 title: About
 description: About me
 slug: about
-date: 2022-06-28
 aliases:
   - about-me
   - about-tig
-author: tigattack
+showdate: false
+showwordcount: false
+showreadingtime: false
 ---
 
 ## Hi, I'm tigattack.

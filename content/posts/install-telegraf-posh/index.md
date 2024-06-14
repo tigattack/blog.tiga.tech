@@ -3,7 +3,6 @@ draft = false
 date = 2021-05-11T02:33:55+01:00
 title = "Dynamically Deploy Telegraf and Windows Monitoring Configurations with PowerShell"
 description = "This is a Telegraf deployment script for Windows Server environments."
-featuredImage = "header.png"
 slug = "install-telegraf-posh"
 aliases = ["/install-telegraf-posh"]
 authors = ["tigattack"]
@@ -16,7 +15,6 @@ I recently made [this script](https://github.com/tigattack/Install-Telegraf-PoSH
 
 This is primarily designed for Windows Server but can also be pushed to workstations.
 
-{{< toc >}}
 
 # Overview
 
@@ -66,24 +64,24 @@ It is flexible in this regard though, the only requirement being that it is run 
 
 1. Download all the files in [the repository](https://github.com/tigattack/Install-Telegraf-PoSH) to your desired source location (i.e. a network path). This can be done by running the commands below in PowerShell\*.
 
-<pre class="language-powershell">
-<code>cd \\path\to\share # Make sure you change this
+```powershell
+cd \\path\to\share # Make sure you change this
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 Invoke-WebRequest "https://github.com/tigattack/Install-Telegraf-PoSH/archive/refs/heads/main.zip" -OutFile "$env:TEMP\Install-Telegraf-PoSH.zip"
 Expand-Archive -Path "$env:TEMP\Install-Telegraf-PoSH.zip" -DestinationPath "$env:TEMP\"
 Remove-Item "$env:TEMP\Install-Telegraf-PoSH.zip"
 Remove-Item "$env:TEMP\Install-Telegraf-PoSH-main\.github" -Recurse
 Move-Item "$env:TEMP\Install-Telegraf-PoSH-main\" ".\Install-Telegraf"
-</code></pre>
+```
 
 2. Download the latest Telegraf release for Windows from [Telegraf's GitHub releases](https://github.com/influxdata/telegraf/releases).
 3. Extract the EXE from the downloaded ZIP and move it to the source location.
 4. Rename the EXE to `telegraf.exe`.
 5. Open PowerShell, cd to the source directory (e.g. `cd \\path\to\share`) ,and run the following command:
 
-<pre class="language-powershell">
-<code>(Get-FileHash -Algorithm SHA256 ".\telegraf.exe").Hash | Out-File ".\telegraf.exe.sha256sum"
-</code></pre>
+```powershell
+(Get-FileHash -Algorithm SHA256 ".\telegraf.exe").Hash | Out-File ".\telegraf.exe.sha256sum"
+```
 
 6. Configure your output plugin and any other Telegraf agent settings in `telegraf.conf`.
 
@@ -101,47 +99,45 @@ However, please also feel free to perform a manual download of all the files in 
 
 First install:
 
-<img src="RaFEbuju26.png"
-    title="First install" loading="lazy" />
+![First install](RaFEbuju26.png)
 
 Update:
 
-<img src="zovUBIVo22.png"
-    title="Update" loading="lazy" />
+![Update](zovUBIVo22.png)
 
 ### Commands
 
 Standalone:
 
-<pre class="language-powershell">
-<code>InstallTelegraf.ps1 -Source '\\path\to\share' `
+```powershell
+InstallTelegraf.ps1 -Source '\\path\to\share' `
     -Destination 'C:\custom\path' `
     -ServiceName 'my-telegraf' `
     -ServiceDisplayName 'My Telegraf' `
     -LogPath 'C:\Windows\TEMP\InstallTelegraf.log'
-</code></pre>
+```
 
 Standalone dry run:
 
-<pre class="language-powershell">
-<code>InstallTelegraf.ps1 -Source '\\path\to\share' `
+```powershell
+InstallTelegraf.ps1 -Source '\\path\to\share' `
     -Destination 'C:\custom\path' `
     -ServiceName 'my-telegraf' `
     -ServiceDisplayName 'My Telegraf' `
     -LogPath 'C:\Windows\TEMP\InstallTelegraf.log' `
     -WhatIf
-</code></pre>
+```
 
 Automated Deployment:
 
-<pre class="language-powershell">
-<code>PowerShell.exe -WindowStyle Hidden -File '\\path\to\InstallTelegraf.ps1' `
+```powershell
+PowerShell.exe -WindowStyle Hidden -File '\\path\to\InstallTelegraf.ps1' `
     -Source '\\path\to\share' `
     -Destination 'C:\custom\path' `
     -ServiceName 'my-telegraf' `
     -ServiceDisplayName 'My Telegraf' `
     -LogPath 'C:\Windows\TEMP\InstallTelegraf.log'
-</code></pre>
+```
 
 ## Parameters
 

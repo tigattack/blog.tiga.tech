@@ -3,7 +3,6 @@ draft = false
 date = 2019-02-18T18:49:09+00:00
 title = "Upgrading and Repairing the Bora"
 description = "After buying my Bora I decided to carry out a number of repairs and upgrades. The end goal was to resolve the issues I identified before purchase and de-chav it. I have a few things planned, such as..."
-featuredImage = "header.jpg"
 slug = "upgrading-and-fixing-the-bora"
 aliases = ["/upgrading-and-fixing-the-bora"]
 authors = ["tigattack"]
@@ -16,7 +15,6 @@ After buying my Bora, which I [wrote about here](https://blog.tiga.tech/new-car-
 
 The end goal was to resolve the issues I identified before purchase and de-chav it.
 
-{{< toc >}}
 
 # Modifications & Upgrades
 
@@ -31,28 +29,31 @@ The end goal was to resolve the issues I identified before purchase and de-chav 
 * Replaced the gold "JDM" gear knob and factory gaiter with my Audi TT 8N (Mk1) 225 Quattro gearknob and black/red-stiched gaiter.
 
 <figure>
-{{< gallery match="gearstick/*" sortOrder="asc" rowHeight="150" margins="5"
-    thumbnailResizeOptions="600x600 q90 Lanczos" showExif=false
-    previewType="blur" embedPreview="true" loadJQuery=true >}}
-<figcaption aria-hidden="true">Before and after swapping the head unit, gear knob, and gear gaiter.</figcaption>
+    {{< gallery >}}
+        <img src="gearstick/43485851_2087684624629362_844631299015573504_n-1.jpg" class="grid-w50">
+        <img src="gearstick/IMG_20190206_083133.jpg" class="grid-w50">
+    {{< /gallery >}}
+    <figcaption aria-hidden="true">Before and after swapping the head unit, gear knob, and gear gaiter.</figcaption>
 </figure>
 
 * Fitted a black radiator grille.
 
 <figure>
-{{< gallery match="grille/*" sortOrder="asc" rowHeight="200" margins="5"
-    thumbnailResizeOptions="600x600 q90 Lanczos" showExif=false
-    previewType="blur" embedPreview="true" loadJQuery=true >}}
-<figcaption aria-hidden="true">Before and after swapping the grille. Whoops, should've given it a clean for the second photo...</figcaption>
+    {{< gallery >}}
+        <img src="grille/43601485_2087683651296126_130388154770259968_n-1.jpg" class="grid-w40">
+        <img src="grille/IMG_20190213_144347.jpg" class="grid-w60">
+    {{< /gallery >}}
+    <figcaption aria-hidden="true">Before and after swapping the grille. Whoops, should've given it a clean for the second photo...</figcaption>
 </figure>
 
 * Replaced the awful gold-spoked wheels with my 18" Audi RS4 B5 wheels.
 
 <figure>
-{{< gallery match="wheels/*" sortOrder="desc" rowHeight="200" margins="5"
-    thumbnailResizeOptions="600x600 q90 Lanczos" showExif=false
-    previewType="blur" embedPreview="true" loadJQuery=true >}}
-<figcaption aria-hidden="true">Before and after swapping the wheels. I cleaned it this time.</figcaption>
+    {{< gallery >}}
+        <img src="wheels/Before-wheels.jpg" class="grid-w50">
+        <img src="wheels/After-wheels.jpg" class="grid-w50">
+    {{< /gallery >}}
+    <figcaption aria-hidden="true">Before and after swapping the wheels. I cleaned it this time.</figcaption>
 </figure>
 
 # Repairs

@@ -3,7 +3,6 @@ draft = false
 date = 2020-05-21T17:15:25+01:00
 title = "Flashing ESPHome Firmware to ESP-01S"
 description = "In this post I'll run through how to create and flash ESPHome firmware for an ESP8266-based temperature sensor."
-featuredImage = "header.jpg"
 slug = "flashing-esphome-firmware-to-esp-01s"
 aliases = ["/flashing-esphome-firmware-to-esp-01s"]
 authors = ["tigattack"]
@@ -24,15 +23,13 @@ section.
 
 ---
 
-{{< toc >}}
-
 # Prerequisites
 
 * Home Assistant (HASS) with the [ESPHome plugin installed](https://esphome.io/guides/getting_started_hassio.html).
 * A Raspberry Pi running Linux. Instructions for installing Raspbian on a Pi can be found [here](https://www.raspberrypi.org/documentation/installation/installing-images/README.md).
 * 5 jumper wires.
 
-<img src="5D3_6712-Blog-Watermark.jpg" loading="lazy" />
+![Raspberry Pi with jumper wires connected to GPIO pins](5D3_6712-Blog-Watermark.jpg)
 
 # ESPHome configuration
 
@@ -47,8 +44,8 @@ section.
     *Unless you're running your own router and/or DNS server, you can skip steps 5-6 and proceed to step 7.*
 5. In the `wifi` section of the file you just opened, add the following: `domain: .<your-internal-domain-name>`. This is what mine looks:
 
-<pre class="language-yaml" data-line="10">
-<code>esphome:
+```yml
+esphome:
   name: espName
   platform: ESP8266
   board: esp01_1m
@@ -75,15 +72,15 @@ api:
 
 ota:
   password: "OTAPassw0rd"
-</code></pre>
+```
 
 
 1. Now open: `/config/esphome/.esphome/espName.yaml.json`.  
     Change the address from `espName.local` to `espName.<your-internal-domain-name>`.  
     This is what mine looks like, see line 8:
 
-<pre class="language-json" data-line="10">
-<code>{
+```json
+{
   "storage_version": 1,
   "name": "espName",
   "comment": null,
@@ -96,7 +93,8 @@ ota:
   "build_path": null,
   "firmware_bin_path": null,
   "loaded_integrations": []
-}</code></pre>
+}
+```
 
 Please **do not** copy this since your ESPHome version may be different if you're following this in the future, and copying this could lead to issues.
 
@@ -135,7 +133,7 @@ text_sensor:
 ```
 
 {{< spoiler "This is what mine looks like" >}}
-<img src="ESPConfig.PNG" loading="lazy" alt="ESPConfig" />
+![ESPConfig](ESPConfig.PNG)
 {{< /spoiler >}}
 
 # Compiling the firmware
@@ -152,7 +150,10 @@ text_sensor:
 Connect 5 jumper wires between the Raspberry Pi's GPIO and the ESP's pins, as per the diagram below.  
 *Make sure that you connect the 3v3&lt;-&gt;VCC wire last of all.*
 
-{{< gallery match="wiring/*" sortOrder="desc" rowHeight="250" margins="5" thumbnailResizeOptions="600x600 q90 Lanczos" showExif=false previewType="blur" embedPreview="true" loadJQuery=true >}}
+{{< gallery >}}
+  <img src="wiring/5D3_6723-Blog-Watermark.jpg" class="grid-w33">
+  <img src="wiring/Wiring.png" class="grid-w33">
+{{< /gallery >}}
 
 ## Preparing the Pi
 
@@ -170,18 +171,15 @@ Connect 5 jumper wires between the Raspberry Pi's GPIO and the ESP's pins, as pe
 ## Copying and flashing
 
 1. Copy the firmware file to the Pi. I used [scp](https://linux.die.net/man/1/scp) to do this:
-<pre
-  class="language-yaml"
-  class="no-line-numbers">
-<code>scp ~/Downloads/espName.bin pi@raspberrypi:/home/pi/
-</code></pre>
+```shell
+scp ~/Downloads/espName.bin pi@raspberrypi:/home/pi/
+```
 
 1. SSH to your Pi or connect a keyboard and display.
 2. In the terminal run:
     `esptool.py --port /dev/ttyS0 write_flash 0x0000 ~/espName.bin`  
     If successful, you'll see a similar output to this:  
-    <img src="Flash.png"
-    loading="lazy" alt="Flash" />
+    ![Flash result](Flash.png)
 
 As you can see, the MAC address of the chip has been printed as part of the ouput. You can use this to create a DHCP reservation for the ESP, if you so wish.
 
@@ -209,13 +207,13 @@ You will now have 5 new entities:
 
 You may need to calibrate your temperature sensors. I used a room temperature & humidity sensor to find the delta between the ESP reported values and real values. Once you've found your deltas, record them to use in the following steps.
 
-<img src="5D3_6725-Blog-Watermark.jpg" loading="lazy" />
+![Generic room temperature & humidity sensor](5D3_6725-Blog-Watermark.jpg)
 
 1. Open the following file in HASS: `/config/esphome/espName.yaml`
 2. Replace lines 41-46 with the following, inputting your own offsets.
 
-<pre class="language-yml">
-<code>    temperature:
+```yaml
+    temperature:
       name: espName Temperature
       force_update: true
       filters:
@@ -225,7 +223,7 @@ You may need to calibrate your temperature sensors. I used a room temperature & 
       force_update: true
       filters:
         - offset: 6
-</code></pre>
+```
 
 Note that these values are my own and may not be correct for you. The temperature reported by my ESP was 7.4 degrees higher than actual, and the reported humidity was 6% lower than actual.
 
@@ -242,11 +240,11 @@ There are a few possible solutions to this, but it depends on the root cause of 
 
 ## Updates and self-reset
 
-{{< notice info >}}
+{{< alert "circle-info" >}}
 This issue seems to have been fixed in ESPHome 1.15.0 - 
 [esphome/esphome#1185](https://github.com/esphome/esphome/pull/1185)  
 I'm leaving this here since some people still see this issue on occasion.
-{{< /notice >}}
+{{< /alert >}}
 
 One root cause of the problem detailed above is an issue with the self-reset functionality which is triggered after an OTA update or network connection failure.
 

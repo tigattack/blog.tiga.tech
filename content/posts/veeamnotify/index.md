@@ -9,17 +9,16 @@ authors = ["tigattack"]
 tags = ["project", "PowerShell"]
 categories = ["technology"]
 series = []
-featuredImage = "images/header.png"
 +++
 
 VeeamNotify sends Veeam Backup & Replication session summary notifications to Discord, Microsoft Teams, and Slack, detailing the session result, various statistics, and optionally alerting you via @mention when a job finishes in a warning or failed state.
 
-VeeamNotify is a replacement for my previous [VeeamDiscordNotifications](https://github.com/tigattack/VeeamDiscordNotifications) project, and the respective [Teams](https://github.com/tigattack/VeeamTeamsNotifications) and [Slack](https://github.com/tigattack/VeeamSlackNotifications) projects. You may have seen my [previous blog post](https://blog.tiga.tech/veeam-b-r-notifications-in-discord/) about VeeamDiscordNotifications.  
+VeeamNotify is a replacement for my previous [VeeamDiscordNotifications](https://github.com/tigattack/VeeamDiscordNotifications) project, and the respective [Teams](https://github.com/tigattack/VeeamTeamsNotifications) and [Slack](https://github.com/tigattack/VeeamSlackNotifications) projects. You may have seen my [previous blog post](https://blog.tiga.tech/veeam-b-r-notifications-in-discord/) about VeeamDiscordNotifications.
+
 VeeamNotify features improvements across the board and support for all the aforementioned messaging services in one place.
 
 ---
 
-{{< toc >}}
 
 # VeeamNotify Compatibility
 
@@ -37,18 +36,14 @@ Supported Veeam Job Types:
 * VM Replication
 * Windows & Linux Agent Backup jobs*
 
-ue to limitations in Veeam, only some types of Agent jobs are supported.
+Due to limitations in Veeam, only some types of Agent jobs are supported:
 
-**Supported** jobs are referred to as "Agent Backup" or "Managed by backup server".  
-**Unsupported** jobs are referred to as "Agent policy" or "Managed by agent".  
-See the spoilered illustration below if this isn't clear to you.
+* **Supported** jobs are referred to as "Agent Backup" or "Managed by backup server".  
+* **Unsupported** jobs are referred to as "Agent policy" or "Managed by agent".  
 
-<details>
-<summary>Illustrated screenshot showing an example of supported types</summary>
-<img src="images/agent-types.png" width="75%"></img>
-
-**Note:** Linux Agent Backup jobs are also supported, this image is only an example.
-</details>
+{{< spoiler title="See the spoilered illustration below if this isn't clear to you." >}}
+![Agent job types](images/agent-types.png "**Note:** Linux Agent Backup jobs are also supported, this image is only an example.")
+{{< /spoiler >}}
 
 You can read about the difference between these two Agent job types [here](https://helpcenter.veeam.com/docs/backup/agents/agent_job_protection_mode.html?ver=110#selecting-job-mode).
 
@@ -59,11 +54,11 @@ I've included as much relevant information as I've been able to discover in the 
 
 # Manual Install Instructions
 
-If you're not here for manual installation instructions, I suggest you have a look at some of the simpler installation methods in the [VeeamNotify wiki](https://github.com/tigattack/VeeamNotify/wiki).
+If you're not here for manual installation instructions, I suggest you have a look at some simpler installation methods in the [VeeamNotify wiki](https://github.com/tigattack/VeeamNotify/wiki).
 
-{{< notice info >}}
+{{< alert "circle-info" >}}
 I will keep these instructions updated and in-line with current release as much as possible, but if something is out of date then please submit an issue in the [GitHub repository](https://github.com/tigattack/VeeamNotify).
-{{< /notice >}}
+{{< /alert >}}
 
 ## Requirements
 
@@ -78,7 +73,7 @@ At the time of writing, `v1.0` is the latest version, so that's what we'll insta
 
 The install directory is `C:\VeeamScripts` by default. You can use any directory you wish, but the user under which Veeam runs must have read/write access to it.
 
-Firstly, open Powershell as administrator and leave it open. We'll be using it through the process.
+Firstly, open PowerShell as administrator and leave it open. We'll be using it through the process.
 
 Now we need to create the install directory. Run the following command to do this:
 
@@ -107,7 +102,7 @@ Rename-Item 'C:\VeeamScripts\VeeamNotify-v1.0' 'C:\VeeamScripts\VeeamNotify'
 Remove-Item 'C:\VeeamScripts\VeeamNotify-v1.0.zip'
 ```
 
-Windows typically blocks execution of downloaded scripts, so we need to unblock all of the script files for this project:
+Windows typically blocks execution of downloaded scripts, so we need to unblock all the script files for this project:
 
 ```powershell
 Get-ChildItem -Path 'C:\VeeamScripts\VeeamNotify' -Filter '*.ps*' -Recurse | Unblock-File
@@ -121,9 +116,9 @@ Open the configuration file:
 notepad.exe C:\VeeamScripts\VeeamNotify\config\conf.json
 ```
 
-{{< notice info >}}
+{{< alert "circle-info" >}}
 Old versions of Notepad don't support Unix-style line endings, so this file may look pretty fucked up. Try using another editor if Notepad is proving too difficult.
-{{< /notice >}}
+{{< /alert >}}
 
 The primary points of configuration here are webhooks, so make sure you add the webhook(s) of the service(s) you wish to notify.  
 I'll provide no specific instructions beyond that; how you configure VeeamNotify is entirely your choice.
@@ -156,22 +151,20 @@ Copy that output, then repeat the following steps for each job that you want to 
     * Check "Run the following script after the job".
     * Paste the launch command we generated above.
     * Ensure "Run scripts every X backup session" is set to 1.
-  {{< notice example >}}
-  ![Veeam-config](images/vbr-job-settings.png)
-  {{< /notice >}}
+      ![Veeam-config](images/vbr-job-settings.png)
 
 5. Click "OK", then click "Finish".
 
 ## Fin.
 
-All done! Start a job to test your install.
+All done! Start a job to test your installation.
 
-{{< notice example >}}
-Here's some example notifications:
+Here are some example notifications:
 
-<img width="400" alt="Discord notifications example" src="images/discord.png">
-<img width="400" alt="Discord notifications example" src="images/teams.png">
-{{< /notice >}}
+{{< gallery >}}
+<img alt="Discord notifications example" src="images/discord.png" class="grid-w50">
+<img alt="Discord notifications example" src="images/teams.png" class="grid-w50">
+{{< /gallery >}}
 
 If you have any problems with the script, please [open an issue](https://github.com/tigattack/VeeamNotify/issues/new?assignees=tigattack&labels=bug&template=bug_report.yml&title=[BUG]+) on the GitHub project.
 

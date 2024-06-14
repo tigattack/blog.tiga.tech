@@ -1,0 +1,5 @@
+{{ if and
+    (not hugo.IsServer)
+    (isset site.Params.umamiAnalyticsCustom "websiteid") }}
+{{ partial "umami_custom.html" . }}
+{{ end }}

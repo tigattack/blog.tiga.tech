@@ -8,7 +8,6 @@ authors = ["tigattack"]
 tags = ["monitoring", "grafana", "rclone"]
 categories = ["technology"]
 series = []
-featuredImage = "images/dashboard.png"
 +++
 
 In this post, we'll look at monitoring some important metrics from Rclone using Grafana, InfluxDB, and Telegraf.
@@ -19,7 +18,6 @@ Having a clear point of observation for these metrics is often invaluable when i
 
 ---
 
-{{< toc >}}
 
 We'll be using [Rclone's `rc` mode](https://rclone.org/rc/) (remote control) for this, so, before we jump in, let's talk a little about that first.
 
@@ -75,17 +73,17 @@ As I mentioned above, there are two routes you can take when configuring this; I
 The first and simplest option is to simply add the flags above to your mount (or other) command.
 
 Example command:
-<pre class="command-line language-bash no-line-numbers" data-prompt="$">
-<code>rclone mount --rc --rc-addr=0.0.0.0:5572 --rc-enable-metrics \
+```shell
+rclone mount --rc --rc-addr=0.0.0.0:5572 --rc-enable-metrics \
     --rc-user='username' --rc-password='password' \
-    &lt;your-remote&gt;: /your/mount/point</code>
-</pre>
+    <your-remote>: /your/mount/point
+```
 
 See, I said this one was easy!
 
-{{< notice tip >}}
+{{< alert "lightbulb" >}}
 If you have multiple mounts, you can add these flags to all of them, but you will need to change the port since multiple processes cannot bind to the same port.
-{{< /notice >}}
+{{< /alert >}}
 
 
 ## Option 2 - Run Rclone `rcd` as a service
@@ -107,9 +105,9 @@ Some examples:
 
 You can see all available options without needing to run `rcd` first like so:
 
-<pre class="command-line language-bash no-line-numbers" data-prompt="$">
-<code>rclone rc options/get --rc-user='username' --rc-pass='password'</code>
-</pre>
+```shell
+rclone rc options/get --rc-user='username' --rc-pass='password'
+```
 
 In the standalone service definition below, we want to focus on 2 things:
 
@@ -118,8 +116,8 @@ In the standalone service definition below, we want to focus on 2 things:
 2. `ExecStop` - This command runs when you stop the service and will unmount all remotes.
 
 {{< spoiler title="rclone-rcd.service standalone" open=true >}}
-<pre class="language-toml line-numbers">
-<code>[Unit]
+```ini
+[Unit]
 Description=Rclone rcd service
 After=network-online.target
 
@@ -129,7 +127,7 @@ ExecStart=/usr/bin/rclone rcd \
 	--rc-addr '0.0.0.0:5572' \
 	--rc-enable-metrics \
 	--rc-user 'username' \
-    --rc-pass 'password' \
+	--rc-pass 'password' \
 	--config '/path/to/your/rclone.conf' \
 	--log-level 'INFO' \
 	--log-file '/path/to/your/rcd.log'
@@ -141,8 +139,8 @@ StartLimitBurst=3
 TimeoutStartSec=150
 
 [Install]
-WantedBy=multi-user.target</code>
-</pre>
+WantedBy=multi-user.target
+```
 {{< /spoiler >}}
 
 In this second service definition, I've added two `ExecStartPost` commands. `ExecStartPost` commands run after the `ExecStart` command has succeeded.  This method is a good way of launching `rcd` and almost instantly mounting your remote.
@@ -150,8 +148,8 @@ In this second service definition, I've added two `ExecStartPost` commands. `Exe
 The first `ExecStartPost` sets various global Rclone options that cannot be defined with the `rc mount/mount` command, then the second `ExecStartPost` mounts the specified remote.
 
 {{< spoiler title="rclone-rcd.service with mount" open=true >}}
-<pre class="language-toml line-numbers">
-<code>[Unit]
+```ini
+[Unit]
 Description=Rclone rcd service with mount
 After=network-online.target
 
@@ -161,7 +159,7 @@ ExecStart=/usr/bin/rclone rcd \
 	--rc-addr '0.0.0.0:5572' \
 	--rc-enable-metrics \
 	--rc-user 'username' \
-    --rc-pass 'password' \
+	--rc-pass 'password' \
 	--config '/path/to/your/rclone.conf' \
 	--log-level 'INFO' \
 	--log-file '/path/to/your/rcd.log' \
@@ -169,13 +167,13 @@ ExecStart=/usr/bin/rclone rcd \
 
 # Set global opts
 ExecStartPost=/usr/bin/rclone rc options/set \
-	--rc-user 'username' --rc=pass 'password' \
+	--rc-user 'username' --rc-pass 'password' \
 	--json '{"main": {"UserAgent": "someuseragenthere", "Timeout": 3600000000000}, "mount": {"AllowOther": true}, "vfs": {"Umask": 2, "UID": 1000 , "GID": 1000, "PollInterval": 15000000000, "DirCacheTime": 3600000000000000, "CacheMaxAge": 129600000000000, "CacheMaxSize": 322122547200, "CacheMode": 3}, "log": {"File": "/var/log/rclone/rclone-mount.log"}}'
 
 # Mount remote
 ExecStartPost=/usr/bin/rclone rc mount/mount \
-	--rc-user 'username' --rc=pass 'password' \
-	fs=&lt;your-remote&gt;: mountPoint=/your/mount/point
+	--rc-user 'username' --rc-pass 'password' \
+	fs=<your-remote>: mountPoint=/your/mount/point
 
 ExecStop=/usr/bin/rclone rc --user 'username' --pass 'password' mount/unmountall
 Restart=on-failure
@@ -185,17 +183,17 @@ StartLimitBurst=3
 TimeoutStartSec=150
 
 [Install]
-WantedBy=multi-user.target</code>
-</pre>
+WantedBy=multi-user.target
+```
 {{< /spoiler >}}
 
 # Scraping the metrics
 
 We're going to use Telegraf to scrape Rclone's `/metrics` endpoint.
 
-{{< notice tip >}}
+{{< alert "lightbulb" >}}
 For those of you who prefer Prometheus, Rclone's `/metrics` endpoint is Prometheus-compatible, so it will be pretty easy for you to get going with this too.
-{{< /notice >}}
+{{< /alert >}}
 
 I won't cover installation of [InfluxDB](https://docs.influxdata.com/influxdb) or [Telegraf](https://docs.influxdata.com/telegraf/) since both are highly documented and have been covered by many other people.
 
@@ -203,28 +201,26 @@ You will need to either configure a new database in InfluxDB or use an existing 
 You will also need credentials for InfluxDB.
 
 {{< spoiler title="telegraf.conf" open=true >}}
-<pre class="language-toml line-numbers">
-<code>
+```toml
 # InfluxDB to write metrics to
 [[outputs.influxdb]]
-  urls = ["http://&lt;influx-host&gt;:8086"]
-  database = "&lt;database&gt;"
-  username = "&lt;username&gt;"
-  password = "&lt;password&gt;"
+  urls = ["http://<influx-host>:8086"]
+  database = "<database>"
+  username = "<username>"
+  password = "<password>"
 
 # Pull metrics from Rclone
 [[inputs.prometheus]]
   # Single Rclone rc
-  urls = ['http://&lt;rclone-host&gt;:5572/metrics']
+  urls = ['http://<rclone-host>:5572/metrics']
 
   # Multiple Rclone rc
-  # urls = ['http://&lt;rclone-host&gt;:5572/metrics','http://&lt;rclone-host&gt;:5573/metrics']
+  # urls = ['http://<rclone-host>:5572/metrics','http://<rclone-host>:5573/metrics']
 
   # Rclone authentication
-  username = "&lt;username&gt;"
-  password = "&lt;password&gt;"
-</code>
-</pre>
+  username = "<username>"
+  password = "<password>"
+```
 {{< /spoiler >}}
 
 
@@ -254,7 +250,7 @@ First of all, you must create a data source in Grafana for your InfluxDB databas
 It should look something like this:
 
 {{< spoiler title="Datasource settings page" open=false >}}
-<img src="images/datasource-settings.png" alt="Datasource settings page">
+![Datasource settings page](images/datasource-settings.png)
 {{< /spoiler >}}
 
 Hopefully you now have a nice green tick and you can continue to importing the dashboard!
@@ -266,7 +262,7 @@ I've uploaded the dashboard to Grafana Dashboards, a great place for finding and
 To import a dashboard, click the dashboards button in the sidebar in Grafana, then "Import".
 
 {{< spoiler title="Import dashboard screenshot" open=false >}}
-<img src="images/import-dashboard.png" alt="Import dashboard screenshot">
+![Import dashboard screenshot](images/import-dashboard.png)
 {{< /spoiler >}}
 
 You can either import it into Grafana using the ID or download the JSON file, both found at the link above.

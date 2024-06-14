@@ -20,16 +20,13 @@ categories:
 authors:
   - tigattack
 series: {}
-featuredImage: images/header.png
 ---
 
-{{< toc >}}
-
-{{< notice tip >}}
+{{< alert "lightbulb" >}}
 This is likely to work for other generations and classes of OptiPlex desktops (e.g. 3050, 5060, etc.), but I cannot personally confirm this. 
 Attempt at your own risk.
-{{< /notice >}}
-
+{{< /alert >}}
+<br>
 # Preamble
 
 I recently bought myself a Dell OptiPlex 5070 Micro to play with. It's the first node of what will be a 3-node cluster that I will use to start playing with Kubernetes in the real (read: non-virtualised) world.

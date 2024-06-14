@@ -1,9 +1,8 @@
 +++
 draft = false
 date = 2019-10-28T15:25:20+00:00
-title = "MacBook Pro Touch Bar - Fix stuck keys"
+title = "MacBook Pro Touch Bar — Fix stuck keys"
 description = ""
-featuredImage = "header.jpg"
 slug = "macbook-pro-touchbar-fix-stuck-jammed-hung-keys"
 aliases = ["/macbook-pro-touchbar-fix-stuck-jammed-hung-keys"]
 authors = ["tigattack"]
