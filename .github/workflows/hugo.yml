@@ -41,6 +41,7 @@ jobs:
       - name: Build with Hugo
         env:
           HUGO_ENVIRONMENT: production
+          TZ: Europe/London
         run: |
           hugo \
             --minify \
