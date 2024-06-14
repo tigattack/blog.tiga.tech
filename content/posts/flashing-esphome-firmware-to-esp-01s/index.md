@@ -30,7 +30,7 @@ section.
 * A Raspberry Pi running Linux. Instructions for installing Raspbian on a Pi can be found [here](https://www.raspberrypi.org/documentation/installation/installing-images/README.md).
 * 5 jumper wires.
 
-<img src="5D3_6712-Blog-Watermark.jpg" loading="lazy" />
+![Raspberry Pi with jumper wires connected to GPIO pins](5D3_6712-Blog-Watermark.jpg)
 
 # ESPHome configuration
 
@@ -134,7 +134,7 @@ text_sensor:
 ```
 
 {{< spoiler "This is what mine looks like" >}}
-<img src="ESPConfig.PNG" loading="lazy" alt="ESPConfig" />
+![ESPConfig](ESPConfig.PNG)
 {{< /spoiler >}}
 
 # Compiling the firmware
@@ -180,8 +180,7 @@ scp ~/Downloads/espName.bin pi@raspberrypi:/home/pi/
 2. In the terminal run:
     `esptool.py --port /dev/ttyS0 write_flash 0x0000 ~/espName.bin`  
     If successful, you'll see a similar output to this:  
-    <img src="Flash.png"
-    loading="lazy" alt="Flash" />
+    ![Flash result](Flash.png)
 
 As you can see, the MAC address of the chip has been printed as part of the ouput. You can use this to create a DHCP reservation for the ESP, if you so wish.
 
@@ -209,7 +208,7 @@ You will now have 5 new entities:
 
 You may need to calibrate your temperature sensors. I used a room temperature & humidity sensor to find the delta between the ESP reported values and real values. Once you've found your deltas, record them to use in the following steps.
 
-<img src="5D3_6725-Blog-Watermark.jpg" loading="lazy" />
+![Generic room temperature & humidity sensor](5D3_6725-Blog-Watermark.jpg)
 
 1. Open the following file in HASS: `/config/esphome/espName.yaml`
 2. Replace lines 41-46 with the following, inputting your own offsets.

@@ -18,22 +18,18 @@ I recently ran into an issue where I couldn't change the password of an account 
 3. Pick *"Create a GPO in this domain, and Link it here..."*.
 4. Pick a name for your GPO (e.g. *"Disable Password Complexity Rules"*)
 and click OK.
-<figure>
-  <img src="eb7b03634376a8181c3c4bb79984ae70.png"
-    loading="lazy" alt="AD-DC-Password-Complexity-GPO-1" />
-  <figcaption><em>Note from future self: Why did you make these images like this.</em></figcaption>
-</figure>
+
+![AD-DC-Password-Complexity-GPO-1](eb7b03634376a8181c3c4bb79984ae70.png "_Note from future self: Why did you make these images like this._")
 
 5. Expand the Domain Controllers container, right click on your new policy, and pick *"Edit..."*.
 6. Navigate through Computer Configuration > Policies > Windows Settings > Security Settings > Account Policies.
 7. Open the policy named *"Password must meet complexity requirements"* and set it to Disabled.
-<img src="1d0a06a73d46cbfa433f28fed563e7ba.png"
-  loading="lazy" alt="AD-DC-Password-Complexity-GPO-2" />
+
+![AD-DC-Password-Complexity-GPO-2](1d0a06a73d46cbfa433f28fed563e7ba.png)
 
 The policy is now set, and all you need to do is run `gpupdate`, so open `cmd` and do that. It can take a few seconds.
 
-<img src="84fe7304b6d584324e679b96f239d4c3.png"
-  loading="lazy" alt="AD-DC-Password-Complexity-GPO-3" />
+![AD-DC-Password-Complexity-GPO-3](84fe7304b6d584324e679b96f239d4c3.png)
 
 **Once gpupdate has completed, you're all set.**
 

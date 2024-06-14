@@ -99,13 +99,11 @@ However, please also feel free to perform a manual download of all the files in 
 
 First install:
 
-<img src="RaFEbuju26.png"
-    title="First install" loading="lazy" />
+![First install](RaFEbuju26.png)
 
 Update:
 
-<img src="zovUBIVo22.png"
-    title="Update" loading="lazy" />
+![Update](zovUBIVo22.png)
 
 ### Commands
 

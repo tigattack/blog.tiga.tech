@@ -105,8 +105,7 @@ Lidarr will now be available at `http://<IP>:8686`
     4. Ensure the update branch is set to "develop"
     5. Save changes.
 
-<img src="00ac7f25fe481369.png" loading="lazy"
-    alt="Lidarr-update-branch" />
+![Lidarr-update-branch](00ac7f25fe481369.png)
 
 This means that you'll get the closest to stable that's available, other builds have been known to break the DB. This is usually default but it's important to check.
 

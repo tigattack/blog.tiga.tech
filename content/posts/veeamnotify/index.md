@@ -43,9 +43,7 @@ See the spoilered illustration below if this isn't clear to you.
 
 <details>
 <summary>Illustrated screenshot showing an example of supported types</summary>
-<img src="images/agent-types.png" width="75%"></img>
-
-**Note:** Linux Agent Backup jobs are also supported, this image is only an example.
+![Agent job types](images/agent-types.png "**Note:** Linux Agent Backup jobs are also supported, this image is only an example.")
 </details>
 
 You can read about the difference between these two Agent job types [here](https://helpcenter.veeam.com/docs/backup/agents/agent_job_protection_mode.html?ver=110#selecting-job-mode).
@@ -154,9 +152,7 @@ Copy that output, then repeat the following steps for each job that you want to 
     * Check "Run the following script after the job".
     * Paste the launch command we generated above.
     * Ensure "Run scripts every X backup session" is set to 1.
-  {{< alert "circle-info" >}}
-  ![Veeam-config](images/vbr-job-settings.png)
-  {{< /alert >}}
+      ![Veeam-config](images/vbr-job-settings.png)
 
 5. Click "OK", then click "Finish".
 
@@ -167,9 +163,10 @@ All done! Start a job to test your install.
 {{< alert "circle-info" >}}
 Here's some example notifications:
 
-<img width="400" alt="Discord notifications example" src="images/discord.png">
-<img width="400" alt="Discord notifications example" src="images/teams.png">
-{{< /alert >}}
+{{< gallery >}}
+<img alt="Discord notifications example" src="images/discord.png" class="grid-w50">
+<img alt="Discord notifications example" src="images/teams.png" class="grid-w50">
+{{< /gallery >}}
 
 If you have any problems with the script, please [open an issue](https://github.com/tigattack/VeeamNotify/issues/new?assignees=tigattack&labels=bug&template=bug_report.yml&title=[BUG]+) on the GitHub project.
 

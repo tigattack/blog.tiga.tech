@@ -101,8 +101,8 @@ bcdedit /displayorder {default} /addlast
 ```
 
 Here is the output from my friends computer when I fixed his corrupted BCD. Sorry for the potato quality!  
-<img src="7b136f2c24e105d14bd17aff877d37b5.png"
-loading="lazy" alt="Windows-10-Pro-New-BCD" />
+
+![Windows-10-Pro-New-BCD](7b136f2c24e105d14bd17aff877d37b5.png)
 
 ---
 
