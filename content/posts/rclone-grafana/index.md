@@ -73,11 +73,11 @@ As I mentioned above, there are two routes you can take when configuring this; I
 The first and simplest option is to simply add the flags above to your mount (or other) command.
 
 Example command:
-<pre class="command-line language-bash no-line-numbers" data-prompt="$">
-<code>rclone mount --rc --rc-addr=0.0.0.0:5572 --rc-enable-metrics \
+```shell
+rclone mount --rc --rc-addr=0.0.0.0:5572 --rc-enable-metrics \
     --rc-user='username' --rc-password='password' \
-    &lt;your-remote&gt;: /your/mount/point</code>
-</pre>
+    <your-remote>: /your/mount/point
+```
 
 See, I said this one was easy!
 
@@ -105,9 +105,9 @@ Some examples:
 
 You can see all available options without needing to run `rcd` first like so:
 
-<pre class="command-line language-bash no-line-numbers" data-prompt="$">
-<code>rclone rc options/get --rc-user='username' --rc-pass='password'</code>
-</pre>
+```shell
+rclone rc options/get --rc-user='username' --rc-pass='password'
+```
 
 In the standalone service definition below, we want to focus on 2 things:
 
@@ -116,8 +116,8 @@ In the standalone service definition below, we want to focus on 2 things:
 2. `ExecStop` - This command runs when you stop the service and will unmount all remotes.
 
 {{< spoiler title="rclone-rcd.service standalone" open=true >}}
-<pre class="language-toml line-numbers">
-<code>[Unit]
+```ini
+[Unit]
 Description=Rclone rcd service
 After=network-online.target
 
@@ -139,8 +139,8 @@ StartLimitBurst=3
 TimeoutStartSec=150
 
 [Install]
-WantedBy=multi-user.target</code>
-</pre>
+WantedBy=multi-user.target
+```
 {{< /spoiler >}}
 
 In this second service definition, I've added two `ExecStartPost` commands. `ExecStartPost` commands run after the `ExecStart` command has succeeded.  This method is a good way of launching `rcd` and almost instantly mounting your remote.
@@ -148,8 +148,8 @@ In this second service definition, I've added two `ExecStartPost` commands. `Exe
 The first `ExecStartPost` sets various global Rclone options that cannot be defined with the `rc mount/mount` command, then the second `ExecStartPost` mounts the specified remote.
 
 {{< spoiler title="rclone-rcd.service with mount" open=true >}}
-<pre class="language-toml line-numbers">
-<code>[Unit]
+```ini
+[Unit]
 Description=Rclone rcd service with mount
 After=network-online.target
 
@@ -173,7 +173,7 @@ ExecStartPost=/usr/bin/rclone rc options/set \
 # Mount remote
 ExecStartPost=/usr/bin/rclone rc mount/mount \
 	--rc-user 'username' --rc=pass 'password' \
-	fs=&lt;your-remote&gt;: mountPoint=/your/mount/point
+	fs=<your-remote>: mountPoint=/your/mount/point
 
 ExecStop=/usr/bin/rclone rc --user 'username' --pass 'password' mount/unmountall
 Restart=on-failure
@@ -183,8 +183,8 @@ StartLimitBurst=3
 TimeoutStartSec=150
 
 [Install]
-WantedBy=multi-user.target</code>
-</pre>
+WantedBy=multi-user.target
+```
 {{< /spoiler >}}
 
 # Scraping the metrics
@@ -201,28 +201,26 @@ You will need to either configure a new database in InfluxDB or use an existing 
 You will also need credentials for InfluxDB.
 
 {{< spoiler title="telegraf.conf" open=true >}}
-<pre class="language-toml line-numbers">
-<code>
+```toml
 # InfluxDB to write metrics to
 [[outputs.influxdb]]
-  urls = ["http://&lt;influx-host&gt;:8086"]
-  database = "&lt;database&gt;"
-  username = "&lt;username&gt;"
-  password = "&lt;password&gt;"
+  urls = ["http://<influx-host>:8086"]
+  database = "<database>"
+  username = "<username>"
+  password = "<password>"
 
 # Pull metrics from Rclone
 [[inputs.prometheus]]
   # Single Rclone rc
-  urls = ['http://&lt;rclone-host&gt;:5572/metrics']
+  urls = ['http://<rclone-host>:5572/metrics']
 
   # Multiple Rclone rc
-  # urls = ['http://&lt;rclone-host&gt;:5572/metrics','http://&lt;rclone-host&gt;:5573/metrics']
+  # urls = ['http://<rclone-host>:5572/metrics','http://<rclone-host>:5573/metrics']
 
   # Rclone authentication
-  username = "&lt;username&gt;"
-  password = "&lt;password&gt;"
-</code>
-</pre>
+  username = "<username>"
+  password = "<password>"
+```
 {{< /spoiler >}}
 
 

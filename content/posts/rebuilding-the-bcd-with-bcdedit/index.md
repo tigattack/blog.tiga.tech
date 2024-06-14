@@ -32,10 +32,10 @@ Once you've booted from that, open a command prompt. You can find out how to do 
 Before we do anything else you need to find out which volume your OS is installed on.  
 To do this run these commands:
 
-<pre class="language-shell">
-<code>> diskpart
-> list volume
-</code></pre>
+```shell
+diskpart
+list volume
+```
 
 Find the volume that matches the size and label of the volume that Windows is installed on and remember the letter, you'll need it later.
 This can be found in the "Ltr" column of the output of the command.  
@@ -43,36 +43,36 @@ Now run `exit` to leave the DISKPART utility.
 
 So after you've got the OS volume letter you need to create a new, empty BCD file using these two commands:
 
-<pre class="language-shell">
-<code>> bcdedit /createstore bcd
-> bcdedit /import bcd
-</code></pre>
+```shell
+bcdedit /createstore bcd
+bcdedit /import bcd
+```
 
 Then delete the old one:
 
-<pre class="language-shell">
-<code>> del bcd
-</code></pre>
+```shell
+del bcd
+```
 
 Now what you need to do is create a part of the BCD file known as the Boot Manager
 
-<pre class="language-shell">
-<code>> bcdedit /create {bootmgr}
-</code></pre>
+```shell
+bcdedit /create {bootmgr}
+```
 
 There isn't much else you need to do with the Boot Manager but it does need to know what volume to boot the OS from and how long to wait for user input on the OS choice screen. Replace 30 with the amount of seconds you want it to wait. If you're not sure what to do, just use 30 as that is the default.
 
-<pre class="language-shell">
-<code>> bcdedit /set {bootmgr} device boot
-> bcdedit /timeout 30
-</code></pre>
+```shell
+bcdedit /set {bootmgr} device boot
+bcdedit /timeout 30
+```
 
 After you've created and configured the boot manager, as above, you need to create the OS entry object in the BCD file. This will tell the boot manager to boot Windows from files in the \Windows folder on one of the systems volumes.  
 So run this command:
 
-<pre class="language-shell">
-<code>> bcdedit /create /d "Your OS name here (e.g. Windows 10 Pro)" /application osloader
-</code></pre>
+```shell
+bcdedit /create /d "Your OS name here (e.g. Windows 10 Pro)" /application osloader
+```
 
 The command you just ran will spit out a response that looks something like this:  
 `The entry {aecb8aac-61ac-11e5-8614-99c411b05d8b} was successfully created.`
@@ -80,25 +80,25 @@ The command you just ran will spit out a response that looks something like this
 The GUID (the bit that looks like
 `{aecb8aac-61ac-11e5-8614-99c411b05d8b}`) will need to be used in to the next command.
 
-<pre class="language-shell">
-<code>> bcdedit /default {GUID-HERE}
-</code></pre>
+```shell
+bcdedit /default {GUID-HERE}
+```
 
 So now the object needs some values in it so it knows what to do. To get a rough idea for these next commands, try and run the command "`bcdedit`" on a healthy computer and use the output from that as a model. In my case the OS volume was C, so I entered these:
 
-<pre class="language-shell">
-<code>> bcdedit /set {default} device partition=c:
-> bcdedit /set {default} path \windows\system32\boot\winload.exe
-> bcdedit /set {default} osdevice partition=c:
-> bcdedit /set {default} systemroot \Windows
-> bcdedit /set {default} detecthal yes
-</code></pre>
+```shell
+bcdedit /set {default} device partition=c:
+bcdedit /set {default} path \windows\system32\boot\winload.exe
+bcdedit /set {default} osdevice partition=c:
+bcdedit /set {default} systemroot \Windows
+bcdedit /set {default} detecthal yes
+```
 
 Lastly you must run this command so that your computer can see your OS when booting:
 
-<pre class="language-shell">
-<code>> bcdedit /displayorder {default} /addlast
-</code></pre>
+```shell
+bcdedit /displayorder {default} /addlast
+```
 
 Here is the output from my friends computer when I fixed his corrupted BCD. Sorry for the potato quality!  
 <img src="7b136f2c24e105d14bd17aff877d37b5.png"

@@ -50,32 +50,32 @@ I will keep these instructions updated and in-line with current release as much 
 The directory should be `C:\VeeamScripts`.  
 To make the directory run the following command in PowerShell:
 
-<pre class="language-powershell">
-<code>New-Item C:\VeeamScripts -Type directory
-</code></pre>
+```powershell
+New-Item C:\VeeamScripts -Type directory
+```
 
 ## 2. Download the project
 
 There may be later releases so [take a look](https://github.com/tigattack/VeeamDiscordNotifications/releases)
 and replace the version number in the commands below with the latest if applicable.
 
-<pre class="language-powershell">
-<code>Invoke-WebRequest -Uri 'https://github.com/tigattack/VeeamDiscordNotifications/releases/download/v1.5/VeeamDiscordNotifications-v1.5.zip' -OutFile 'C:\VeeamScripts\VeeamDiscordNotifications-v1.5.zip'
-</code></pre>
+```powershell
+Invoke-WebRequest -Uri 'https://github.com/tigattack/VeeamDiscordNotifications/releases/download/v1.5/VeeamDiscordNotifications-v1.5.zip' -OutFile 'C:\VeeamScripts\VeeamDiscordNotifications-v1.5.zip'
+```
 
 You may recieve an SSL error as in some cases winhttp uses TLS1 by default (depends on a few things), and GitHub appears to no longer accept TLS1. If you receive this error, run the following command and then re-issue the above command.
 
-<pre class="language-powershell">
-<code>[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-</code></pre>
+```powershell
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+```
 
 ## 3. Extract and clean up
 
-<pre class="language-powershell">
-<code>Expand-Archive C:\VeeamScripts\VeeamDiscordNotifications-v1.5.zip -DestinationPath C:\VeeamScripts
+```powershell
+Expand-Archive C:\VeeamScripts\VeeamDiscordNotifications-v1.5.zip -DestinationPath C:\VeeamScripts
 Rename-Item C:\VeeamScripts\VeeamDiscordNotifications-v1.5 C:\VeeamScripts\VeeamDiscordNotifications
 Remove-Item C:\VeeamScripts\VeeamDiscordNotifications-v1.5.zip
-</code></pre>
+```
 
 You've now extracted the release and cleaned up the download.
 
@@ -97,31 +97,31 @@ If you'd like to use the avatar that I used, [here it is.](https://raw.githubuse
 
 Open the configuration file:
 
-<pre class="language-powershell">
-<code>notepad.exe C:\VeeamScripts\VeeamDiscordNotifications\config\conf.json
-</code></pre>
+```powershell
+notepad.exe C:\VeeamScripts\VeeamDiscordNotifications\config\conf.json
+```
 
 Older versions of Notepad don't support LF line endings, so this file may look pretty fucked up, but it doesn't really matter in this case. All you have to do here is replace the webhook URL with your own from step 3. Just make sure you replace *only* the Discord URL and nothing else.
 
 You may also need to set your PowerShell execution policy to Unrestricted.
 
-<pre class="language-powershell">
-<code>Set-ExecutionPolicy Unrestricted
-</code></pre>
+```powershell
+Set-ExecutionPolicy Unrestricted
+```
 
 If you don't want to do that, replace the script path in section 5 below with the following
 
-<pre class="language-powershell">
-<code>Powershell.exe -ExecutionPolicy Bypass -File C:\VeeamScripts\VeeamDiscordNotifications\DiscordNotificationBootstrap.ps1
-</code></pre>
+```powershell
+Powershell.exe -ExecutionPolicy Bypass -File C:\VeeamScripts\VeeamDiscordNotifications\DiscordNotificationBootstrap.ps1
+```
 
 Unblock the script files. The reason you may need to do this is Windows often blocks execution of downloaded scripts.
 
-<pre class="language-powershell">
-<code>Unblock-File C:\VeeamScripts\VeeamDiscordNotifications\DiscordNotificationBootstrap.ps1
+```powershell
+Unblock-File C:\VeeamScripts\VeeamDiscordNotifications\DiscordNotificationBootstrap.ps1
 Unblock-File C:\VeeamScripts\VeeamDiscordNotifications\DiscordVeeamAlertSender.ps1
 Unblock-File C:\VeeamScripts\VeeamDiscordNotifications\resources\logger.psm1
-</code></pre>
+```
 
 ## 6. Configure in Veeam
 
@@ -132,9 +132,9 @@ Repeat this for each job that you want to be reported into Discord.
 * Go to the "Scripts" tab and configure as shown below.
 <img src="946fff5199115636.png" loading="lazy" alt="Veeam-config" />
 
-<pre class="language-powershell">
-<code>Powershell.exe -File C:\VeeamScripts\VeeamDiscordNotifications\DiscordNotificationBootstrap.ps1
-</code></pre>
+```powershell
+Powershell.exe -File C:\VeeamScripts\VeeamDiscordNotifications\DiscordNotificationBootstrap.ps1
+```
 
 Success! *Hopefully.*  
 Run a job and find out. This is what mine looks like.

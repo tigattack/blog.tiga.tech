@@ -25,54 +25,54 @@ Credit for much of this process goes to my friend [Dan](https://github.com/danth
 
 1. Add the mono repo and install mono. This is necessary since the version provided with Ubuntu is out of date and will not work with Lidarr.
 
-<pre class="language-shell">
-<code>sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+```shell
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
 echo "deb http://download.mono-project.com/repo/ubuntu xenial main" | sudo tee /etc/apt/sources.list.d/mono-official.list
 sudo apt update
 sudo apt install mono-devel
-</code></pre>
+```
 
 2. Download the latest Linux build from [Lidarr's GitHub](https://github.com/lidarr/Lidarr/releases).
 
-<pre class="language-shell">
-<code>wget https://github.com/...
-</code></pre>
+```shell
+wget https://github.com/...
+```
 
 Fill in the URL with the link to the latest build.
 
 3. Choose a directory to extract Lidarr to, in my case this is `/opt/`, and extract it like so:
 
-<pre class="language-shell">
-<code>sudo tar -xzvf <FILENAME> --directory /opt/
-</code></pre>
+```shell
+sudo tar -xzvf <FILENAME> --directory /opt/
+```
 
 Replace `<FILENAME>` with the Lidarr tarball filename.  
 In my case this was `Lidarr.develop.0.3.1.471.linux.tar.gz`.
 
 4. Create a user called "lidarr":
 
-<pre class="language-shell">
-<code>sudo tar -xzvf <FILENAME> --directory /opt/
-</code></pre>
+```shell
+sudo tar -xzvf <FILENAME> --directory /opt/
+```
 
 The `-m` argument tells it to not create a home directory for the user.
 
 5. Give the Lidarr user ownership of the Lidarr directory:
 
-<pre class="language-shell">
-<code>sudo chown -R lidarr:lidarr /opt/Lidarr
-</code></pre>
+```shell
+sudo chown -R lidarr:lidarr /opt/Lidarr
+```
 
 6. Create a systemd script like so:
 
-<pre class="language-shell">
-<code>sudo nano /etc/systemd/system/lidarr.service
-</code></pre>
+```shell
+sudo nano /etc/systemd/system/lidarr.service
+```
 
 And paste in the following
 
-<pre class="language-systemd">
-<code>[Unit]
+```ini
+[Unit]
 Description=Lidarr Daemon
 After=syslog.target network.target
 
@@ -87,14 +87,14 @@ Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
-</code></pre>
+```
 
 7. Enable auto-start for the service, and then start it
 
-<pre class="language-shell">
-<code>sudo systemctl enable lidarr.service
+```shell
+sudo systemctl enable lidarr.service
 sudo systemctl start lidarr
-</code></pre>
+```
 
 Lidarr will now be available at `http://<IP>:8686`
 
