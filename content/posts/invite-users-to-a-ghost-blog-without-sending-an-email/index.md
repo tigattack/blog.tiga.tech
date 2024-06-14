@@ -28,8 +28,12 @@ In this post, I will show you how to work around this and add new users without 
 2. Go to the "Staff" section.
 3. Click "Invite People".
 4. Insert a dummy email and the role you'd like the user to have, then click "Send invitation now".
-    ![Invite](Invite.png)
-    Note: You'll probably see an error after you've submitted the invitation. You can safely ignore this.
+
+{{< alert >}}
+You'll probably see an error after you've submitted the invitation. You can safely ignore this
+{{< /alert >}}
+
+![Invite](Invite.png)
 
 # Get the Invitation
 

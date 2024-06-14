@@ -15,7 +15,7 @@ Part 2 of a [Discord notifications series](#see-also-in-discord-notifications).
 
 In a similar fashion to part 1, this setup has been running for a while and I'm very pleased with it's flawless functionality.
 
-{{< alert >}}
+{{< alert cardColor="#e63946" iconColor="#1d3557" textColor="#f1faee" >}}
 This project is no longer maintained; it has been superseded by my new project, [VeeamNotify](https://github.com/titgattack/VeeamNotify).  
 You can read more about it [here](../veeamnotify).
 {{< /alert >}}

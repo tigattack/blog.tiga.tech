@@ -14,7 +14,7 @@ series = []
 I recently ran into an issue where I couldn't change the password of an account in AD from one of the Domain Controllers. I realised it's because it has a different Group Policy than other computers.
 
 1. Open Group Policy Management (`gpmc.msc`).
-2. Expand your forest, expand the Domains container, expand your domain, and then right click on the Domain Controllers container.
+2. Expand your forest, expand the Domains container, expand your domain, and then right-click on the Domain Controllers container.
 3. Pick *"Create a GPO in this domain, and Link it here..."*.
 4. Pick a name for your GPO (e.g. *"Disable Password Complexity Rules"*)
 and click OK.

@@ -11,11 +11,10 @@ categories = ["technology"]
 series = []
 +++
 
-{{< alert >}}
+{{< alert cardColor="#e63946" iconColor="#1d3557" textColor="#f1faee" >}}
 **Update:** As of 4th June 2022, Lidarr has a stable release available. It's also [highly documented](https://wiki.servarr.com/lidarr) now, rendering this post pretty much entirely redundant.  
 I suggest you follow [their instructions](https://wiki.servarr.com/lidarr/installation) for installing on Ubuntu or, even better, running in Docker.
 {{< /alert >}}
-
 
 [Lidarr](https://github.com/lidarr/Lidarr) is still in alpha, but you can install it on Ubuntu with some ease.
 

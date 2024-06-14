@@ -23,7 +23,6 @@ section.
 
 ---
 
-
 # Prerequisites
 
 * Home Assistant (HASS) with the [ESPHome plugin installed](https://esphome.io/guides/getting_started_hassio.html).

@@ -127,7 +127,7 @@ ExecStart=/usr/bin/rclone rcd \
 	--rc-addr '0.0.0.0:5572' \
 	--rc-enable-metrics \
 	--rc-user 'username' \
-    --rc-pass 'password' \
+	--rc-pass 'password' \
 	--config '/path/to/your/rclone.conf' \
 	--log-level 'INFO' \
 	--log-file '/path/to/your/rcd.log'
@@ -159,7 +159,7 @@ ExecStart=/usr/bin/rclone rcd \
 	--rc-addr '0.0.0.0:5572' \
 	--rc-enable-metrics \
 	--rc-user 'username' \
-    --rc-pass 'password' \
+	--rc-pass 'password' \
 	--config '/path/to/your/rclone.conf' \
 	--log-level 'INFO' \
 	--log-file '/path/to/your/rcd.log' \
@@ -167,12 +167,12 @@ ExecStart=/usr/bin/rclone rcd \
 
 # Set global opts
 ExecStartPost=/usr/bin/rclone rc options/set \
-	--rc-user 'username' --rc=pass 'password' \
+	--rc-user 'username' --rc-pass 'password' \
 	--json '{"main": {"UserAgent": "someuseragenthere", "Timeout": 3600000000000}, "mount": {"AllowOther": true}, "vfs": {"Umask": 2, "UID": 1000 , "GID": 1000, "PollInterval": 15000000000, "DirCacheTime": 3600000000000000, "CacheMaxAge": 129600000000000, "CacheMaxSize": 322122547200, "CacheMode": 3}, "log": {"File": "/var/log/rclone/rclone-mount.log"}}'
 
 # Mount remote
 ExecStartPost=/usr/bin/rclone rc mount/mount \
-	--rc-user 'username' --rc=pass 'password' \
+	--rc-user 'username' --rc-pass 'password' \
 	fs=<your-remote>: mountPoint=/your/mount/point
 
 ExecStop=/usr/bin/rclone rc --user 'username' --pass 'password' mount/unmountall

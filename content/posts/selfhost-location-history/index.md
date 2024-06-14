@@ -130,7 +130,7 @@ listener 1883 0.0.0.0
 allow_anonymous true
 ```
 
-{{< alert >}}
+{{< alert cardColor="#e63946" iconColor="#1d3557" textColor="#f1faee" >}}
 This `mosquitto.conf` allows full permissions to anyone with network access to the broker. It should **not** be used in production.
 {{< /alert >}}
 

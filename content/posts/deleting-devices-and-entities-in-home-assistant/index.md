@@ -40,10 +40,10 @@ You can backup the entire machine it's running on, snapshot the VM (if it's on a
 
 # 2. Shutdown Home Assistant
 
-In general it's not a good idea to modify these core files while HASS is running. Since they aren't *supposed* to be user-modifiable, HASS doesn't expect them to be changed by anything other than itself and therefore may not handle it nicely if they are changed while it's running.
+In general, it's not a good idea to modify these core files while HASS is running. Since they aren't *supposed* to be user-modifiable, HASS doesn't expect them to be changed by anything other than itself and therefore may not handle it nicely if they are changed while it's running.
 
 {{< alert "circle-info" >}}
-If you're running HassOS this may not be possible. I'm not familiar with the ins and outs of HassOS, having never used it myself. You could try editing these files while HASS is running and then restart it, but I can't guarantee that will work.
+If you're running HAOS this may not be possible. I'm not familiar with the ins and outs of HAOS, having never used it myself. You could try editing these files while HASS is running and then restart it, but I can't guarantee that will work.
 {{< /alert >}}
 <br>
 
