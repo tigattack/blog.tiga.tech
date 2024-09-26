@@ -2,14 +2,13 @@
 # Refer to the theme docs for more details about each of these parameters.
 # https://blowfish.page/docs/getting-started/
 
-theme = "blowfish" # UNCOMMENT THIS LINE
+theme = "blowfish"
 baseURL = 'https://blog.tiga.tech/'
 defaultContentLanguage = "en"
 
 # pluralizeListTitles = "true" # hugo function useful for non-english languages, find out more in  https://gohugo.io/getting-started/configuration/#pluralizelisttitles
 
 enableRobotsTXT = true
-paginate = 10
 summaryLength = 0
 
 buildDrafts = false
@@ -18,6 +17,13 @@ buildFuture = false
 enableEmoji = true
 
 # googleAnalytics = "G-XXXXXXXXX"
+
+[module]
+[[module.imports]]
+path = "github.com/nunocoracao/blowfish/v2"
+
+[pagination]
+pagerSize = 10
 
 [imaging]
   anchor = 'Center'

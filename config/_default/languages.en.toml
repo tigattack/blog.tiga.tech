@@ -10,7 +10,7 @@ rtl = false
 dateFormat = "2 January 2006"
 description = "Everything as Code."
 
-[author]
+[params.author]
 name = "tigattack"
 headline = "Systems Engineer. Breaker of things."
 bio = ""
