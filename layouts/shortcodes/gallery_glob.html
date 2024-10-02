@@ -6,6 +6,9 @@
 {{ $page := .Page.Resources }}
 {{ $class := .Get "class" }}
 {{ $caption := .Get "caption" }}
+
+{{ $watermark := default true (.Get "watermark") }}
+
 {{ $images := slice }}
 
 {{ $imagesArray := $page.Match (.Get "images") }}
@@ -19,6 +22,7 @@
           "class" $class
           "gallery" true
           "page" $.Page
+          "watermark" $watermark
           "nofig" true)
       }}
     {{ end }}
