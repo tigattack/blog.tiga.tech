@@ -11,6 +11,7 @@ keywords:
   - docker
 tags: [technology]
 authors: [tigattack]
+hideFeatureWatermark: true
 ---
 
 # The Problem
@@ -30,7 +31,12 @@ Enter Owntracks...
 * The backend server, known as the "Recorder", consumes the client's location from an MQTT broker or HTTP POST request.
 * The mobile app publishes its location via MQTT or HTTP periodically or based on any of a number of optional triggers (geo-fences, significant location changes, manual updates, etc.)
 
-![Owntracks architecture overview](images/owntracks-arch-overview.png "_Owntracks architecture overview via [OwnTracks Booklet](https://owntracks.org/booklet/guide/whathow)._")
+{{< img
+  src="images/owntracks-arch-overview.png"
+  alt="Owntracks architecture overview"
+  caption="_Owntracks architecture overview via [OwnTracks Booklet](https://owntracks.org/booklet/guide/whathow)._"
+  watermark=false
+>}}
 
 {{< alert "circle-info" >}}
 If you choose to use MQTT, you only need to expose your MQTT broker to the internet if you want real-time tracking. Otherwise, the Owntracks mobile app will cache location records until it can reach the broker.

@@ -26,22 +26,16 @@ I was to turn right at this junction, so I was in the far right lane. Unbeknowns
 
 The Suzuki driver decided she wanted to turn right into the small residential road. It was a last minute realisation//decision for her, and she jumped across 3 lanes in a matter of seconds. I caught a glimpse as she was heading for me, a split second before she slammed into the side of me.
 
-<figure>
-    <img src="illustration.jpg" loading="lazy" style="width:60.0%" />
-    <figcaption aria-hidden="true">Illustration - Suzuki is shown in red. I am shown in blue.</figcaption>
-</figure>
+{{< img src="illustration-watermarked.jpg" class="grid-w75" caption="Illustration - Suzuki is shown in red. I am shown in blue." alt="Crash illustration" >}}
 
 I was span around by 90° and ended up 2.5 lanes over to the left, between the far left lane and the one next to it.
 
 Enough talking, here's the after-math.
 
-{{< gallery >}}
-    <img src="crash/IMG_20180908_113022.jpg" class="grid-w33">
-    <img src="crash/IMG_20180908_113126.jpg" class="grid-w33">
-    <img src="crash/IMG_20180915_155439.jpg" class="grid-w33">
-{{< /gallery >}}
-
-Left to right: My car directly after the crash, the Suzuki that hit me, and a better shot of my car a few days after the crash.
+{{< gallery_glob
+    images="crash/*"
+    class="grid-w33"
+    caption="Left to right: My car directly after the crash, the Suzuki that hit me, and a better shot of my car a few days after the crash." >}}
 
 Note the difference in colour between the front bumper of the Suzuki and the rest of the body. This makes me think this isn't the driver's first accident.
 
@@ -51,17 +45,10 @@ I had some amazing times in and with this car. Below you can see where it starte
 
 I had a spot of bad luck, as you can see in the fourth image. I was parked outside a friend's flat in London and somebody broke into the car overnight. Unfortunately some things were stolen from the boot, but nothing highly valuable. Live and learn.
 
-<figure>
-    {{< gallery >}}
-        <img src="car/IMG_20170605_130455.jpg" class="grid-w33">
-        <img src="car/IMG_20180302_144932.jpg" class="grid-w33">
-        <img src="car/IMG_20180505_202347.jpg" class="grid-w33">
-        <img src="car/IMG_20180701_105516.jpg" class="grid-w33">
-        <img src="car/IMG_20180720_190033.jpg" class="grid-w33">
-        <img src="car/IMG_20180904_104043.jpg" class="grid-w33">
-    {{< /gallery >}}
-    <figcaption>The last image was only about a week before the accident. We were camping in Cornwall.</figcaption>
-</figure>
+{{< gallery_glob
+    images="car/*"
+    class="grid-w33"
+    caption="The last image was only about a week before the accident. We were camping in Cornwall." >}}
 
 Some details of the car, for those who are interested:
 

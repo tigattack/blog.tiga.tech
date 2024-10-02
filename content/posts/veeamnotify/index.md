@@ -162,8 +162,8 @@ All done! Start a job to test your installation.
 Here are some example notifications:
 
 {{< gallery >}}
-<img alt="Discord notifications example" src="images/discord.png" class="grid-w50">
-<img alt="Discord notifications example" src="images/teams.png" class="grid-w50">
+  {{< img alt="Discord notifications example" src="images/discord.png" class="grid-w50" >}}
+  {{< img alt="Discord notifications example" src="images/teams.png" class="grid-w50" >}}
 {{< /gallery >}}
 
 If you have any problems with the script, please [open an issue](https://github.com/tigattack/VeeamNotify/issues/new?assignees=tigattack&labels=bug&template=bug_report.yml&title=[BUG]+) on the GitHub project.

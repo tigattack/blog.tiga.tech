@@ -150,10 +150,10 @@ text_sensor:
 Connect 5 jumper wires between the Raspberry Pi's GPIO and the ESP's pins, as per the diagram below.  
 *Make sure that you connect the 3v3&lt;-&gt;VCC wire last of all.*
 
-{{< gallery >}}
-  <img src="wiring/5D3_6723-Blog-Watermark.jpg" class="grid-w33">
-  <img src="wiring/Wiring.png" class="grid-w33">
-{{< /gallery >}}
+{{< gallery_glob
+  images="wiring/*"
+  class="grid-w50"
+  watermark=false >}}
 
 ## Preparing the Pi
 

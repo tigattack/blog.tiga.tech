@@ -28,23 +28,17 @@ The end goal was to resolve the issues I identified before purchase and de-chav 
     The Philips unit had a shitty touch screen, no support for Bluetooth contacts, and a few other annoying issues.
 * Replaced the gold "JDM" gear knob and factory gaiter with my Audi TT 8N (Mk1) 225 Quattro gearknob and black/red-stiched gaiter.
 
-<figure>
-    {{< gallery >}}
-        <img src="gearstick/43485851_2087684624629362_844631299015573504_n-1.jpg" class="grid-w50">
-        <img src="gearstick/IMG_20190206_083133.jpg" class="grid-w50">
-    {{< /gallery >}}
-    <figcaption aria-hidden="true">Before and after swapping the head unit, gear knob, and gear gaiter.</figcaption>
-</figure>
+{{< gallery_glob
+    images="gearstick/*"
+    class="grid-w50"
+    caption="Before and after swapping the head unit, gear knob, and gear gaiter." >}}
 
 * Fitted a black radiator grille.
 
-<figure>
-    {{< gallery >}}
-        <img src="grille/43601485_2087683651296126_130388154770259968_n-1.jpg" class="grid-w40">
-        <img src="grille/IMG_20190213_144347.jpg" class="grid-w60">
-    {{< /gallery >}}
-    <figcaption aria-hidden="true">Before and after swapping the grille. Whoops, should've given it a clean for the second photo...</figcaption>
-</figure>
+{{< gallery_glob
+    images="grille/*"
+    class="grid-w50"
+    caption="Before and after swapping the grille. Whoops, should've given it a clean for the second photo..." >}}
 
 * Replaced the awful gold-spoked wheels with my 18" Audi RS4 B5 wheels.
 
