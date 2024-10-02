@@ -6,19 +6,20 @@
 
 {{ $disableImageOptimization := .Page.Site.Params.disableImageOptimization | default false }}
 
-{{ $src := .src -}}
-{{ $class := .class -}}
-{{ $alt := .alt -}}
+{{ $src := .src }}
+{{ $class := .class }}
+{{ $alt := .alt }}
+{{ $caption := .caption }}
 
 {{ $page := .page }}
 {{ $image := $page.Resources.GetMatch (printf "*%s*" $src) }}
 
-{{ $watermark := default true (.watermark) -}}
+{{ $watermark := default true (.watermark) }}
 {{ $nofig := .nofig }}
 
 {{ with $image }}
   {{ if not $nofig }}<figure>{{ end }}
-  {{ if or $disableImageOptimization (eq .MediaType.SubType "svg")}}
+  {{ if or $disableImageOptimization (eq .MediaType.SubType "svg") }}
     {{ if eq $watermark false }}
       <img class="{{ $class }}" src="{{ $src }}"/>
     {{ else }}
@@ -57,7 +58,12 @@
       {{ end }}
     {{ end }}
   {{ end }}
-  {{ if not $nofig }}</figure>{{ end }}
+
+  {{ if not $nofig }}
+    {{ with $caption }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
+    </figure>
+  {{ end }}
+
 {{ else }}
   {{ warnf "img: Could not find image at %+v in page %+v" $src $page.RelPermalink }}
   <img alt="{{ $alt }}" src="{{ $src }}" class="{{ .class }}"/>
