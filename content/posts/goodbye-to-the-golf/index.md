@@ -28,9 +28,9 @@ The Suzuki driver decided she wanted to turn right into the small residential ro
 
 {{< img src="illustration-watermarked.jpg" class="grid-w75" caption="Illustration - Suzuki is shown in red. I am shown in blue." alt="Crash illustration" >}}
 
-I was span around by 90° and ended up 2.5 lanes over to the left, between the far left lane and the one next to it.
+I was spun round 90° and ended up 2.5 lanes over to the left, halfway between the two leftmost lanes.
 
-Enough talking, here's the after-math.
+Enough talking, here's the aftermath.
 
 {{< gallery_glob
     images="crash/*"
@@ -72,8 +72,8 @@ Some details of the car, for those who are interested:
 I can't remember much else right now, but as you can see I spent a lot of time on this car.
 
 <figure>
-{{< carousel images="mods/*" >}}
-<figcaption>A collection of images showing some of modifications//retrofits that I did.<br>From first to last: Cruise control, Brembo discs and pads, Recaro leather heated seats, Bora Sport TDI instrument cluster with lit needles and MTE enabled, remap from Bevo Tuning at Alan Jeffery Plymouth, and finally a WIP image from the vac line simplification that I did.</figcaption>
+    {{< carousel images="mods/*" >}}
+    <figcaption>A collection of images showing some of modifications//retrofits that I did.<br>From first to last: Cruise control, Brembo discs and pads, Recaro leather heated seats, Bora Sport TDI instrument cluster with lit needles and MTE enabled, remap from Bevo Tuning at Alan Jeffery Plymouth, and finally a WIP image from the vac line simplification that I did.</figcaption>
 </figure>
 
 It was an amazing second car. I adored every single minute I spent working on and driving it, and it'll be hard to say goodbye, but all good things must come to an end.
