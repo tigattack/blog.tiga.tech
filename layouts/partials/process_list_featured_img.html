@@ -1,0 +1,64 @@
+{{ $image := .image }}
+{{ $class := .class }}
+{{ $page := .page }}
+
+{{ $logo := (resources.Get "watermark.png") }}
+{{ $watermarked := false }}
+
+<!-- Disable image optimisation per site params or if image is SVG -->
+{{ $disableImageOptimization := default false (
+    or
+      $page.Site.Params.disableImageOptimization 
+      (strings.HasSuffix $image ".svg"))
+}}
+
+<!-- Throw an error if either the image or logo is missing -->
+{{ if or (not $image) (not $logo) }}
+  {{ errorf "watermark_post: Image or logo missing. Context: %+v" . }}
+{{ end }}
+
+
+<!-- Resize image unless image optimisation disabled -->
+{{ if not $disableImageOptimization }}
+  {{ $image = $image.Resize "600x" }}
+{{ end }}
+
+<!-- Watermark image unless image name contains "watermark" or hideFeatureWatermark=true in page parameters  -->
+{{ if not (or (strings.Contains (strings.ToLower $image) "watermark") $page.Params.hideFeatureWatermark) }}
+  <!-- Set watermark size to 25% of the image height, capped at 150px -->
+  {{ $size := math.Round (mul $image.Height 0.25) }}
+  {{ $size = cond (ge $size 150.0) ($size) 150.0 }}
+
+  <!-- Resize the logo based on the computed size -->
+  {{ $logo = $logo.Resize (printf "%.0fx png" $size) }}
+
+  <!--
+    Calculate the cropped height based on a 5:3 ratio.
+    This is how article images are shown in Blowfish's 'simple' article links page layout.
+  -->
+  {{ $cropRatio := math.Div 5.0 3.0 }}
+  {{ $croppedHeight := math.Div $image.Width $cropRatio }}
+
+  <!-- Use the image height if it's smaller than the cropped height -->
+  {{ if lt $image.Height $croppedHeight }}
+    {{ $croppedHeight = $image.Height }} 
+  {{ end }}
+
+  <!-- Calculate the vertical offset needed to center the cropped portion of the image  -->
+  {{ $cropOffset := math.Div (math.Sub $image.Height $croppedHeight) 2.0 }}
+
+  <!--
+    Determine the vertical position of the logo.
+    Positions the logo slightly above the bottom of the cropped area, using a dynamic ratio to fix it ~5% above the bottom.
+  -->
+  {{ $y := math.Div (math.Add $cropOffset (math.Sub $croppedHeight $logo.Height)) 1.05 }}
+  <!-- Determine the horizontal position of the logo, positioning it in the middle of the image -->
+  {{ $x := math.Div (math.Sub $image.Width $logo.Width) 2.0 }}
+
+  <!-- Apply the watermark to the image at the calculated position -->
+  {{ $image = $image.Filter (images.Overlay $logo $x $y) }}
+  {{ $watermarked = true }}
+
+{{ end }}
+
+<div class="{{ $class }}" style="background-image:url({{ $image.RelPermalink }});" data-auto-watermarked="{{ $watermarked }}"></div>

@@ -1,0 +1,36 @@
+{{- $image := .image }}
+{{- $class := .class }}
+{{- $alt := .alt }}
+{{- $onlyImage := default false .onlyImage }}
+
+{{- $logo := (resources.Get "watermark.png") }}
+{{- $watermarked := false }}
+
+{{- if and $image $logo }}
+  <!-- Skip watermarking if image name contains "watermark" or class contains "no-wm" -->
+  {{- if not (or (strings.Contains (strings.ToLower $image) "watermark") (strings.Contains (strings.ToLower $class) "no-wm")) }}
+
+    <!-- Set watermark size to 25% of the image height, capped at 150px -->
+    {{- $size := math.Round (mul $image.Height 0.25) }}
+    {{- $size = cond (ge $size 150.0) ($size) 150.0 }}
+
+    <!-- Resize the logo based on the computed size -->
+    {{- $logo = $logo.Resize (printf "%.0fx png" $size) }}
+
+    <!-- Determine the horizontal position of the logo, positioning it in the middle of the image -->
+    {{- $x := div (sub $image.Width $logo.Width) 2 }}
+    <!--
+      Determine the vertical position of the logo.
+      Positions the logo slightly above the bottom of the cropped area, using a dynamic ratio to fix it ~5% above the bottom.
+    -->
+    {{- $y := div (sub $image.Height $logo.Height) 1.05 }}
+
+    {{- $image = $image.Filter (images.Overlay $logo $x $y) }}
+
+    {{- $watermarked = true }}
+  {{- end }}
+  <!-- Return the image resource/object or an HTML img tag depending on user preference -->
+  {{ if $onlyImage }}{{ return $image }}{{ else }}<img alt="{{ $alt }}" src="{{ $image.RelPermalink }}" class="{{ $class }}" data-auto-watermarked="{{ $watermarked }}"/>{{ end }}
+{{- else }}
+  {{ warnf "watermark: Image or logo missing. Context: %+v" . }}
+{{- end }}
