@@ -40,14 +40,15 @@ The end goal was to resolve the issues I identified before purchase and de-chav 
     class="grid-w50"
     caption="Before and after swapping the grille. Whoops, should've given it a clean for the second photo..." >}}
 
-* Replaced the awful gold-spoked wheels with my 18" Audi RS4 B5 wheels.
+* Replaced the awful gold-spoked wheels with my 18" Audi RS4 B5 wheels. A year or so later, I replaced those with a freshly refurbished set of 18" Team Dynamics Pro Race 1.2 in anthracite gray.
 
 <figure>
     {{< gallery >}}
         {{< img src="wheels/before-watermarked.jpg" class="grid-w50" >}}
         {{< img src="wheels/zafter1-watermarked.jpg" class="grid-w50" >}}
+        {{< img src="wheels/zafter2.jpg" class="grid-w100" >}}
     {{< /gallery >}}
-    <figcaption aria-hidden="true">Before and after swapping the wheels. I cleaned it this time.</figcaption>
+    <figcaption>Before swapping the wheels, and photos of both sets of wheels I ran over time. I also cleaned it this time 👀</figcaption>
 </figure>
 
 # Repairs
