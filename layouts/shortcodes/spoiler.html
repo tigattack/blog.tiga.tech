@@ -1,21 +1,19 @@
 <div class="max-w-lg mx-auto p-8">
+  {{ $title := "" }}
+  {{ $open := false }}
   {{ if .IsNamedParams }}
-    <details class="p-6" {{ with .Get "open" }}open="{{ . }}"{{ else }}{{ end }}>
-      <summary class="text-sm leading-6 font-semibold select-none cursor-pointer">
-        {{ with .Get "title" }}{{ . | markdownify }}{{ end }}
-      </summary>
-      <div class="text-sm leading-6">
-        {{ .Inner | markdownify }}
-      </div>
-    </details>
+    {{ $title = .Get "title" }}
+    {{ $open = .Get "open" }}
   {{ else }}
-  <details class="p-6" {{ with .Get 1 }}open="{{ . }}"{{ else }}{{ end }}>
+      {{ $title = .Get 0 }}
+      {{ $open = .Get 1 }}
+  {{ end }}
+  <details class="p-6" {{ if eq $open true }}open=""{{ end }}>
     <summary class="text-sm leading-6 font-semibold select-none cursor-pointer">
-      {{ with .Get 0 }}{{ . | markdownify }}{{ end }}
+      {{ $title | markdownify }}
     </summary>
     <div class="text-sm leading-6">
-      {{ .Inner | markdownify }}
+      {{ trim .Inner "\r\n" | .Page.RenderString }}
     </div>
   </details>
-  {{ end }}
 </div>
