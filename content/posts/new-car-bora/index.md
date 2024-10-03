@@ -89,13 +89,13 @@ As you'll see in the list below, it had been pretty distastefully modified, but 
 
 <figure>
     {{< gallery >}}
-        {{< img src="before/43485851_2087684624629362_844631299015573504_n-watermarked.jpg" class="grid-w33" >}}
-        {{< img src="before/43542726_2087683597962798_4181095661304807424_n-watermarked.jpg" class="grid-w33" >}}
-        {{< img src="before/43569456_2087683884629436_7963232605053124608_n-watermarked.jpg" class="grid-w33" >}}
-        {{< img src="before/43601485_2087683651296126_130388154770259968_n-watermarked.jpg" class="grid-w33" >}}
-        {{< img src="before/IMG_20181018_083236-watermarked.jpg" class="grid-w33" >}}
+        {{< img src="before/43542726_2087683597962798_4181095661304807424_n-watermarked.jpg" class="grid-w50" >}}
+        {{< img src="before/IMG_20181018_083236-watermarked.jpg" class="grid-w50" >}}
+        {{< img src="before/43601485_2087683651296126_130388154770259968_n-watermarked.jpg" class="grid-w55" >}}
+        {{< img src="before/43485851_2087684624629362_844631299015573504_n-watermarked.jpg" class="grid-w45" >}}
+        {{< img src="before/43569456_2087683884629436_7963232605053124608_n-watermarked.jpg" class="grid-w45" >}}
     {{< /gallery >}}
-    <figcaption>Images from before and just after purchase.</figcaption>
+    <figcaption>Before and just after purchase.</figcaption>
 </figure>
 
 ### Upon purchase (17/10/2018)
@@ -124,13 +124,18 @@ If you're interested then please take a look [here](https://blog.tiga.tech/upgra
 
 Anyway, here's some photos from after I fixed it up a bit and de-chavved it:
 
-{{< gallery >}}
-    {{< img src="after/DSC01182-watermarked.jpg" class="grid-w33" >}}
-    {{< img src="after/DSC01184-watermarked.jpg" class="grid-w33" >}}
-    {{< img src="after/IMG_20181202_102921-watermarked.jpg" class="grid-w33" >}}
-    {{< img src="after/IMG_20181205_092213-watermarked.jpg" class="grid-w33" >}}
-    {{< img src="after/IMG_20190215_131735-watermarked.jpg" class="grid-w33" >}}
-{{< /gallery >}}
+<figure>
+    {{< gallery >}}
+        {{< img src="after/IMG_20181202_102921-watermarked.jpg" class="grid-w33" >}}
+        {{< img src="after/IMG_20181205_092213-watermarked.jpg" class="grid-w33" >}}
+        {{< img src="after/IMG_20190215_131735-watermarked.jpg" class="grid-w33" >}}
+        {{< img src="after/DSC01182-watermarked.jpg" class="grid-w50" >}}
+        {{< img src="after/DSC01184-watermarked.jpg" class="grid-w50" >}}
+        {{< img src="after/IMG_20201205_145634.jpg" class="grid-w50" >}}
+        {{< img src="after/IMG_20201205_145808.jpg" class="grid-w50" >}}
+    {{< /gallery >}}
+    <figcaption>Photos from between a year or two of ownership.</figcaption>
+</figure>
 
 # Fin.
 
