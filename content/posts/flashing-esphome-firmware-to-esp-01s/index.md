@@ -147,8 +147,7 @@ text_sensor:
 
 ## Preparing the ESP
 
-Connect 5 jumper wires between the Raspberry Pi's GPIO and the ESP's pins, as per the diagram below.  
-*Make sure that you connect the 3v3&lt;-&gt;VCC wire last of all.*
+Connect 5 jumper wires between the Raspberry Pi's GPIO and the ESP's pins, as per the diagram below. Make sure that you connect the 3v3/VCC wire last of all.
 
 {{< gallery_glob
   images="wiring/*"
