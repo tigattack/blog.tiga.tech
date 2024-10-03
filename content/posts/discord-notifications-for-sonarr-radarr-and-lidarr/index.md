@@ -25,11 +25,11 @@ I'll show you how to do this in Sonarr, but Radarr is identical and Lidarr is ve
 
 Go to Discord and open the settings of the channel that you want Sonarr to report to. I created a channel called "downloads" just for these services.
 
-{{< figure src="a5606eefbd8f94ce.png" alt="Channel-edit" class="grid-w30" >}}
+{{< img src="a5606eefbd8f94ce.png" alt="Channel-edit" class="grid-w30" watermark=false >}}
 
 Click "Create Webhook", and you'll see something similar to the following:
 
-{{< figure src="379acdfd293ce1f0.png" alt="Config-webhook" class="grid-w55" >}}
+{{< img src="379acdfd293ce1f0.png" alt="Config-webhook" class="grid-w55" watermark=false >}}
 
 As you can see mine has already been configured, but all you need to do is set the name, upload an image if you'd like (icons are at the bottom of this post) and then copy the webhook URL.
 
@@ -45,11 +45,11 @@ Type the webhook name in the username field and leave the last two empty.
 
 Here's my configuration for reference:
 
-![Sonarr-config](df11f44f88de21b2.png)
+{{< img src="df11f44f88de21b2.png" alt="Sonarr config" watermark=false >}}
 
 Click "Test", then look back in Discord. You should see something like this:
 
-{{< figure src="404074dbdee3c666.png" alt="Sonarr-success" class="grid-w55" >}}
+{{< img src="404074dbdee3c666.png" alt="Sonarr-success" class="grid-w55" watermark=false >}}
 
 Success!
 

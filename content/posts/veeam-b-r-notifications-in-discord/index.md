@@ -83,11 +83,11 @@ You've now extracted the release and cleaned up the download.
 
 Open Discord and go to the settings of the channel that you want Veeam to report to. I created a channel called "backups" for this service.
 
-{{< figure src="0c41a84cb8e5d493.png" alt="Discord channel edit" class="grid-w30" >}}
+{{< img src="0c41a84cb8e5d493.png" alt="Discord channel edit" class="grid-w30" watermark=false >}}
 
 Click "Edit Channel", then navigate to the "Webhooks" section and click "Create Webhook". You'll see something similar to the following:
 
-{{< figure src="5c4a70e84dec96d1.png" alt="Configure webhook in Discord" class="grid-w50" >}}
+{{< img src="5c4a70e84dec96d1.png" alt="Configure webhook in Discord" class="grid-w50" watermark=false >}}
 
 As you can see mine has already been configured, but all you need to do is set the name, upload an image for the avatar if you'd like, then copy the webhook URL.
 
@@ -130,7 +130,7 @@ Repeat this for each job that you want to be reported into Discord.
 * Right click the job and click "Edit".
 * Go to the "Storage" section and click on the "Advanced" button.
 * Go to the "Scripts" tab and configure as shown below:
-  ![Veeam job config](946fff5199115636.png)
+  {{< img src="946fff5199115636.png" alt="Veeam job config" watermark=false >}}
 
 ```powershell
 Powershell.exe -File C:\VeeamScripts\VeeamDiscordNotifications\DiscordNotificationBootstrap.ps1
@@ -139,7 +139,7 @@ Powershell.exe -File C:\VeeamScripts\VeeamDiscordNotifications\DiscordNotificati
 Success! *Hopefully.*  
 Run a job and find out. This is what mine looks like.
 
-{{< figure src="be80deaa6d9a0c13.png" alt="Discord report" class="grid-w65" >}}
+{{< img src="be80deaa6d9a0c13.png" alt="Discord report" class="grid-w65" >}}
 
 ---
 
