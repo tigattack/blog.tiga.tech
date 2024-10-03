@@ -60,7 +60,7 @@ This can be disabled per-page with by setting the `hideFeatureWatermark` page pa
 
 ## Using images in posts
 
-> [!NOTE] Watermarking
+> [!NOTE]
 > When an image is passed through the [`watermark` partial](layouts/partials/watermark.html), it will be watermarked **unless** the image path/URL contains `watermark`.
 
 | Method                                                                                     | Description                                    |
