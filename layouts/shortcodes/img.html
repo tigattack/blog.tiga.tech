@@ -3,7 +3,6 @@
 {{ $isFromGallery := false }}
 
 {{ with .Parent }}
-  {{ warnf .Name }}
   {{ if eq .Name "gallery" }}
     {{ $isFromGallery = true }}
   {{ end }}
