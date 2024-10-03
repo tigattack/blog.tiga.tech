@@ -44,8 +44,8 @@ The end goal was to resolve the issues I identified before purchase and de-chav 
 
 <figure>
     {{< gallery >}}
-        <img src="wheels/Before-wheels.jpg" class="grid-w50">
-        <img src="wheels/After-wheels.jpg" class="grid-w50">
+        {{< img src="wheels/before-watermarked.jpg" class="grid-w50" >}}
+        {{< img src="wheels/zafter1-watermarked.jpg" class="grid-w50" >}}
     {{< /gallery >}}
     <figcaption aria-hidden="true">Before and after swapping the wheels. I cleaned it this time.</figcaption>
 </figure>
