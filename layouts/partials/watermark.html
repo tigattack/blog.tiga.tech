@@ -7,8 +7,8 @@
 {{- $watermarked := false }}
 
 {{- if and $image $logo }}
-  <!-- Skip watermarking if image name contains "watermark" or class contains "no-wm" -->
-  {{- if not (or (strings.Contains (strings.ToLower $image) "watermark") (strings.Contains (strings.ToLower $class) "no-wm")) }}
+  <!-- Skip watermarking if image name contains "watermark" -->
+  {{- if not (strings.Contains (strings.ToLower $image) "watermark") }}
 
     <!-- Set watermark size to 25% of the image height, capped at 150px -->
     {{- $size := math.Round (mul $image.Height 0.25) }}
