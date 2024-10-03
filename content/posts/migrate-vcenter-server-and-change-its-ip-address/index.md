@@ -3,7 +3,6 @@ draft = true
 date = 2019-10-28T15:25:20+00:00
 title = "Migrate a vCenter Server and Change its IP Address"
 description = ""
-featuredImage = "header.jpg"
 slug = "migrate-vcenter-server-and-change-its-ip-address"
 authors = ["tigattack"]
 tags = ["vmware", "vsphere", "vcenter", "esxi"]
