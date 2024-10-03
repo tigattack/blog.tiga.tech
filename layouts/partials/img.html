@@ -33,10 +33,10 @@
           class="{{ $class }}"
           loading="lazy"
           srcset="
-          {{ (.Resize "330x").RelPermalink }} 330w,
-          {{ (.Resize "660x").RelPermalink }} 660w,
-          {{ (.Resize "1024x").RelPermalink }} 1024w,
-          {{ (.Resize "1320x").RelPermalink }} 2x"
+          {{- (.Resize "330x").RelPermalink }} 330w,
+          {{- (.Resize "660x").RelPermalink }} 660w,
+          {{- (.Resize "1024x").RelPermalink }} 1024w,
+          {{- (.Resize "1320x").RelPermalink }} 2x"
           src="{{ (.Resize "660x").RelPermalink }}"
           {{ with $alt }}alt="{{ . }}"{{ end }}
         />
@@ -47,10 +47,10 @@
             class="{{ $class }}"
             loading="lazy"
             srcset="
-            {{ (.Resize "330x").RelPermalink }} 330w,
-            {{ (.Resize "660x").RelPermalink }} 660w,
-            {{ (.Resize "1024x").RelPermalink }} 1024w,
-            {{ (.Resize "1320x").RelPermalink }} 2x"
+            {{- (.Resize "330x").RelPermalink }} 330w,
+            {{- (.Resize "660x").RelPermalink }} 660w,
+            {{- (.Resize "1024x").RelPermalink }} 1024w,
+            {{- (.Resize "1320x").RelPermalink }} 2x"
             src="{{ (.Resize "660x").RelPermalink }}"
             {{ with $alt }}alt="{{ . }}"{{ end }}
           />
