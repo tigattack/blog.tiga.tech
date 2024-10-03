@@ -34,7 +34,7 @@ Enter Owntracks...
 {{< img
   src="images/owntracks-arch-overview.png"
   alt="Owntracks architecture overview"
-  caption="_Owntracks architecture overview via [OwnTracks Booklet](https://owntracks.org/booklet/guide/whathow)._"
+  caption="_Owntracks architecture overview_, [OwnTracks Booklet](https://owntracks.org/booklet/guide/whathow)."
   watermark=false
 >}}
 
