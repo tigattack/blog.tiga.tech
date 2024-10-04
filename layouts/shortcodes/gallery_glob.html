@@ -1,29 +1,33 @@
 <!-- Mostly borrowed from hugo blowfish theme's gallery & carousel shortcodes -->
 
+<!-- Get site's image optimisation config -->
 {{ $disableImageOptimization := .Page.Site.Params.disableImageOptimization | default false }}
+<!-- Generate random ID for the div element -->
+{{ $id := delimit (slice "gallery_glob" (partial "functions/uid.html" .)) "-" }}
 
-{{ $id := delimit (slice "gallery" (partial "functions/uid.html" .)) "-" }}
-{{ $page := .Page.Resources }}
+<!-- Get the class param to be applied to each image -->
 {{ $class := .Get "class" }}
+
+<!-- Get optional caption for the gallery -->
 {{ $caption := .Get "caption" }}
 
+<!-- Get watermark param, defaulting to true -->
 {{ $watermark := default true (.Get "watermark") }}
 
-{{ $images := slice }}
+<!-- Get image resources to be included in the gallery -->
+{{ $images := .Page.Resources.Match (.Get "images") }}
 
-{{ $imagesArray := $page.Match (.Get "images") }}
 <figure>
   <div id="{{ $id }}" class="gallery">
-    {{ range $imagesArray }}
+    {{ range $images }}
       {{ partial 
         "img"
         (dict
           "src" .Name
           "class" $class
-          "gallery" true
           "page" $.Page
           "watermark" $watermark
-          "nofig" true)
+          "gallery" true)
       }}
     {{ end }}
   </div>

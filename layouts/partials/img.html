@@ -6,60 +6,52 @@
 
 {{ $disableImageOptimization := .Page.Site.Params.disableImageOptimization | default false }}
 
+<!-- Get params -->
 {{ $src := .src }}
 {{ $class := .class }}
 {{ $alt := .alt }}
 {{ $caption := .caption }}
-
 {{ $page := .page }}
+{{ $watermark := default true (.watermark) }}
+
+<!-- If gallery is true, lazy-load is disabled and srcset attr isn't included -->
+{{ $gallery := default false (.gallery) }}
+
 {{ $image := $page.Resources.GetMatch (printf "*%s*" $src) }}
 
-{{ $watermark := default true (.watermark) }}
-{{ $nofig := .nofig }}
 
 {{ with $image }}
-  {{ if not $nofig }}<figure>{{ end }}
-  {{ if or $disableImageOptimization (eq .MediaType.SubType "svg") }}
-    {{ if eq $watermark false }}
-      <img class="{{ $class }}" src="{{ $src }}"/>
-    {{ else }}
+  {{ if not $gallery }}<figure>{{ end }}
+
+    {{ if or $disableImageOptimization (eq .MediaType.SubType "svg") }}
+    {{ if $watermark }}
       {{ $wmImg := partial "watermark" (dict "image" $image "onlyImage" true) }}
       <img class="{{ $class }}" src="{{ $wmImg.RelPermalink }}"/>
+
+      {{ else }}
+      <img class="{{ $class }}" src="{{ $src }}"/>
     {{ end }}
+
   {{ else }}
+    {{ if $watermark }}
+      {{ $image = partial "watermark" (dict "image" $image "onlyImage" true) }}
+    {{ end }}
     {{ with $image }}
-      {{ if not $watermark }}
-        <img
-          class="{{ $class }}"
-          loading="lazy"
-          srcset="
+      <img
+        class="{{ $class }}"
+        {{ if not $gallery }}loading="lazy"{{ end }}
+        srcset="
           {{- (.Resize "330x").RelPermalink }} 330w,
           {{- (.Resize "660x").RelPermalink }} 660w,
           {{- (.Resize "1024x").RelPermalink }} 1024w,
           {{- (.Resize "1320x").RelPermalink }} 2x"
-          src="{{ (.Resize "660x").RelPermalink }}"
-          {{ with $alt }}alt="{{ . }}"{{ end }}
-        />
-      {{ else }}
-        {{ $wmImg := partial "watermark" (dict "image" $image "onlyImage" true) }}
-        {{ with $wmImg }}
-          <img
-            class="{{ $class }}"
-            loading="lazy"
-            srcset="
-            {{- (.Resize "330x").RelPermalink }} 330w,
-            {{- (.Resize "660x").RelPermalink }} 660w,
-            {{- (.Resize "1024x").RelPermalink }} 1024w,
-            {{- (.Resize "1320x").RelPermalink }} 2x"
-            src="{{ (.Resize "660x").RelPermalink }}"
-            {{ with $alt }}alt="{{ . }}"{{ end }}
-          />
-        {{ end }}
-      {{ end }}
+        src="{{ (.Resize "660x").RelPermalink }}"
+        {{ with $alt }}alt="{{ . }}"{{ end }}
+      />
     {{ end }}
   {{ end }}
 
-  {{ if not $nofig }}
+  {{ if not $gallery }}
     {{ with $caption }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
     </figure>
   {{ end }}
