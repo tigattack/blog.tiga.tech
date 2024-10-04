@@ -230,9 +230,7 @@ Simply replace the missing values, chuck this into your `telegraf.conf`, reload 
 
 Now for the fun and, for you, easy part!
 
-I've created a dashboard to display Rclone's key metrics:
-
-![Rclone Grafana Dashboard](images/dashboard.png)
+![Rclone Grafana Dashboard](images/dashboard.png "I've created a dashboard to display Rclone's key metrics")
 
 I also won't cover the installation of Grafana since it is relatively simple and incredibly [well documented](https://grafana.com/docs/grafana/latest/).
 
@@ -250,7 +248,7 @@ First of all, you must create a data source in Grafana for your InfluxDB databas
 It should look something like this:
 
 {{< spoiler title="Datasource settings page" open=false >}}
-![Datasource settings page](images/datasource-settings.png)
+![Datasource settings page no-wm](images/datasource-settings.png)
 {{< /spoiler >}}
 
 Hopefully you now have a nice green tick and you can continue to importing the dashboard!
@@ -262,7 +260,7 @@ I've uploaded the dashboard to Grafana Dashboards, a great place for finding and
 To import a dashboard, click the dashboards button in the sidebar in Grafana, then "Import".
 
 {{< spoiler title="Import dashboard screenshot" open=false >}}
-![Import dashboard screenshot](images/import-dashboard.png)
+![Import dashboard screenshot no-wm](images/import-dashboard.png)
 {{< /spoiler >}}
 
 You can either import it into Grafana using the ID or download the JSON file, both found at the link above.
