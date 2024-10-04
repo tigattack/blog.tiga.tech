@@ -117,12 +117,13 @@ There were a few issues upon purchasing, which I was aware of and partially how 
 
 I carried out a number of repairs and upgrades after buying the car.
 
-I've detailed these in a separate post as adding them to this post would've made it far too long; I often find large blog posts offputting unless I'm actually learning something, so I try to keep these as short as possible (although this is already a far cry from "short").
+I've detailed these in a separate post as adding them to this post would've made it far too long; I often find large blog posts off-putting unless I'm actually learning something, so I try to keep these as short as possible (although this is already a far cry from "short").
 
-If you're interested then please take a look [here](https://blog.tiga.tech/upgrading-and-fixing-the-bora/)!
+Anyway, check it out if you're interested:
 
+{{< article link="/posts/upgrading-and-fixing-the-bora/" >}}
 
-Anyway, here's some photos from after I fixed it up a bit and de-chavved it:
+And finally, here are some photos from after I fixed it up a bit and de-chavved it:
 
 <figure>
     {{< gallery >}}
