@@ -15,7 +15,7 @@
 Build a gallery of statically-sized images (as opposed to [Blowfish's gallery shortcode](https://blowfish.page/docs/shortcodes/#gallery) where the size of each image is configurable) from a file path glob.
 
 * Outputs a clean, consistent layout with an optional caption.
-* Through usage of the included `img` partial (usage of `img` as a shortcode is documented below), this shortcode:
+* Through usage of the included [`img`](layouts/partials/img.html) partial (usage of `img` as a shortcode is documented below), this shortcode:
   * Supports image processing and optimisation.
   * Automatically applies watermarking unless disabled.
 
