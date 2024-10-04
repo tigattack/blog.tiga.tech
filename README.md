@@ -12,38 +12,41 @@
 
 ### `gallery_glob`
 
-- **Purpose**: Build a gallery of statically-sized images (as opposed to [Blowfish's gallery shortcode](https://blowfish.page/docs/shortcodes/#gallery) where the size of each image is configurable) from a file path glob.
-- **Features**:
-  - Outputs a clean, consistent layout with an optional caption.
-  - Through usage of the included `img` partial (usage of `img` as a shortcode is documented below), this shortcode:
-    - Supports image processing and optimisation.
-    - Automatically applies watermarking unless disabled.
-- **Parameters:**:
-  - `images` (required, str): Path glob (relative to current path) of images to include.
-  - `class` (required, str): Class to apply to all images (e.g. `grid-w50`, `grid-w50 md:grid-w33`, etc.). See [Blowfish's gallery shortcode docs](https://blowfish.page/docs/shortcodes/#gallery) for more info.
-  - `caption` (optional, str): Optional caption to display below the gallery. Supports markdown.
+Build a gallery of statically-sized images (as opposed to [Blowfish's gallery shortcode](https://blowfish.page/docs/shortcodes/#gallery) where the size of each image is configurable) from a file path glob.
 
-Example usage: `{{< gallery_glob images="images/*" class="image-classes" caption="My Gallery" >}}`
+* Outputs a clean, consistent layout with an optional caption.
+* Through usage of the included `img` partial (usage of `img` as a shortcode is documented below), this shortcode:
+  * Supports image processing and optimisation.
+  * Automatically applies watermarking unless disabled.
+
+**Parameters:**
+* `images` (required, str): Path glob (relative to current path) of images to include.
+* `class` (required, str): Class to apply to all images (e.g. `grid-w50`, `grid-w50 md:grid-w33`, etc.). See [Blowfish's gallery shortcode docs](https://blowfish.page/docs/shortcodes/#gallery) for more info.
+* `caption` (optional, str): Optional caption to display below the gallery. Supports markdown.
+
+**Example:** `{{< gallery_glob images="images/*" class="image-classes" caption="My Gallery" >}}`
 
 ### `img`
 
-- **Purpose**: Display an image with optional watermarking and image optimisation.
-- **Parameters**:
-  - `src` (required, str): The image path.
-  - `class` (optional, str): Custom CSS classes for styling the image.
-  - `alt` (optional, str): Alternative text for the image.
-  - `watermark` (optional, bool): Control whether watermarking is applied (default: true).
-  
-Example usage: `{{< img src="images/example.jpg" class="img-class" alt="Example image" watermark=false >}}`
+Display an image with optional watermarking and image optimisation.
+
+**Parameters:**
+* `src` (required, str): The image path.
+* `class` (optional, str): Custom CSS classes for styling the image.
+* `alt` (optional, str): Alternative text for the image.
+* `watermark` (optional, bool): Control whether watermarking is applied (default: true).
+
+**Example:** `{{< img src="images/example.jpg" class="img-class" alt="Example image" watermark=false >}}`
 
 ### `spoiler`
 
-- **Purpose**: Toggle visibility of content, useful for spoilers or collapsible sections.
-- **Parameters**:
-  - `title` (required, str): The title displayed for the toggle.
-  - `open` (optional, str): Whether the content is initially visible (default: false).
+Toggle visibility of content, useful for spoilers or collapsible sections.
 
-Example usage: `{{< spoiler title="Click to reveal spoiler" open=false >}}This is hidden content.{{< /spoiler >}}`
+**Parameters:**
+* `title` (required, str): The title displayed for the toggle.
+* `open` (optional, str): Whether the content is initially visible (default: false).
+
+**Example:** `{{< spoiler title="Click to reveal spoiler" open=false >}}This is hidden content.{{< /spoiler >}}`
 
 
 ## Featured image watermarking in article lists
@@ -71,9 +74,7 @@ This can be disabled per-page with by setting the `hideFeatureWatermark` page pa
 | `{{< gallery >}} ... {{< /gallery >}}`                                                     | [Blowfish gallery shortcode](https://blowfish.page/docs/shortcodes/#gallery), images are processed based on method used to add include them.<br>See rows above for image inclusion methods. |
 | `{{< gallery_glob images="path-glob" class="image classes" caption="optional caption" >}}` | Builds a gallery from a glob pattern.<br>Passes images through `img` shortcode and inheriting its features. |
 
-## 
-
-## Notes
+## Personal Notes
 
 * [Blowfish built-in shortcodes](https://blowfish.page/docs/shortcodes/).
 * [Blowfish built-in icons](https://blowfish.page/samples/icons/).
