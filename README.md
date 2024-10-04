@@ -69,8 +69,8 @@ This can be disabled per-page with by setting the `hideFeatureWatermark` page pa
 | Method                                                                                     | Description                                    |
 | ------------------------------------------------------------------------------------------ | ---------------------------------------------- |
 | `<img> src="image-path" class="image classes" alt="alt text"`                              | Adds the image directly, skips all processing. |
-| `![**alt** text](image-path)`                                                                  | Markdown syntax, image is processed according to site's image optimisation config and passed through `watermark` partial. |
-| `{{< img src="image-path" class="image classes" alt="alt text" watermark=true\|false >}}`  | Custom shortcode, image is optimised and passed through `watermark` partial.<br>Images are optimised by means of Hugo's [`Resize`](https://gohugo.io/methods/resource/resize/) method and HTML's `img` tag `srcset` attribute. Default resize is `600x`.<br>Images are watermarked if `watermark` is not false (default true). |
+| `![**alt** text](image-path)`                                                              | Markdown syntax, image is processed according to site's image optimisation config and passed through `watermark` partial. |
+| `{{< img src="image-path" class="image classes" alt="alt text" watermark=true\|false >}}`  | Custom shortcode, image is optimised and passed through `watermark` partial.<br>Images are optimised by means of Hugo's [`Resize`](https://gohugo.io/methods/resource/resize/) method and HTML's `img` tag `srcset` attribute. The image passed in the `src` attribute is resized to 660x by default if the original is larger.<br>Images are watermarked if `watermark` is not false (default true). |
 | `{{< gallery >}} ... {{< /gallery >}}`                                                     | [Blowfish gallery shortcode](https://blowfish.page/docs/shortcodes/#gallery), images are processed based on method used to add include them.<br>See rows above for image inclusion methods. |
 | `{{< gallery_glob images="path-glob" class="image classes" caption="optional caption" >}}` | Builds a gallery from a glob pattern.<br>Passes images through `img` shortcode and inheriting its features. |
 
@@ -79,6 +79,26 @@ This can be disabled per-page with by setting the `hideFeatureWatermark` page pa
 * [Blowfish built-in shortcodes](https://blowfish.page/docs/shortcodes/).
 * [Blowfish built-in icons](https://blowfish.page/samples/icons/).
 * Post thumbnails are cropped to a 1.67:1 aspect ratio (e.g. 300x180) and anchored to centre to fit the bounding box on article list pages.
+
+### TODOs
+
+* should convert to webp as part of the image optimisation process
+* more imaging things [here](https://gohugo.io/content-management/image-processing/#resampling-filter) and [here](https://gohugo.io/content-management/image-processing/#processing-options)
+* test if md `![alt text](/image-path "Caption")` works. If not, it's probably [render-image.html](layouts/_default/_markup/render-image.html)
+
+Would be handy to use some of these debug shortcodes:
+https://github.com/marcus-crane/utf9k/tree/370daacc49ce16012a2ed53d326b931b03e63269/content/debug
+https://utf9k.net/blog/hugo-debug-reports/
+
+and this to maintain code snippets as separate files:
+https://kubernetes.io/docs/contribute/style/hugo-shortcodes/#source-code-files
+https://github.com/kubernetes/website/blob/main/layouts/shortcodes/code.html
+
+look at these potentially useful shortcodes:
+* <https://github.com/rvanhorn/hugo-dynamic-tabs>
+* <https://github.com/statropy/github-button-hugo-shortcode>
+
+* Images in gallery are in the middle of other elements on first load. After reloading, it's fine.
 
 ## Upgrading
 

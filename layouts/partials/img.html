@@ -1,7 +1,7 @@
 <!--
   Partial for rendering an image.
   Passes through optional Hugo image optimisation and my custom watermark partial.
-  Based on Blowfish's layouts/_default/_markup/render-image.html
+  Took inspiration from Blowfish's layouts/_default/_markup/render-image.html
 -->
 
 {{ $disableImageOptimization := .Page.Site.Params.disableImageOptimization | default false }}
@@ -23,12 +23,12 @@
 {{ with $image }}
   {{ if not $gallery }}<figure>{{ end }}
 
-    {{ if or $disableImageOptimization (eq .MediaType.SubType "svg") }}
+  {{ if or $disableImageOptimization (eq .MediaType.SubType "svg") }}
     {{ if $watermark }}
       {{ $wmImg := partial "watermark" (dict "image" $image "onlyImage" true) }}
       <img class="{{ $class }}" src="{{ $wmImg.RelPermalink }}"/>
 
-      {{ else }}
+    {{ else }}
       <img class="{{ $class }}" src="{{ $src }}"/>
     {{ end }}
 
@@ -36,16 +36,17 @@
     {{ if $watermark }}
       {{ $image = partial "watermark" (dict "image" $image "onlyImage" true) }}
     {{ end }}
+
     {{ with $image }}
       <img
         class="{{ $class }}"
         {{ if not $gallery }}loading="lazy"{{ end }}
         srcset="
-          {{- (.Resize "330x").RelPermalink }} 330w,
-          {{- (.Resize "660x").RelPermalink }} 660w,
-          {{- (.Resize "1024x").RelPermalink }} 1024w,
-          {{- (.Resize "1320x").RelPermalink }} 2x"
-        src="{{ (.Resize "660x").RelPermalink }}"
+          {{- if gt .Width 330 }}{{ (.Resize "330x").RelPermalink }} 330w,{{ end }}
+          {{- if gt .Width 660 }}{{ (.Resize "660x").RelPermalink }} 660w,{{ end }}
+          {{- if gt .Width 1024 }}{{ (.Resize "1024x").RelPermalink }} 1024w,{{ end }}
+          {{- if gt .Width 1320 }}{{ (.Resize "1320x").RelPermalink }} 2x{{ end }}"
+        src="{{ if gt .Width 660 }}{{ (.Resize "660x").RelPermalink }}{{ else }}{{ .RelPermalink }}{{ end }}"
         {{ with $alt }}alt="{{ . }}"{{ end }}
       />
     {{ end }}
