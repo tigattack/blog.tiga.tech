@@ -1,11 +1,5 @@
 <meta name="darkreader-lock">
 
-{{ if and
-    (not hugo.IsServer)
-    (isset site.Params.umamiAnalyticsCustom "websiteid") }}
-{{ partial "umami_custom.html" . }}
-{{ end }}
-
 <!-- Snippet borrowed from Blowfish's layouts/partials/vendor.html to support custom gallery_glob shortcode -->
 {{ if page.HasShortcode "gallery_glob" }}
     {{ $packeryLib := resources.Get "lib/packery/packery.pkgd.min.js" }}
