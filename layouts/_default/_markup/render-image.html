@@ -11,6 +11,8 @@
 
 {{ $watermark := true }}
 
+{{ $class := "my-0 rounded-md"}}
+
 {{ if eq (substr $altText -5 5) "no-wm" }}
 {{ $altText = (trim (replace $altText "no-wm" "") " ") }}
 {{ $watermark = false }}
@@ -19,7 +21,7 @@
 {{ if findRE "^https?" $url.Scheme }}
   {{ $wmImg := partial "watermark" (dict "image" $url.String "onlyImage" true) }}
   <figure>
-    <img class="my-0 rounded-md" loading="lazy" src="{{ $wmImg.RelPermalink }}" alt="{{ $altText }}" />
+    <img class={{ $class }} loading="lazy" src="{{ $wmImg.RelPermalink }}" alt="{{ $altText }}" />
     {{ with $caption }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
   </figure>
 
@@ -28,7 +30,7 @@
     "img"
     (dict
       "src" $url.String
-      "class" "my-0 rounded-md"
+      "class" $class
       "alt" $altText
       "caption" $caption
       "page" $.Page
