@@ -97,13 +97,9 @@ However, please also feel free to perform a manual download of all the files in 
 
 ### Screenshots
 
-First install:
+![First install](RaFEbuju26.png "First install")
 
-![First install](RaFEbuju26.png)
-
-Update:
-
-![Update](zovUBIVo22.png)
+![Update](zovUBIVo22.png "Update")
 
 ### Commands
 

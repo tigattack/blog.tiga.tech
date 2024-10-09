@@ -42,7 +42,7 @@ Due to limitations in Veeam, only some types of Agent jobs are supported:
 * **Unsupported** jobs are referred to as "Agent policy" or "Managed by agent".  
 
 {{< spoiler title="See the spoilered illustration below if this isn't clear to you." >}}
-![Agent job types](images/agent-types.png "**Note:** Linux Agent Backup jobs are also supported, this image is only an example.")
+![Agent job types no-wm](images/agent-types.png "**Note:** Linux Agent Backup jobs are also supported, this image is only an example.")
 {{< /spoiler >}}
 
 You can read about the difference between these two Agent job types [here](https://helpcenter.veeam.com/docs/backup/agents/agent_job_protection_mode.html?ver=110#selecting-job-mode).
