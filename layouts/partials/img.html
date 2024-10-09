@@ -25,7 +25,7 @@
 
   {{ if or $disableImageOptimization (eq .MediaType.SubType "svg") }}
     {{ if $watermark }}
-      {{ $wmImg := partial "watermark" (dict "image" $image "onlyImage" true) }}
+      {{ $wmImg := partial "watermark" (dict "image" . "onlyImage" true) }}
       <img class="{{ $class }}" src="{{ $wmImg.RelPermalink }}"/>
 
     {{ else }}
@@ -34,19 +34,15 @@
 
   {{ else }}
     {{ if $watermark }}
-      {{ $image = partial "watermark" (dict "image" $image "onlyImage" true) }}
+      {{ $image = partial "watermark" (dict "image" . "onlyImage" true) }}
     {{ end }}
 
-    {{ with $image }}
+    <!-- Convert image to WebP -->
+    {{ with $image.Process "webp" }}
       <img
         class="{{ $class }}"
         {{ if not $gallery }}loading="lazy"{{ end }}
-        srcset="
-          {{- if gt .Width 330 }}{{ (.Resize "330x").RelPermalink }} 330w,{{ end }}
-          {{- if gt .Width 660 }}{{ (.Resize "660x").RelPermalink }} 660w,{{ end }}
-          {{- if gt .Width 1024 }}{{ (.Resize "1024x").RelPermalink }} 1024w,{{ end }}
-          {{- if gt .Width 1320 }}{{ (.Resize "1320x").RelPermalink }} 2x{{ end }}"
-        src="{{ if gt .Width 660 }}{{ (.Resize "660x").RelPermalink }}{{ else }}{{ .RelPermalink }}{{ end }}"
+        src="{{ .RelPermalink }}"
         {{ with $alt }}alt="{{ . }}"{{ end }}
       />
     {{ end }}

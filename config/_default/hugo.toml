@@ -28,6 +28,11 @@ pagerSize = 10
 [imaging]
   anchor = 'Center'
 
+[[webp]]
+  lossless = false
+  quality = 75
+  preset = "default"
+
 [taxonomies]
   tag = "tags"
   category = "categories"

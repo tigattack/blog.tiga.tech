@@ -1,3 +1,9 @@
+<!--
+  This partial implements a lot of the same functionality as the watermark partial.
+  However, some of the logic must be different for featured images in article lists,
+  so it's separated here for the sake of simplicity.
+-->
+
 {{ $image := .image }}
 {{ $class := .class }}
 {{ $page := .page }}
@@ -18,9 +24,9 @@
 {{ end }}
 
 
-<!-- Resize image unless image optimisation disabled -->
+<!-- Resize image and convert to WebP unless image optimisation disabled -->
 {{ if not $disableImageOptimization }}
-  {{ $image = $image.Resize "600x" }}
+  {{ $image = $image.Resize "600x webp" }}
 {{ end }}
 
 <!-- Watermark image unless image name contains "watermark" or hideFeatureWatermark=true in page parameters  -->
