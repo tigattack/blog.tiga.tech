@@ -113,10 +113,7 @@ look at these potentially useful shortcodes:
 
 ## Upgrading
 
-1. Upgrade theme: `hugo mod get -u`
-2. Check latest supported Hugo version at [nunocoracao/blowfish/config.toml](https://github.com/nunocoracao/blowfish/blob/main/config.toml) after selecting relevant tag.
-3. If supported Hugo version is not latest:
+1. Upgrade theme and check Hugo version: `scripts/update_blowfish.sh`
+2. If script suggests using `scripts/update_hugo.sh`:
   1. go to [Homebrew/homebrew-core/hugo.rb](https://github.com/Homebrew/homebrew-core/commits/master/Formula/h/hugo.rb) and copy the commit hash for the relevant version.
   2. Run `scripts/update_hugo.sh commit_hash_here`
-4. Else `brew upgrade hugo`
-5. Patch Hugo version in [.github/workflows/hugo.yml](.github/workflows/hugo.yml#L24)

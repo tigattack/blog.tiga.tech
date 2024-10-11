@@ -3,8 +3,8 @@
 dlpath="/tmp/hugo.rb"
 
 if [ -z $1 ]; then
-  echo "Empty hash, will not proceed."
-  exit 1
+    echo "Empty hash, will not proceed."
+    exit 1
 fi
 
 curl -s -o "$dlpath" https://raw.githubusercontent.com/Homebrew/homebrew-core/${1}/Formula/h/hugo.rb
