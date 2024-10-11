@@ -1,4 +1,4 @@
 [submodule "number_plate_obfuscator"]
 	path = number_plate_obfuscator
 	url = git@github.com:tigattack/license-plate-removal.git
-	branch = main
+	branch = master

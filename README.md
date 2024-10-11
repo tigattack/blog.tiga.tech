@@ -87,7 +87,10 @@ This can be disabled per-page with by setting the `hideFeatureWatermark` page pa
   else
     source number_plate_obfuscator/.venv/bin/activate
   fi
+  # For a single image:
   number_plate_obfuscator/main.py -s <image path>
+  # Or for a directory of images:
+  for i in `find <images dir path> -type f`; do number_plate_obfuscator/main.py -s $i ; done
   ```
 * Post thumbnails are cropped to a 1.67:1 aspect ratio (e.g. 300x180) and anchored to centre to fit the bounding box on article list pages.
 
@@ -117,3 +120,5 @@ look at these potentially useful shortcodes:
 2. If script suggests using `scripts/update_hugo.sh`:
   1. go to [Homebrew/homebrew-core/hugo.rb](https://github.com/Homebrew/homebrew-core/commits/master/Formula/h/hugo.rb) and copy the commit hash for the relevant version.
   2. Run `scripts/update_hugo.sh commit_hash_here`
+
+Update `number_plate_obfuscator`: `git submodule update --remote number_plate_obfuscator`
