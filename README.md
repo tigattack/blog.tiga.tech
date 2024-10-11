@@ -78,6 +78,17 @@ This can be disabled per-page with by setting the `hideFeatureWatermark` page pa
 
 * [Blowfish built-in shortcodes](https://blowfish.page/docs/shortcodes/).
 * [Blowfish built-in icons](https://blowfish.page/samples/icons/).
+* Obfuscate vehicle numberplate:
+  ```sh
+  if [ ! -d number_plate_obfuscator/.venv ]; then
+    python3 -m venv number_plate_obfuscator/.venv
+    source number_plate_obfuscator/.venv/bin/activate
+    pip install -r number_plate_obfuscator/requirements.txt
+  else
+    source number_plate_obfuscator/.venv/bin/activate
+  fi
+  number_plate_obfuscator/main.py -s <image path>
+  ```
 * Post thumbnails are cropped to a 1.67:1 aspect ratio (e.g. 300x180) and anchored to centre to fit the bounding box on article list pages.
 
 ### TODOs
