@@ -1,5 +1,5 @@
 ---
-draft: true
+draft: false
 date: 2024-11-21T12:37:21+00:00
 title: "APC AP9630 NMC2 Firmware Recovery"
 description: "There are few pieces of technology more frustrating to me than this."
