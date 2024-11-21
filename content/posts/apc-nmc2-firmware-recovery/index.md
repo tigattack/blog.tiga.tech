@@ -8,7 +8,7 @@ tags: []
 categories: ["technology"]
 ---
 
-In this post, I'll walk through the steps I had to take to recover an APC AP9630 Network Management Card (NMC) (a.k.a NMC2) with corrupted or otherwise broken firmware back to a working state.
+In this post, I'll walk through the steps I had to take to recover an APC AP9630 Network Management Card (NMC) (a.k.a. NMC2) with corrupted or otherwise broken firmware back to a working state.
 
 {{< alert icon="circle-info" >}}
 The steps are largely similar for the NMC3 (AP964x etc.), but I make no guarantees as I have no personal experience with them.
@@ -28,7 +28,7 @@ When I received the NMC, I was excited to get going and swiftly fitted it into m
 
 This is typically a requirement to configure network settings and gain access to the web UI, SSH, etc. since it's apparently rather rare that a seller of used equipment has the foresight to reset to factory defaults. If they did, this would allow it to boot straight into DHCP mode upon first use in its new home.
 
-Anyway, I digress. Once installed in my UPS, I noticed that the status LED was flashing amber. My research showed me this meant it was in BOOTP/DHCP mode, which would later prove to be untrue but I didn't know this yet.  
+Anyway, I digress. Once installed in my UPS, I noticed that the status LED was flashing amber. My research showed me this meant it was in BOOTP/DHCP mode, which would later prove to be untrue, but I didn't know this yet.  
 I'd already provisioned a DHCP reservation for it, so I attempted to reach it on the expected IP address, but sadly to no avail.
 
 I contacted the seller to ask if they knew the IP address it was configured with. To my surprise they responded quickly, telling me it should be somewhere in the 172.16.250-253 range. Unfortunately, I also had no luck with any of these addresses.
@@ -43,7 +43,7 @@ The serial cable required is an APC 940-0299. I found the pinout [here](https://
 
 However, in keeping with the running theme here, it didn't work. Connecting with 9600bps/8b data/1b stop/no parity/no flow ctrl yielded nothing but an empty, black box. I followed all the instructions, pressing the reset button for various lengths of time, timing it with different responses from the status LED, so on and so forth. The empty, black box remained unchanged.
 
-Fuck it, I bit the bullet and bought a 2.5mm-USB APC serial adaptor. It wasn't official, but it had a bunch of good reviews so I was happy to take the risk. I also don't have anything with a DB9 serial port that isn't buried under boxes, so an official APC cable wouldn't have been of much use anyway.
+Fuck it, I bit the bullet and bought a 2.5mm-USB APC serial adaptor. It wasn't official, but it had a bunch of good reviews, so I was happy to take the risk. I also don't have anything with a DB9 serial port that isn't buried under boxes, so an official APC cable wouldn't have been of much use anyway.
 
 It arrived the following day. It didn't work. I was ready to break this NMC in two and throw it back into the fiery pits of hell from which it clearly came.
 
@@ -53,7 +53,7 @@ Yet another day later, I received the new cable. It didn't work.
 
 Barely managing to stop myself from punting the bloody thing into the sea, I fell back to further research.
 
-In a stroke of luck, I came across a Schneider Electric (SE) (APC's parent company) forum post where a had similar symptoms and mentioned that their NMC's status LED was flashing amber at a faster rate than was expected for DHCP mode. This was also the case for me, but I'd thought little of it beforehand. This silly little assumption was the cause of all my pain.
+In a stroke of luck, I came across a Schneider Electric (SE) (APC's parent company) forum post where another user had similar symptoms and mentioned that their NMC's status LED was flashing amber at a faster rate than was expected for DHCP mode. This was also the case for me, but I'd thought little of it beforehand. This silly little assumption was the cause of all my pain.
 
 A SE representative stated the faster amber flash, approx. 2x/second, suggested it was in "boot monitor" (BM) mode. This is indicative of a fatal firmware (FW) failure or FW corruption.
 
@@ -105,9 +105,9 @@ The `bin` files are the ones we want here. You should have a `bin` file for each
 The `app` firmware binary is named depending on your UPS type (for example this could be `sumx`, `sy`, `sy3p`, or something else) as described above.
 
 For NMC2 firmware version 7.1.8 I had the following `bin` files:
-* `apc_hw05_bootmon_109.bin` - Bootmon
-* `apc_hw05_aos_718.bin` - AOS
-* `apc_hw05_sumx_718.bin` - Application module
+* `apc_hw05_bootmon_109.bin` — Bootmon
+* `apc_hw05_aos_718.bin` — AOS
+* `apc_hw05_sumx_718.bin` — Application module
 
 ### Connecting to the NMC
 
@@ -130,7 +130,7 @@ For me, this wasn't actually necessary; I simply connected, hit return, and inst
 
 Once you receive the `BM>` prompt, you know for sure that your NMC is in BM mode and has experienced some form of unrecoverable firmware failure.
 
-If you can't get the prompt, double check your physical connections and serial terminal settings.  
+If you can't get the prompt, double-check your physical connections and serial terminal settings.  
 You could also try connecting with a baud rate of 9600. While this is the baud rate for the BM on the NMC3, it's also the baud rate for AOS on the NMC2. So, if you have a NMC2 and this works, you're likely in luck and have nothing more to do! 🎉
 
 ### Flashing Firmware to the NMC
@@ -152,7 +152,7 @@ The rest of this process assumes you are using `screen` for the serial connectio
 2. Run `sysinfo` and keep a copy of the output. You may find this useful later for comparison purposes.
 3. The APC documentation[^1] suggests you first perform a factory reset, however this is only available on BM version >=1.0.8. In my case this option wasn't available.
     1. To perform the factory reset on BM version >=1.0.8, run the following commands:
-    2. `factory_reset` - A confirmation prompt will follow.
+    2. `factory_reset` — A confirmation prompt will follow.
     3. Run `factory_reset_confirm` to complete the reset process.
     4. Once complete, you should see a `BM>` prompt.
 3. Run `XMODEM`. It may look like it's done nothing, but you will shortly see `C`'s being printed.  
