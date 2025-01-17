@@ -53,9 +53,12 @@ jobs:
           TZ: Europe/London
         run: |
           hugo \
-            --gc \
+            --baseURL "${{ steps.pages.outputs.base_url }}/" \
             --minify \
-            --baseURL "${{ steps.pages.outputs.base_url }}/"
+            --gc \
+            --logLevel debug \
+            --templateMetrics \
+            --templateMetricsHints
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
