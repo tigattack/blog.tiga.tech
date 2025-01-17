@@ -1,13 +1,20 @@
 #!/usr/bin/env bash -e
 
+# Get current Blowfish version
+blowfish_ver=$(cat go.mod | grep 'require github.com/nunocoracao/blowfish/v2' | gsed -e 's/.*blowfish\/v2\s*//' -e 's/\s\/.*//')
+
 # Update Blowfish theme (and any other go modules)
-echo "Updating Blowfish theme..."
+echo "Current Blowfish version: $blowfish_ver"
+echo "Updating Blowfish..."
 hugo mod get -u
-echo "Updated Blowfish theme."
+
+# Get updated Blowfish version
+blowfish_ver=$(cat go.mod | grep 'require github.com/nunocoracao/blowfish/v2' | gsed -e 's/.*blowfish\/v2\s*//' -e 's/\s\/.*//')
+
+echo "Updated Blowfish to $blowfish_ver"
 
 # Get Blowfish's supported Hugo version
 echo "Checking Hugo supported, installed, and available versions..."
-blowfish_ver=$(cat go.mod | grep 'require github.com/nunocoracao/blowfish/v2' | gsed -e 's/.*blowfish\/v2\s*//' -e 's/\s\/.*//')
 blowfish_supported_hugo_ver=$(curl -s "https://raw.githubusercontent.com/nunocoracao/blowfish/refs/tags/${blowfish_ver}/release-versions/hugo-latest.txt" | gsed 's/v//')
 installed_hugo_ver=$(hugo version | gsed -e 's/hugo v//' -e 's/\+extended.*\|\s.*//')
 
