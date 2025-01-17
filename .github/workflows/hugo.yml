@@ -37,7 +37,7 @@ jobs:
 
       - name: Get short commit SHA
         id: get_short_sha
-        run: echo "result=${GITHUB_SHA::7}" >> $GITHUB_ENV
+        run: echo "result=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
 
       # Thanks https://github.com/peaceiris/actions-hugo
       - uses: actions/cache@v4
