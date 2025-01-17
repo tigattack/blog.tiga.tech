@@ -23,6 +23,7 @@ jobs:
     env:
       HUGO_VERSION: 0.140.2
       HUGO_CACHEDIR: /tmp/hugo_cache
+      HUGO_RESOURCEDIR: /tmp/hugo_resources
     steps:
       - name: Install Hugo CLI
         run: |
@@ -34,13 +35,19 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
+      - name: Get short commit SHA
+        id: get_short_sha
+        run: echo "result=${GITHUB_SHA::7}" >> $GITHUB_ENV
+
       # Thanks https://github.com/peaceiris/actions-hugo
       - uses: actions/cache@v4
         with:
-          path: ${{ env.HUGO_CACHEDIR }}
-          key: ${{ runner.os }}-hugomod-${{ hashFiles('**/go.sum') }}
+          path: |
+            ${{ env.HUGO_CACHEDIR }}
+            ${{ env.HUGO_RESOURCEDIR }}
+          key: ${{ runner.os }}-hugo-cache-${{ steps.get_short_sha.outputs.result }}
           restore-keys: |
-            ${{ runner.os }}-hugomod-
+            ${{ runner.os }}-hugo-cache-
 
       - id: pages
         uses: actions/configure-pages@v5
