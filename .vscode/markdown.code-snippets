@@ -113,12 +113,21 @@
     "prefix": ["BFS-gallery", "HSC-gallery", "gallery"],
     "body": [
       "{{< gallery >}}",
-        "<img src=\"image-uri-here\" class=\"${1|grid-w5,grid-w10,grid-w15,grid-w20,grid-w25,grid-w30,grid-w33,grid-w35,grid-w40,grid-w45,grid-w50,grid-w55,grid-w60,grid-w65,grid-w66,grid-w70,grid-w75,grid-w80,grid-w85,grid-w90,grid-w95,grid-w100|}\" />",
-        "<img src=\"image-uri-here\" class=\"grid-w50 md:grid-w33 xl:grid-w25\" />",
-        "$0",
+        "\t<!-- example: {{< img src=\"image-uri-here\" class=\"grid-w50 md:grid-w33 xl:grid-w25\" >}} -->",
+        "\t{{< img src=\"${1:image-uri-here}\" class=\"${2|grid-w5,grid-w10,grid-w15,grid-w20,grid-w25,grid-w30,grid-w33,grid-w35,grid-w40,grid-w45,grid-w50,grid-w55,grid-w60,grid-w65,grid-w66,grid-w70,grid-w75,grid-w80,grid-w85,grid-w90,grid-w95,grid-w100|}\" watermark=${3|true,false|} >}}",
       "{{< /gallery >}}"
     ],
     "description": "Showcase multiple images at once, in a responsive manner with more varied and interesting layouts. Blowfish gallery Shortcode. Documentation: https://blowfish.page/docs/shortcodes/#gallery ",
+  },
+  "gallery_glob": {
+    "prefix": ["gallery_glob"],
+    "body": [
+      "{{< gallery_glob",
+        "\timages=\"${1:path-glob}\"",
+        "\tclass=\"${2|grid-w5,grid-w10,grid-w15,grid-w20,grid-w25,grid-w30,grid-w33,grid-w35,grid-w40,grid-w45,grid-w50,grid-w55,grid-w60,grid-w65,grid-w66,grid-w70,grid-w75,grid-w80,grid-w85,grid-w90,grid-w95,grid-w100|}\"",
+        "\tcaption=\"${3:optional caption}\" >}}"
+    ],
+    "description": "Showcase multiple images at once, in a responsive manner with more varied and interesting layouts, sourcing images from a path glob.",
   },
   "github": {
     "prefix": ["BFS-github", "HSC-github", "github"],
@@ -140,6 +149,19 @@
       "{{< icon \"${1:star}$0\" >}}",
     ],
     "description": "Output an SVG icon. Blowfish icon Shortcode. Documentation: https://blowfish.page/docs/shortcodes/#icon ",
+  },
+  "img": {
+    "prefix": ["img"],
+    "body": [
+      "{{< img",
+      "\tsrc=\"${1:image-uri-here}\"",
+      "\tclass=\"${2|grid-w5,grid-w10,grid-w15,grid-w20,grid-w25,grid-w30,grid-w33,grid-w35,grid-w40,grid-w45,grid-w50,grid-w55,grid-w60,grid-w65,grid-w66,grid-w70,grid-w75,grid-w80,grid-w85,grid-w90,grid-w95,grid-w100|}\"",
+      "\twatermark=${3|true,false|}",
+      "\talt=\"${4:alt text}\"",
+      "\tcaption=\"${5:caption}\"",
+      ">}}"
+    ],
+    "description": "Shortcode to display an image with an optional caption",
   },
   "katex": {
     "prefix": ["BFS-katex", "HSC-katex", "katex"],
