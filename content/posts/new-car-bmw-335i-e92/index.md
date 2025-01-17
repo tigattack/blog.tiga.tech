@@ -9,9 +9,9 @@ categories: ["automotive"]
 
 Hello. It's been a while since I last shared a car update, so I figured this is a well overdue post.
 
-I've been through another 3 cars since my last update, so let's start with a quick refresher before I begin rambling about my new purchase.
+I've been through another 3 cars since my last update, so let's start with a quick catch-up before I begin rambling about my new purchase.
 
-# Preamble
+# My Cars Since 2019
 
 In 2019, I wrote about my new VW Bora (Mk4 Jetta, for any readers from across the pond) after the unfortunate demise of my Mk4 Golf. You can read more about these two in the posts found in this site's [automotive category](/categories/automotive/).
 
@@ -26,7 +26,18 @@ This was a fantastic car and I adored it for many reasons. You can read about my
 
 {{< gallery_glob images="a4/*" class="grid-w50 md:grid-w33" >}}
 
-Unfortunately, beyond looking quite nice, it wasn't all that that exciting after a while.
+Back in 2023, I did a pretty cool project with the A4 where I built a custom head unit using a Raspberry Pi, based on BlueWave Studio's OpenAuto Pro.  
+I never really finished a point of completion with the project, with it pretty much being in a permanent state of prototype until I sold the car.  
+Nevertheless, here are some photos from along the way:
+
+{{< gallery_glob images="a4_hu/*" class="grid-w50"
+    caption="From beginning to end of my Raspberry Pi-based head unit project." >}}
+
+Here's a short clip of the first boot:
+
+{{< vimeo id="1047854478" >}}
+
+Car/tech crossover projects aside, beyond looking quite nice, this car wasn't all that that exciting after a while.
 
 I'd sorted it out with a remap and a DPF & EGR delete[^1] shortly after purchase, and it would go well enough when I put my foot down, but thanks in part to the Quattro system running a 50:50 front/rear torque split by default, it was boredom-inducingly stable, never wishing to break traction come hell or high water.
 
@@ -36,7 +47,7 @@ However, all good things must come to an end. It was ageing, the mileage and nig
 
 # Time for a New Car
 
-OK, preamble over, down to business. I no longer needed the practicality of the A4, so I began looking back to the world of saloons, coupés, and hatchbacks.
+Now you're all caught up (or not, I won't judge you for skipping 👀), let's get to the real point of this post. I no longer needed the practicality of the A4, so I began looking back to the world of saloons, coupés, and hatchbacks.
 
 I'd recently purchased a BMW Z3 2.8L (6 speed, M52B28 engine). An absolute nail of a car and priced to reflect it, but it was great, cheap fun for summer.  
 
