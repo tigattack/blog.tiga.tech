@@ -13,6 +13,11 @@ blowfish_ver=$(cat go.mod | grep 'require github.com/nunocoracao/blowfish/v2' | 
 
 echo "Updated Blowfish to $blowfish_ver"
 
+# Stage and commit
+git add go.mod go.sum
+git commit -m "chore: bump blowfish to $blowfish_ver"
+echo "Commited blowfish update"
+
 # Get Blowfish's supported Hugo version
 echo "Checking Hugo supported, installed, and available versions..."
 blowfish_supported_hugo_ver=$(curl -s "https://raw.githubusercontent.com/nunocoracao/blowfish/refs/tags/${blowfish_ver}/release-versions/hugo-latest.txt" | gsed 's/v//')
@@ -45,9 +50,12 @@ fi
 build_workflow_hugo_ver=$(grep 'HUGO_VERSION:' .github/workflows/hugo.yml | gsed 's/.*: //')
 
 if [[ $blowfish_supported_hugo_ver != $build_workflow_hugo_ver ]]; then
-    echo "Updating Hugo version in build workflow..."
     gsed -i .github/workflows/hugo.yml -e "s/$build_workflow_hugo_ver/$blowfish_supported_hugo_ver/"
     echo "Updated Hugo version in build workflow."
+    # Stage and commit
+    git add .github/workflows/hugo.yml
+    git commit -m "ci: bump hugo to $blowfish_supported_hugo_ver"
+    echo "Commited Hugo update in site build workflow"
 else
     echo "Validated Hugo version in build workflow is up to date with the latest supported version in Blowfish."
 fi
