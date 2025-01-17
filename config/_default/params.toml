@@ -105,5 +105,7 @@ cardViewScreenWidth = false
 [fathomAnalytics]
 
 [buymeacoffee]
+identifier = "tigattack"
+globalWidget = true
 
 [verification]
