@@ -27,7 +27,7 @@ This was a fantastic car and I adored it for many reasons. You can read about my
 {{< gallery_glob images="a4/*" class="grid-w50 md:grid-w33" >}}
 
 Back in 2023, I did a pretty cool project with the A4 where I built a custom head unit using a Raspberry Pi, based on BlueWave Studio's OpenAuto Pro.  
-I never really finished a point of completion with the project, with it pretty much being in a permanent state of prototype until I sold the car.  
+I never really reached a point of completion with the project, with it pretty much being in a permanent state of prototype until I sold the car.  
 Nevertheless, here are some photos from along the way:
 
 {{< gallery_glob images="a4_hu/*" class="grid-w50"
@@ -96,7 +96,7 @@ I always value a second set of eyes when viewing a car, especially when they are
 
 Unlike most cars I view, it was actually even better than I expected.
 
-The service history checked out, the paintwork was near-perfect considering the age, the brakes, suspension, and other running gear looked and felt to be in great condition (well, mostly... I'll talk about that in a bit), and, as best as I could tell, the engine and gearbox seemed to be great condition.
+The service history checked out, the paintwork was near-perfect considering the age, the brakes, suspension, and other running gear looked and felt to be in great condition (well, mostly... I'll talk about that in a bit), and, as best as I could tell, the engine and gearbox seemed to be in great condition.
 
 One exception was a small oil leak from the oil cooler, but that's an easy fix, as you'll see if you keep reading 😉
 
