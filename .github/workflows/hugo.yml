@@ -77,6 +77,12 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+
+      - run: npm install --save-dev @percy/cli
+
       - uses: actions/cache@v4
         with:
           path: tmp/.htmlproofer
@@ -100,6 +106,10 @@ jobs:
             --ignore_status_codes 403
             --typhoeus='{"headers":{"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:134.0) Gecko/20100101 Firefox/134.0"}}'
             --cache='{"timeframe": {"external": "30d"}}'
+
+      - run: npx percy snapshot ${{ env.HUGO_PUBLISHDIR }}
+        env:
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
 
   deploy:
     permissions:
