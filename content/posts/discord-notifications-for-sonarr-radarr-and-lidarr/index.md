@@ -11,12 +11,12 @@ categories = ["technology"]
 series = ["Discord Notifications"]
 +++
 
-Part 1 of a [Discord notifications series](#see-also-in-discord-notifications).
+Part 1 of a Discord Notifications series.
 
 I've had this running for a while and it works flawlessly, I'm very pleased with it.  
 After having a few people ask me how it's done I decided it'd be best to make a post.
 
-This is made extremely simple thanks to [Sonarr](https://github.com/Sonarr/Sonarr/)'s built-in support for Slack notifications and [Discord](https://discordapp.com/)'s built-in [support for Slack webhooks](https://discordapp.com/developers/docs/resources/webhook#execute-slackcompatible-webhook).
+This is made extremely simple thanks to [Sonarr](https://github.com/Sonarr/Sonarr/)'s built-in support for Slack notifications and [Discord](https://discord.com/)'s built-in <a href="https://discord.com/developers/docs/resources/webhook#execute-slackcompatible-webhook" data-proofer-ignore>support for Slack webhooks</a>.
 Of course [Radarr](https://github.com/Radarr/Radarr/) and [Lidarr](https://github.com/lidarr/Lidarr/) support this too, as they are forks of Sonarr.
 
 I'll show you how to do this in Sonarr, but Radarr is identical and Lidarr is very similar, so you can follow this same process for each *arr.

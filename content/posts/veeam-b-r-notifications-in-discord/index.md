@@ -11,12 +11,12 @@ categories = ["technology"]
 series = ["Discord Notifications"]
 +++
 
-Part 2 of a [Discord notifications series](#see-also-in-discord-notifications).
+Part 2 of a Discord Notifications series.
 
 In a similar fashion to part 1, this setup has been running for a while and I'm very pleased with it's flawless functionality.
 
 {{< alert cardColor="#e63946" iconColor="#1d3557" textColor="#f1faee" >}}
-This project is no longer maintained; it has been superseded by my new project, [VeeamNotify](https://github.com/titgattack/VeeamNotify).  
+This project is no longer maintained; it has been superseded by my new project, [VeeamNotify](https://github.com/tigattack/VeeamNotify).  
 You can read more about it [here](../veeamnotify).
 {{< /alert >}}
 
@@ -177,8 +177,5 @@ for Discord with various improvements and Discord-specific changes.
 This release adds the job's processing speed to the report, adds an update checker, and brings an option (disabled by default) to mention the specified Discord user when a job fails.
 
 ---
-
-If you have any problems with the script, please [open an issue](https://github.com/tigattack/VeeamDiscordNotifications/issues/new?assignees=&labels=bug&template=bug_report.md&title=%5BBUG%5D+)
-on the GitHub project.
 
 I always welcome feedback on my posts, please [contact me](/contact) if you have any. I'm also happy to answer any related questions if I know the answer.
