@@ -38,9 +38,9 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
-      - name: Get short commit SHA
-        id: get_short_sha
-        run: echo "result=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
+      - name: Extract branch name
+        id: extract_branch
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
 
       # Thanks https://github.com/peaceiris/actions-hugo
       - uses: actions/cache@v4
@@ -48,7 +48,7 @@ jobs:
           path: |
             ${{ env.HUGO_CACHEDIR }}
             ${{ env.HUGO_RESOURCEDIR }}
-          key: ${{ runner.os }}-hugo-cache-${{ steps.get_short_sha.outputs.result }}
+          key: ${{ runner.os }}-hugo-cache-${{ steps.extract_branch.outputs.branch }}
           restore-keys: |
             ${{ runner.os }}-hugo-cache-
 
