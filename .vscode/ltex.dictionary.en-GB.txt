@@ -21,3 +21,11 @@ OFH
 tig
 Bimmerpost
 aftermarket
+OpenAuto
+BlueWave
+whitebox
+Homelab
+labbing
+MicroServer
+GPIO
+ESPHome
