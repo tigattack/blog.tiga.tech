@@ -45,7 +45,7 @@ Due to limitations in Veeam, only some types of Agent jobs are supported:
 ![Agent job types no-wm](images/agent-types.png "**Note:** Linux Agent Backup jobs are also supported, this image is only an example.")
 {{< /spoiler >}}
 
-You can read about the difference between these two Agent job types [here](https://helpcenter.veeam.com/docs/backup/agents/agent_job_protection_mode.html?ver=110#selecting-job-mode).
+You can read about the difference between these two Agent job types [here](https://helpcenter.veeam.com/docs/backup/agents/agent_job_protection_mode.html?ver=120#mode).
 
 Unfortunately, even supported Agent jobs return a reduced amount of session information, so you won't see as much detail in the notification (see the example screenshots at the top).
 

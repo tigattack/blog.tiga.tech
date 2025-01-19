@@ -18,7 +18,7 @@ I suggest you follow [their instructions](https://wiki.servarr.com/lidarr/instal
 
 [Lidarr](https://github.com/lidarr/Lidarr) is still in alpha, but you can install it on Ubuntu with some ease.
 
-Credit for much of this process goes to my friend [Dan](https://github.com/dantho281/).
+Credit for much of this process goes to my friend [Emma](https://github.com/emmaisadev).
 
 ---
 

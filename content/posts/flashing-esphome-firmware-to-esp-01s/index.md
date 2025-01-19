@@ -13,7 +13,7 @@ series = []
 
 I recently came across a [listing on AliExpress](https://www.aliexpress.com/item/32956461021.html) for an ESP-01S (an ESP8266-based chip) and AM2302 combination. You'll want the option named "AM2302 ESP-01S". This is also available [here, on Amazon UK](https://amzn.to/3hcKhef), for a little more, if you'd like to get it faster.  
 At $4.38/ea (~£3.60) plus shipping I couldn't say no, so I decided to buy a bunch of them to monitor the temperature and humidity in various locations around the house.  
-I also bought one of these [USB dupont cables](https://www.aliexpress.com/item/1000007049130.html) from AliExpress for each unit; since I have a bunch of old USB power blocks lying around, this was the easiest way for me to power them. You can get an alternative [here, on Amazon UK](https://amzn.to/2WA77mF). It's actually a serial adaptor but since we only need to provide power, it will work.
+I also bought one of these [USB dupont cables](https://www.aliexpress.com/item/1000007049130.html) from AliExpress for each unit; since I have a bunch of old USB power blocks lying around, this was the easiest way for me to power them.
 
 In this post I'll run through how to create an ESPHome configuration for an ESP8266-based temperature sensor and how to flash the firmware.
 
