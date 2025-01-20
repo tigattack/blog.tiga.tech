@@ -9,6 +9,7 @@
 | [**`gallery_glob`**](#gallery_glob) | Builds a gallery from a glob pattern, and applies image optimisation and optional watermarking. |
 | [**`img`**](#img)                   | Custom image shortcode that integrates with image optimisation and watermarking.                |
 | [**`spoiler`**](#spoiler)           | Toggles visibility of content. Useful for hiding spoilers or long sections of text.             |
+| [**`tooltip`**](#tooltip)           | Adds an on-hover, pop-up tooltip above a given piece of text.                                    |
 
 ### `gallery_glob`
 
@@ -48,6 +49,18 @@ Toggle visibility of content, useful for spoilers or collapsible sections.
 
 **Example:** `{{< spoiler title="Click to reveal spoiler" open=false >}}This is hidden content.{{< /spoiler >}}`
 
+### `tooltip`
+
+Adds an on-hover pop-up tooltip above a given piece of text.
+
+**Parameters:**
+* `text` (required, str): The text to show in-line.
+* `tip` (required, str): The tooltip text to show on hover.
+
+**Example:** `{{< tooltip text="OFH/OC" tip="Oil filter housing & oil cooler" >}}`
+
+> [!NOTE]
+> This depends on some custom CSS. Search [assets/css/custom.css](assets/css/custom.css) for `Text tooltip style`.
 
 ## Featured image watermarking in article lists
 
@@ -99,6 +112,7 @@ This can be disabled per-page with by setting the `hideFeatureWatermark` page pa
 * should convert to webp as part of the image optimisation process
 * more imaging things [here](https://gohugo.io/content-management/image-processing/#resampling-filter) and [here](https://gohugo.io/content-management/image-processing/#processing-options)
 * test if md `![alt text](/image-path "Caption")` works. If not, it's probably [render-image.html](layouts/_default/_markup/render-image.html)
+* add spotify info on main page... might need some hacks though 🙃 https://github.com/BehnH/spotify-workers
 
 Would be handy to use some of these debug shortcodes:
 https://github.com/marcus-crane/utf9k/tree/370daacc49ce16012a2ed53d326b931b03e63269/content/debug
@@ -111,6 +125,7 @@ https://github.com/kubernetes/website/blob/main/layouts/shortcodes/code.html
 look at these potentially useful shortcodes:
 * <https://github.com/rvanhorn/hugo-dynamic-tabs>
 * <https://github.com/statropy/github-button-hugo-shortcode>
+* Well useful <https://github.com/kaushalmodi/hugo-debugprint>
 
 * Images in gallery are in the middle of other elements on first load. After reloading, it's fine.
 

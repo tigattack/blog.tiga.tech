@@ -251,4 +251,9 @@
     ],
     "description": "Typewriter-Like text. Blowfish typeit Shortcode. Documentation: https://blowfish.page/docs/shortcodes/#typeit https://www.typeitjs.com/docs/vanilla/usage/ ",
   },
+  "tooltip": {
+    "prefix": "tooltip",
+    "body": "{{< tooltip text=\"${1:Line text}\" tip=\"${2:Tooltip text}\" >}}",
+    "description": "Text with on-hover tooltip"
+  },
 }
