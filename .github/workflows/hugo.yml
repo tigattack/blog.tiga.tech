@@ -88,8 +88,10 @@ jobs:
 
       - uses: actions/cache@v4
         with:
-          path: tmp/.htmlproofer
-          key: ${{ runner.os }}-htmlproofer
+          path: |
+            tmp/.htmlproofer
+            ~/.npm
+          key: ${{ runner.os }}-test-cache-deps
 
       - uses: actions/download-artifact@v4
         with:
@@ -113,6 +115,7 @@ jobs:
       - run: npx percy snapshot -c .github/percy.yml ${{ env.HUGO_PUBLISHDIR }}
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+          PERCY_POSTINSTALL_BROWSER: true
 
   deploy:
     permissions:
