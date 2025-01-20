@@ -8,7 +8,7 @@
 
 <!-- Get params -->
 {{ $src := .src }}
-{{ $class := .class }}
+{{ $class := default "grid-w100" (.class) }}
 {{ $alt := .alt }}
 {{ $caption := .caption }}
 {{ $page := .page }}
