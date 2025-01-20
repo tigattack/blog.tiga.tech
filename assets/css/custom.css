@@ -224,7 +224,7 @@ body .gist .pl-mdi {
 
     /* Fade in and out */
     opacity: 0;
-    transition: opacity 0.5s, visibility 0.5s;
+    transition: opacity 0.3s, visibility 0.3s;
 }
 
 .tooltip:hover .tooltiptext {
