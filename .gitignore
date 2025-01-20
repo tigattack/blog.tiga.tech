@@ -10,3 +10,6 @@ hugo_stats.json
 .DS_Store
 
 tmp/
+node_modules/
+build/
+package*.json
