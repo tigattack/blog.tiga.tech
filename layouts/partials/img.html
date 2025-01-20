@@ -21,7 +21,7 @@
 
 
 {{ with $image }}
-  {{ if not $gallery }}<figure>{{ end }}
+  {{ if and (not $gallery) $caption }}<figure>{{ end }}
 
   {{ if or $disableImageOptimization (eq .MediaType.SubType "svg") }}
     {{ if $watermark }}
@@ -48,8 +48,8 @@
     {{ end }}
   {{ end }}
 
-  {{ if not $gallery }}
-    {{ with $caption }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
+  {{ if and (not $gallery) $caption }}
+    <figcaption>{{ $caption | markdownify }}</figcaption>
     </figure>
   {{ end }}
 
