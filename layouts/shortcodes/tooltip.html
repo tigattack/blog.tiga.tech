@@ -1,0 +1,9 @@
+{{/*  Lack of EOF new line is important */}}
+{{- $text := .Get "text" -}}
+{{- $tip := .Get "tip" -}}
+{{- $tip := $tip | markdownify -}}
+<span class="tooltip">
+  {{- $text | markdownify -}}
+  <span class="tooltiptext">
+    {{- $tip -}}
+</span></span>
