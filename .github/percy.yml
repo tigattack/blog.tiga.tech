@@ -1,0 +1,12 @@
+version: 2
+percy:
+  useSystemProxy: false
+  skipBaseBuild: false
+snapshot:
+  widths:
+    - 375
+    - 1920
+  minHeight: 1024
+static:
+  include:
+    - /(posts|categories|series|about|contact|projects)/**/*.html
