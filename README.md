@@ -107,6 +107,7 @@ This can be disabled per-page with by setting the `hideFeatureWatermark` page pa
   for i in `find <images dir path> -type f`; do number_plate_obfuscator/main.py -s $i ; done
   ```
 * Post thumbnails are cropped to a 1.67:1 aspect ratio (e.g. 300x180) and anchored to centre to fit the bounding box on article list pages.
+* Sometimes the [EXIF script](scripts/strip_exif.sh) will reset the original rotation defined in the orientation tag. Obviously this is a bug that needs to be fixed, but until I can be arsed, orientation data can be re-applied like so: `exiftool -orientation="Rotate 90 CW" img.png` ([source](https://exiftool.org/forum/index.php?topic=7909.0)).
 
 ### TODOs
 
