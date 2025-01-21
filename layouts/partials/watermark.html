@@ -1,6 +1,7 @@
 {{ $image := .image }}
 {{ $class := .class }}
 {{ $alt := .alt }}
+{{ $position := default "centre" .position }}
 {{ $onlyImage := default false .onlyImage }}
 
 {{ $logo := (resources.Get "watermark.png") }}
@@ -27,8 +28,16 @@
   <!-- Resize the logo based on the computed size -->
   {{ $logo = $logo.Resize (printf "%.0fx png" $size) }}
 
-  <!-- Determine the horizontal position of the logo, positioning it in the middle of the image -->
+  <!-- Determine the horizontal position of the logo based on $position -->
+  <!-- Use centre if position not left/right -->
+  <!-- If position left/right, calculate a 0.25% offset from the edge -->
   {{ $x := div (sub $image.Width $logo.Width) 2 }}
+  {{ if eq $position "left" }}
+    {{ $x = mul $image.Width 0.025 }}
+  {{ else if eq $position "right" }}
+    {{ $x = sub (sub $image.Width $logo.Width) (mul $image.Width 0.025) }}
+  {{ end }}
+
   <!--
     Determine the vertical position of the logo.
     Positions the logo slightly above the bottom of the cropped area, using a dynamic ratio to fix it ~5% above the bottom.
