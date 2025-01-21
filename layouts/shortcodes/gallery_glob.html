@@ -31,5 +31,5 @@
       }}
     {{ end }}
   </div>
-  {{ with $caption }}<figcaption>{{ $caption | markdownify }}</figcaption>{{ end }}
+  {{ with $caption }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
 </figure>
