@@ -114,7 +114,7 @@
     "body": [
       "{{< gallery >}}",
         "\t<!-- example: {{< img src=\"image-uri-here\" class=\"grid-w50 md:grid-w33 xl:grid-w25\" >}} -->",
-        "\t{{< img src=\"${1:image-uri-here}\" class=\"${2|grid-w5,grid-w10,grid-w15,grid-w20,grid-w25,grid-w30,grid-w33,grid-w35,grid-w40,grid-w45,grid-w50,grid-w55,grid-w60,grid-w65,grid-w66,grid-w70,grid-w75,grid-w80,grid-w85,grid-w90,grid-w95,grid-w100|}\" watermark=${3|true,false|} >}}",
+        "\timg$0",
       "{{< /gallery >}}"
     ],
     "description": "Showcase multiple images at once, in a responsive manner with more varied and interesting layouts. Blowfish gallery Shortcode. Documentation: https://blowfish.page/docs/shortcodes/#gallery ",
