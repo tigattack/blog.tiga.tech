@@ -13,28 +13,24 @@
 {{ $caption := .caption }}
 {{ $page := .page }}
 {{ $watermark := default true (.watermark) }}
+{{ $watermarkPos := .watermarkPos }}
 
 <!-- If gallery is true, lazy-load is disabled and srcset attr isn't included -->
 {{ $gallery := default false (.gallery) }}
 
+{{ $filter := images.AutoOrient }}
 {{ $image := $page.Resources.GetMatch (printf "*%s*" $src) }}
 
 
 {{ with $image }}
+  {{ $image = $image | images.Filter $filter }}
   {{ if and (not $gallery) $caption }}<figure>{{ end }}
 
   {{ if or $disableImageOptimization (eq .MediaType.SubType "svg") }}
-    {{ if $watermark }}
-      {{ $wmImg := partial "watermark" (dict "image" . "onlyImage" true) }}
-      <img class="{{ $class }}" src="{{ $wmImg.RelPermalink }}"/>
-
-    {{ else }}
-      <img class="{{ $class }}" src="{{ $src }}"/>
-    {{ end }}
-
+    <img class="{{ $class }}" src="{{ $src }}"/>
   {{ else }}
     {{ if $watermark }}
-      {{ $image = partial "watermark" (dict "image" . "onlyImage" true) }}
+      {{ $image = partial "watermark" (dict "image" $image "onlyImage" true "position" $watermarkPos) }}
     {{ end }}
 
     <!-- Convert image to WebP -->

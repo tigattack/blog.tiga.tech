@@ -33,9 +33,10 @@ Display an image with optional watermarking and image optimisation.
 
 **Parameters:**
 * `src` (required, str): The image path.
-* `class` (optional, str): Custom CSS classes for styling the image.
+* `class` (optional, str): Custom CSS classes for styling the image. Defaults to `grid-w100`.
 * `alt` (optional, str): Alternative text for the image.
 * `watermark` (optional, bool): Control whether watermarking is applied (default: true).
+* `watermark_position` (optional, str): Choose a watermark position. Choices: `left`, `centre` (default), `right`.
 
 **Example:** `{{< img src="images/example.jpg" class="img-class" alt="Example image" watermark=false >}}`
 

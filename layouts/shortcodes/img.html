@@ -16,6 +16,7 @@
       "alt" (.Get "alt")
       "caption" (.Get "caption" | markdownify)
       "watermark" (default true (.Get "watermark"))
+      "watermarkPos" (.Get "watermark_position")
       "page" .Page
       "gallery" $isFromGallery)
 }}

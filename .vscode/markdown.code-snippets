@@ -157,6 +157,7 @@
       "\tsrc=\"${1:image-uri-here}\"",
       "\tclass=\"${2|grid-w5,grid-w10,grid-w15,grid-w20,grid-w25,grid-w30,grid-w33,grid-w35,grid-w40,grid-w45,grid-w50,grid-w55,grid-w60,grid-w65,grid-w66,grid-w70,grid-w75,grid-w80,grid-w85,grid-w90,grid-w95,grid-w100|}\"",
       "\twatermark=${3|true,false|}",
+      "\twatermark_position=${3|centre,left,right|}",
       "\talt=\"${4:alt text}\"",
       "\tcaption=\"${5:caption}\"",
       ">}}"
