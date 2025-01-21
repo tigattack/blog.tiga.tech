@@ -4,6 +4,7 @@
 # Thanks for the inspiration https://ericmjl.github.io/blog/2023/10/14/how-i-made-a-local-pre-commit-hook-to-resize-images/
 
 import sys
+from io import BytesIO
 from os import stat
 from pathlib import Path
 
@@ -27,9 +28,17 @@ def resize_image(image_path: Path, max_width: int) -> bool:
 def compress_image(image_path: Path, max_size: int) -> bool:
     filesize = stat(image_path).st_size
     if filesize > max_size:
+        buf = BytesIO()
         with Image.open(image_path) as img:
-            img.save(image_path, optimize=True, quality=85)
-            return True
+            img.save(buf, img.format, optimize=True, quality=85)
+            new_size = buf.tell()
+        print(image_path, max_size, new_size)
+        if new_size <= max_size:
+            with open(image_path, "wb") as f:
+                f.write(buf.getbuffer())
+                return True
+        else:
+            print(f"Could not compress to desired size: {image_path}")
     return False
 
 
@@ -120,5 +129,5 @@ if __name__ == "__main__":
         print(fail_msg % msg_fmt_str)
         exit(1)
     else:
-        print("All images are within spec. Commit accepted.")
+        print("Image(s) within spec.")
         exit(0)
