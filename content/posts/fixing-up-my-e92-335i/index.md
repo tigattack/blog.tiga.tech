@@ -7,7 +7,7 @@ tags: []
 categories: ["automotive"]
 ---
 
-Since I bought my E92 335i back in May 2024, I've done a decent number of repairs and maintenance items. I gave a brief summary of these in a recent post where I wrote about buying it:
+Since I bought my E92 335i back in May 2024, I've completed a number of repairs and maintenance items. I gave a brief summary of these in a recent post where I wrote about buying it:
 
 {{< article link="/posts/new-car-bmw-335i-e92/">}}
 <br>
@@ -32,10 +32,10 @@ These are all pretty simple fixes, and were great haggling material, so I wasn't
 
 As I mentioned in my [previous post about the 335i](/posts/new-car-bmw-335i-e92/), these cars have a pretty interesting suspension setup[^1] that I hadn't seen before. It's not exactly rare or unique, but it was new to me, so I was intrigued by it nonetheless.
 
-Each front corner has two lower arms (thrust arm and control arm) and then the usual damper strut (i.e. shock absorber strut) and track rod as seen in basically every other car.
+Each front corner has two lower arms: the thrust arm and the control arm. These are complemented by the usual damper strut (i.e. shock absorber strut) and track rod, as is typical on almost every other car.
 
-* The thrust arm connects the upper, front part of the hub carrier to the front cross member.
-* The control arm connects the lower, rear part of the hub carrier to the centre cross member.
+* The thrust arm connects the upper, front part of the hub carrier to the front crossmember.
+* The control arm connects the lower, rear part of the hub carrier to the centre crossmember.
 * The damper strut, other than damping, serves to locate the upper part of the suspension.
 * The track rod connects the hub carrier to the steering rack and facilitates... steering.
 
