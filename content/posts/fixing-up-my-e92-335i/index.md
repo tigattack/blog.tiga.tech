@@ -1,5 +1,4 @@
 ---
-draft: true
 date: 2025-01-24
 title: "Fixing Up My BMW E92 335i"
 description: "Repairs and Maintenance Completed over a Year with My E92 335i"
