@@ -256,4 +256,9 @@
     "body": "{{< tooltip text=\"${1:Line text}\" tip=\"${2:Tooltip text}\" >}}",
     "description": "Text with on-hover tooltip"
   },
+  "video": {
+    "prefix": "video",
+    "body": "{{< video src=\"${1:path to video}\" controls=${2|true,false|} width=\"${3:element width}\" height=\"${4:element height}\" autoplay=${5|false,true|} loop=${6|false,true|} muted=${7|false,true|} poster=\"${8:url to image shown during loading}\" >}}",
+    "description": "Video player shortcode from https://github.com/martignoni/hugo-video"
+  },
 }
