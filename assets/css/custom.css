@@ -231,3 +231,8 @@ body .gist .pl-mdi {
     visibility: visible;
     opacity: 1;
 }
+
+/* Fix ToC too wide */
+.toc-right {
+    max-width: 21rem;
+}
