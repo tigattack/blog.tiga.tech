@@ -2,7 +2,6 @@
 # Refer to the theme docs for more details about each of these parameters.
 # https://blowfish.page/docs/getting-started/
 
-theme = "blowfish"
 baseURL = 'https://blog.tiga.tech/'
 defaultContentLanguage = "en"
 
@@ -20,6 +19,8 @@ enableEmoji = true
 # googleAnalytics = "G-XXXXXXXXX"
 
 [module]
+[[module.imports]]
+path = "github.com/martignoni/hugo-video"
 [[module.imports]]
 path = "github.com/nunocoracao/blowfish/v2"
 
