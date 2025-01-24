@@ -104,6 +104,11 @@ jobs:
           mkdir $HUGO_PUBLISHDIR
           tar xvf artifact.tar -C $HUGO_PUBLISHDIR
 
+      - run: npx percy snapshot -c .github/percy.yml ${{ env.HUGO_PUBLISHDIR }}
+        env:
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+          PERCY_POSTINSTALL_BROWSER: true
+
       - uses: chabad360/htmlproofer@v2
         with:
           directory: ${{ env.HUGO_PUBLISHDIR }}
@@ -113,11 +118,6 @@ jobs:
             --ignore_status_codes 403
             --typhoeus='{"headers":{"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:134.0) Gecko/20100101 Firefox/134.0"}}'
             --cache='{"timeframe": {"external": "30d"}}'
-
-      - run: npx percy snapshot -c .github/percy.yml ${{ env.HUGO_PUBLISHDIR }}
-        env:
-          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
-          PERCY_POSTINSTALL_BROWSER: true
 
   deploy:
     permissions:
