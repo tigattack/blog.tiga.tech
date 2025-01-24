@@ -118,6 +118,7 @@ jobs:
             --ignore_status_codes 403
             --typhoeus='{"headers":{"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:134.0) Gecko/20100101 Firefox/134.0"}}'
             --cache='{"timeframe": {"external": "30d"}}'
+            --swap_urls 'https\:\/\/blog.tiga.tech/:/'
 
   deploy:
     permissions:
