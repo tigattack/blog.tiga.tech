@@ -12,7 +12,10 @@ description = "Everything as Code."
 
 [params.author]
 name = "tigattack"
-headline = "Systems Engineer. Breaker of things."
+headline = "Site Reliability Engineer. Occasional doer of things."
 bio = ""
-links = [ { github = "https://github.com/tigattack" } ]
+links = [
+  { github = "https://github.com/tigattack" },
+  { lastfm = "https://www.last.fm/user/tigattack" }
+]
 image = "tigattack-200.png"

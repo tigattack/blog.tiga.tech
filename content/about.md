@@ -12,7 +12,7 @@ showreadingtime: false
 
 ## Hi, I'm tigattack.
 
-I live in Bristol, UK, and work as a Systems Engineer.
+I live in Bristol, UK, and work as a Site Reliability Engineer.
 
 I have a keen interest in technology, almost anything automotive, mountain biking, and surfing, but I'll probably only post about the first two here.
 
