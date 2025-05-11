@@ -1,7 +1,7 @@
 #!/usr/bin/env bash -e
 
 # Get current Blowfish version
-blowfish_ver=$(cat go.mod | grep 'require github.com/nunocoracao/blowfish/v2' | gsed -e 's/.*blowfish\/v2\s*//' -e 's/\s\/.*//')
+blowfish_ver=$(cat go.mod | grep 'github.com/nunocoracao/blowfish/v2' | gsed -e 's/.*blowfish\/v2\s*//' -e 's/\s\/.*//')
 
 # Update Blowfish theme (and any other go modules)
 echo "Current Blowfish version: $blowfish_ver"
@@ -9,14 +9,14 @@ echo "Updating Blowfish..."
 hugo mod get -u
 
 # Get updated Blowfish version
-blowfish_ver=$(cat go.mod | grep 'require github.com/nunocoracao/blowfish/v2' | gsed -e 's/.*blowfish\/v2\s*//' -e 's/\s\/.*//')
+blowfish_ver=$(cat go.mod | grep 'github.com/nunocoracao/blowfish/v2' | gsed -e 's/.*blowfish\/v2\s*//' -e 's/\s\/.*//')
 
 echo "Updated Blowfish to $blowfish_ver"
 
 # Stage and commit
 git add go.mod go.sum
 git commit -m "chore: bump blowfish to $blowfish_ver"
-echo "Commited blowfish update"
+echo "Committed blowfish update"
 
 # Get Blowfish's supported Hugo version
 echo "Checking Hugo supported, installed, and available versions..."
