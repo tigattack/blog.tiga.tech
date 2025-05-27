@@ -1,0 +1,11 @@
+<meta name="darkreader-lock">
+
+<!-- Snippet borrowed from Blowfish's layouts/partials/vendor.html to support custom gallery_glob shortcode -->
+{{ if page.HasShortcode "gallery_glob" }}
+    {{ $packeryLib := resources.Get "lib/packery/packery.pkgd.min.js" }}
+    <script defer src="{{ $packeryLib.RelPermalink }}" integrity="{{ $packeryLib.Data.Integrity }}"></script>
+
+    {{ $jsShortcodeGallery := resources.Get "js/shortcodes/gallery.js" }}
+    {{ $jsShortcodeGallery = $jsShortcodeGallery | resources.Minify | resources.Fingerprint "sha512" }}
+    <script type="text/javascript" src="{{ $jsShortcodeGallery.RelPermalink }}" integrity="{{ $jsShortcodeGallery.Data.Integrity }}"></script>
+{{ end }}
