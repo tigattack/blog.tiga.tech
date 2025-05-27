@@ -225,7 +225,7 @@ As I mentioned [above](#radiator-hoses), I drained the coolant from the coolant 
     <figcaption>Draining oil, highlighting the AT cooler coolant hose, and a fresh oil filter.</figcaption>
 </figure>
 
-It took quite a lot of flushing to get all the gunk ([see above](#the-_might-as-well-while-im-in-there_-saga)) out of the cooling system, but after seeing nothing for a few flushes in a row, I was happy.
+It took quite a lot of flushing to get all the gunk ([see above](#the-might-as-well-while-i-saga)) out of the cooling system, but after seeing nothing for a few flushes in a row, I was happy.
 
 After the flush, there was little to do but mix and fill the deionised water and antifreeze concentrate, fill the oil, and throw in the new filter.
 
