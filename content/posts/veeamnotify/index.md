@@ -106,6 +106,7 @@ Windows typically blocks execution of downloaded scripts, so we need to unblock 
 
 ```powershell
 Get-ChildItem -Path 'C:\VeeamScripts\VeeamNotify' -Filter '*.ps*' -Recurse | Unblock-File
+Get-ChildItem -Path 'C:\VeeamScripts\VeeamNotify' -Filter '*.dll' -Recurse | Unblock-File
 ```
 
 ## Configure VeeamNotify
