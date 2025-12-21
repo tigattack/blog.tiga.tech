@@ -1,7 +1,7 @@
 <!--
   Partial for rendering an image.
   Passes through optional Hugo image optimisation and my custom watermark partial.
-  Took inspiration from Blowfish's layouts/_default/_markup/render-image.html
+  Originally based on Blowfish's render-image.html approach, but heavily modified since.
 -->
 
 {{ $disableImageOptimization := .Page.Site.Params.disableImageOptimization | default false }}
@@ -26,20 +26,54 @@
   {{ $image = $image | images.Filter $filter }}
   {{ if and (not $gallery) $caption }}<figure>{{ end }}
 
-  {{ if or $disableImageOptimization (eq .MediaType.SubType "svg") }}
-    <img class="{{ $class }}" src="{{ $src }}"/>
+  {{ $isSVG := eq .MediaType.SubType "svg" }}
+  {{ if or $disableImageOptimization $isSVG }}
+    <img class="{{ $class }}" src="{{ $image.RelPermalink }}" {{ with $alt }}alt="{{ . }}"{{ end }} />
   {{ else }}
+    <!-- Apply watermark if enabled -->
     {{ if $watermark }}
       {{ $image = partial "watermark" (dict "image" $image "onlyImage" true "position" $watermarkPos) }}
     {{ end }}
 
-    <!-- Convert image to WebP -->
+    <!-- Convert to WebP for better compression -->
     {{ with $image.Process "webp" }}
+      <!-- Create responsive srcset -->
+      {{ $originalWidth := .Width }}
+      {{ $img800 := . }}
+      {{ $img1280 := . }}
+
+      {{ if gt $originalWidth 800 }}
+        {{ $img800 = .Resize "800x" }}
+      {{ end }}
+      {{ if gt $originalWidth 1280 }}
+        {{ $img1280 = .Resize "1280x" }}
+      {{ end }}
+
+      {{ $srcset := printf "%s 800w, %s 1280w" $img800.RelPermalink $img1280.RelPermalink }}
+
+      <!-- Extract grid width from class for smart sizes attribute -->
+      {{ $sizes := "(min-width: 768px) 50vw, 65vw" }}
+      {{ if $gallery }}
+        {{ $gridWidth := "33" }}
+        {{ if findRE `grid-w\d+` $class }}
+          {{ $matches := findRE `grid-w(\d+)` $class }}
+          {{ if $matches }}
+            {{ $gridWidth = replaceRE `grid-w(\d+)` "$1" (index $matches 0) }}
+          {{ end }}
+        {{ end }}
+        {{ $sizes = printf "%svw" $gridWidth }}
+      {{ end }}
+
       <img
         class="{{ $class }}"
-        {{ if not $gallery }}loading="lazy"{{ end }}
-        src="{{ .RelPermalink }}"
+        {{ if not $gallery }}loading="lazy" decoding="async" fetchpriority="auto"{{ end }}
         {{ with $alt }}alt="{{ . }}"{{ end }}
+        width="{{ .Width }}"
+        height="{{ .Height }}"
+        src="{{ $img800.RelPermalink }}"
+        srcset="{{ $srcset }}"
+        sizes="{{ $sizes }}"
+        data-zoom-src="{{ .RelPermalink }}"
       />
     {{ end }}
   {{ end }}
