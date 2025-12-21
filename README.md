@@ -88,6 +88,112 @@ This can be disabled per-page with by setting the `hideFeatureWatermark` page pa
 | `{{< gallery >}} ... {{< /gallery >}}`                                                     | [Blowfish gallery shortcode](https://blowfish.page/docs/shortcodes/#gallery), images are processed based on method used to add include them.<br>See rows above for image inclusion methods. |
 | `{{< gallery_glob images="path-glob" class="image classes" caption="optional caption" >}}` | Builds a gallery from a glob pattern.<br>Passes images through `img` shortcode and inheriting its features. |
 
+### Image Processing Pipeline
+
+> [!IMPORTANT]
+> There may be some inaccuracies, this diagram was AI-generated.
+
+```mermaid
+graph TD
+    subgraph "Image Entry Points"
+        A1["Markdown Image<br/>![alt](path)"]
+        A2["img Shortcode<br/>{{< img >}}"]
+        A3["gallery_glob Shortcode<br/>{{< gallery_glob >}}"]
+        A4["Article List<br/>Featured Images"]
+    end
+
+    subgraph "Render Layer"
+        B1["render-image.html<br/>(Markdown processor)"]
+        B2["shortcodes/img.html"]
+        B3["shortcodes/gallery_glob.html"]
+        B4["article-link/simple.html<br/>(Theme partial)"]
+    end
+
+    subgraph "Processing Layer"
+        C1["partials/img.html<br/>(Main image partial)"]
+        C2["partials/process_list_featured_img.html<br/>(List thumbnails)"]
+    end
+
+    subgraph "Watermarking Layer"
+        D1["partials/watermark.html<br/>(Full images)"]
+        D2["Watermark in<br/>process_list_featured_img"]
+    end
+
+    subgraph "Hugo Image Processing"
+        E1["images.Filter<br/>(AutoOrient)"]
+        E2[".Resize<br/>(600x webp for lists)"]
+        E3[".Process<br/>(webp conversion)"]
+        E4["Logo Resize<br/>(25% height, max 150px)"]
+        E5["images.Overlay<br/>(Apply watermark)"]
+    end
+
+    subgraph "Cache Layer"
+        F1["Site.Store<br/>(Global logo cache)"]
+        F2["Hugo Resource Cache<br/>(resources/_gen/)"]
+    end
+
+    subgraph "Output"
+        G1["HTML img tag<br/>with watermarked image"]
+        G2["CSS background-image<br/>(for list thumbnails)"]
+    end
+
+    %% Entry point routing
+    A1 --> B1
+    A2 --> B2
+    A3 --> B3
+    A4 --> B4
+
+    %% Render layer decisions
+    B1 -->|"Remote URL"| D1
+    B1 -->|"Local image"| C1
+    B2 -->|"caption.markdownify"| C1
+    B3 -->|"Loop images"| C1
+    B4 -->|"Get featured image"| C2
+
+    %% Processing layer
+    C1 -->|"SVG or disabled"| G1
+    C1 -->|"watermark=true"| D1
+    C1 -->|"Process"| E1
+    C2 -->|"Resize + convert"| E2
+    C2 -->|"Should watermark"| D2
+
+    %% Watermarking operations
+    D1 --> F1
+    D2 --> F1
+    F1 -->|"Get cached logo"| E4
+    E4 --> E5
+    D1 --> E5
+    D2 --> E5
+
+    %% Hugo processing
+    E1 --> E3
+    E2 --> E5
+    E3 --> F2
+    E5 --> F2
+
+    %% Output
+    F2 -->|"img partial"| G1
+    F2 -->|"process_list partial"| G2
+
+    %% Styling
+    classDef entryPoint fill:#1e3a5f,stroke:#4a90e2,stroke-width:2px,color:#fff
+    classDef render fill:#3d2817,stroke:#d4a574,stroke-width:2px,color:#fff
+    classDef process fill:#2d1b3d,stroke:#9b59b6,stroke-width:2px,color:#fff
+    classDef watermark fill:#3d1a2b,stroke:#e91e63,stroke-width:2px,color:#fff
+    classDef hugo fill:#1b3d1b,stroke:#66bb6a,stroke-width:2px,color:#fff
+    classDef cache fill:#3d3617,stroke:#fdd835,stroke-width:2px,color:#fff
+    classDef output fill:#1a3d3a,stroke:#26a69a,stroke-width:2px,color:#fff
+
+
+    class A1,A2,A3,A4 entryPoint
+    class B1,B2,B3,B4 render
+    class C1,C2 process
+    class D1,D2 watermark
+    class E1,E2,E3,E4,E5 hugo
+    class F1,F2 cache
+    class G1,G2 output
+```
+
 ## Personal Notes
 
 * [Blowfish built-in shortcodes](https://blowfish.page/docs/shortcodes/).
