@@ -1,39 +1,146 @@
-<!--
-  Heavily modified version of Blowfish's layouts/_default/_markup/render-image.html.
+{{/*
+  Heavily modified version of Blowfish v2.93.0's layouts/_default/_markup/render-image.html.
   Purpose of modifications is to support custom watermark partial.
-  Much of the original functionality from Blowfish's render-image.html has been split out to the img partial.
--->
+  Integrates watermark support with upstream's responsive image handling.
+*/}}
 
-{{ $disableImageOptimization := .Page.Site.Params.disableImageOptimization | default false }}
-{{ $url := urls.Parse .Destination }}
-{{ $altText := .Text }}
-{{ $caption := .Title }}
+{{- define "RenderImageSimple" -}}
+  {{- $imgObj := .imgObj -}}
+  {{- $src := .src -}}
+  {{- $alt := .alt -}}
+  {{- $watermark := .watermark -}}
+  {{- $watermarkedImg := $imgObj -}}
 
-{{ $watermark := true }}
+  {{- if and $watermark $imgObj -}}
+    {{- $watermarkedImg = partial "watermark" (dict "image" $imgObj "onlyImage" true) -}}
+    {{- $src = $watermarkedImg.RelPermalink -}}
+  {{- end -}}
 
-{{ $class := "my-0 rounded-md"}}
+  <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="{{ $alt }}"
+    src="{{ $src }}"
+    {{ with $watermarkedImg -}}
+      {{ with $watermarkedImg.Width }}width="{{ . }}"{{ end }}
+      {{ with $watermarkedImg.Height }}height="{{ . }}"{{ end }}
+    {{- end }}>
+{{- end -}}
 
-{{ if eq (substr $altText -5 5) "no-wm" }}
-{{ $altText = (trim (replace $altText "no-wm" "") " ") }}
-{{ $watermark = false }}
-{{ end }}
+{{- define "RenderImageResponsive" -}}
+  {{/* Responsive Image
+    The current setting sizes="(min-width: 768px) 50vw, 65vw" makes the iPhone 16 and 16 Pro
+    select a smaller image, while the iPhone 16 Pro Max selects a larger image.
 
-{{ if findRE "^https?" $url.Scheme }}
-  {{ $wmImg := partial "watermark" (dict "image" $url.String "onlyImage" true) }}
-  <figure>
-    <img class={{ $class }} loading="lazy" src="{{ $wmImg.RelPermalink }}" alt="{{ $altText }}" />
-    {{ with $caption }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
-  </figure>
+    Steps:
+    1. Check the media queries in the `sizes` property.
+    2. Find the first matching value. For example, on a mobile device with a CSS pixel width
+    of 390px and DPR = 3 (iPhone 13), given setting sizes="(min-width: 768px) 50vw, 100vw",
+    it matches the `100vw` option.
+    3. Calculate the optimal image size: 390 × 3 × 100% (100vw) = 1170.
+    4. Find the corresponding match in the `srcset`.
 
-{{ else }}
-  {{ partial 
-    "img"
-    (dict
-      "src" $url.String
-      "class" $class
-      "alt" $altText
-      "caption" $caption
-      "page" $.Page
-      "watermark" $watermark)
-  }}
-{{ end }}
+    To make the browser select a smaller image on mobile devices
+    override the template and change the `sizes` property to "(min-width: 768px) 50vw, 30vw"
+
+    The sizes="auto" is valid only when loading="lazy".
+  */}}
+  {{- $imgObj := .imgObj -}}
+  {{- $alt := .alt -}}
+  {{- $watermark := .watermark -}}
+  {{- $originalWidth := $imgObj.Width -}}
+
+  {{- $img800 := $imgObj -}}
+  {{- $img1280 := $imgObj -}}
+  {{- if gt $originalWidth 800 -}}
+    {{- $img800 = $imgObj.Resize "800x" -}}
+  {{- end -}}
+  {{- if gt $originalWidth 1280 -}}
+    {{- $img1280 = $imgObj.Resize "1280x" -}}
+  {{- end -}}
+
+  {{- if $watermark -}}
+    {{- $img800 = partial "watermark" (dict "image" $img800 "onlyImage" true) -}}
+    {{- $img1280 = partial "watermark" (dict "image" $img1280 "onlyImage" true) -}}
+    {{- $imgObj = partial "watermark" (dict "image" $imgObj "onlyImage" true) -}}
+  {{- end -}}
+
+  {{- $srcset := printf "%s 800w, %s 1280w" $img800.RelPermalink $img1280.RelPermalink -}}
+
+
+  <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="auto"
+    alt="{{ $alt }}"
+    {{ with $imgObj.Width }}width="{{ . }}"{{ end }}
+    {{ with $imgObj.Height }}height="{{ . }}"{{ end }}
+    src="{{ $img800.RelPermalink }}"
+    srcset="{{ $srcset }}"
+    sizes="(min-width: 768px) 50vw, 65vw"
+    data-zoom-src="{{ $imgObj.RelPermalink }}">
+{{- end -}}
+
+{{- define "RenderImageCaption" -}}
+  {{- with .caption -}}
+    <figcaption>{{ . | markdownify }}</figcaption>
+  {{- end -}}
+{{- end -}}
+
+{{- $disableImageOptimizationMD := .Page.Site.Params.disableImageOptimizationMD | default false -}}
+{{- $urlStr := .Destination | safeURL -}}
+{{- $url := urls.Parse $urlStr -}}
+{{- $altText := .Text -}}
+{{- $caption := .Title -}}
+{{- $isRemote := findRE "^(https?|data)" $url.Scheme -}}
+{{- $resource := "" -}}
+
+{{- $watermark := true -}}
+{{- if eq (substr $altText -5 5) "no-wm" -}}
+  {{- $altText = (trim (replace $altText "no-wm" "") " ") -}}
+  {{- $watermark = false -}}
+{{- end -}}
+
+{{- if not $isRemote -}}
+  {{- $resource = or ($.Page.Resources.GetMatch $urlStr) (resources.Get $urlStr) -}}
+{{- end -}}
+
+
+<figure
+  {{- range $k, $v := .Attributes -}}
+    {{- if $v -}}
+      {{- printf " %s=%q" $k ($v | transform.HTMLEscape) | safeHTMLAttr -}}
+    {{- end -}}
+  {{- end -}}>
+  {{- if $isRemote -}}
+    {{- $remoteImg := resources.GetRemote $urlStr -}}
+    {{- with $remoteImg -}}
+      {{- template "RenderImageSimple" (dict "imgObj" . "src" .RelPermalink "alt" $altText "watermark" $watermark) -}}
+    {{- else -}}
+      {{- template "RenderImageSimple" (dict "imgObj" "" "src" $urlStr "alt" $altText "watermark" false) -}}
+    {{- end -}}
+  {{- else if $resource -}}
+    {{- $isSVG := eq $resource.MediaType.SubType "svg" -}}
+    {{- $shouldOptimize := and (not $disableImageOptimizationMD) (not $isSVG) -}}
+    {{- if $shouldOptimize -}}
+      {{- template "RenderImageResponsive" (dict "imgObj" $resource "alt" $altText "watermark" $watermark) -}}
+    {{- else -}}
+      {{/* Not optimize image
+        If it is an SVG file, pass the permalink
+        Otherwise, pass the resource to allow width and height attributes
+      */}}
+      {{- if $isSVG -}}
+        {{- template "RenderImageSimple" (dict "imgObj" "" "src" $resource.RelPermalink "alt" $altText "watermark" false) -}}
+      {{- else -}}
+        {{- template "RenderImageSimple" (dict "imgObj" $resource "src" $resource.RelPermalink "alt" $altText "watermark" $watermark) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- else -}}
+    {{- template "RenderImageSimple" (dict "imgObj" "" "src" $urlStr "alt" $altText "watermark" false) -}}
+  {{- end -}}
+
+  {{- template "RenderImageCaption" (dict "caption" $caption) -}}
+</figure>
