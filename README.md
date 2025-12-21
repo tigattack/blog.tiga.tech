@@ -134,8 +134,9 @@ look at these potentially useful shortcodes:
 ## Upgrading
 
 1. Upgrade theme and check Hugo version: `scripts/update_blowfish.sh`
-2. If script suggests using `scripts/update_hugo.sh`:
-  1. go to [Homebrew/homebrew-core/hugo.rb](https://github.com/Homebrew/homebrew-core/commits/master/Formula/h/hugo.rb) and copy the commit hash for the relevant version.
-  2. Run `scripts/update_hugo.sh commit_hash_here`
+   - This will automatically install the correct Hugo version if needed.
+2. If required, manually install a specific Hugo version: `scripts/install_hugo.sh <version>`
+   - Example: `scripts/install_hugo.sh 0.152.2`
+   - Omit version to install the latest: `scripts/install_hugo.sh`
 
 Update `number_plate_obfuscator`: `git submodule update --remote number_plate_obfuscator`
