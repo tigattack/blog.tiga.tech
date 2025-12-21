@@ -50,9 +50,9 @@ jobs:
           path: |
             ${{ env.HUGO_CACHEDIR }}
             ${{ env.HUGO_RESOURCEDIR }}
-          key: ${{ runner.os }}-hugo-cache-${{ steps.extract_branch.outputs.branch }}
+          key: ${{ runner.os }}-hugo-cache-${{ hashFiles('**/go.mod', '**/go.sum') }}-hugo_v${{ env.HUGO_VERSION }}-${{ steps.extract_branch.outputs.branch }}
           restore-keys: |
-            ${{ runner.os }}-hugo-cache-
+            ${{ runner.os }}-hugo-cache-${{ hashFiles('**/go.mod', '**/go.sum') }}-hugo_v${{ env.HUGO_VERSION }}-
 
       - uses: actions/configure-pages@v5
         id: pages
