@@ -11,6 +11,8 @@ keywords:
   - docker
 tags: [technology]
 authors: [tigattack]
+series: ["Self-Hosted Location History"]
+series_order: 1
 hideFeatureWatermark: true
 ---
 

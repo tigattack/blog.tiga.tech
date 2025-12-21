@@ -31,3 +31,9 @@ GPIO
 ESPHome
 crossmember
 Viton
+OwnTracks
+Dawarich
+geopoint
+geopoints
+PhotoPrism
+Immich
