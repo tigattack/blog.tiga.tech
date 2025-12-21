@@ -12,7 +12,7 @@ summaryLength = 0
 
 buildDrafts = false
 buildFuture = false
-timeout = "300s"
+timeout = "600s"
 
 enableEmoji = true
 
