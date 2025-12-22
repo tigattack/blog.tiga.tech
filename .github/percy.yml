@@ -13,13 +13,5 @@ static:
     - /(posts|categories|series|about|contact|projects)/**/*.html
   exclude:
     - /**/page/1/index.html
-  options:
-    - files: "/posts/**/*.html"
-      execute: |
-        // Force all lazy images to load eagerly
-        document.querySelectorAll('img[loading="lazy"]').forEach(img => {
-          img.loading = 'eager';
-        });
-        // Scroll to trigger lazy load
-        window.scrollTo(0, 0);
-        window.scrollTo(0, document.body.scrollHeight);
+discovery:
+  capture-srcset: true
