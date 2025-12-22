@@ -7,6 +7,9 @@ snapshot:
     - 375
     - 1920
   minHeight: 1024
+  enableJavaScript: true
+  percyCSS: |
+    img[loading="lazy"] { content-visibility: visible !important; }
 static:
   include:
     - /(posts|categories|series|about|contact|projects)/**/*.html
