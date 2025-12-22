@@ -8,27 +8,18 @@ snapshot:
     - 1920
   minHeight: 1024
   enableJavaScript: true
-  discovery:
-    networkIdleTimeout: 750
-  execute:
-    beforeSnapshot: |
-      const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-      
-      // Force all lazy images to load eagerly and scroll them into view
-      for (const img of document.querySelectorAll('img[loading="lazy"]')) {
-        img.loading = 'eager';
-        img.scrollIntoView();
-        await sleep(100);
-      }
-      
-      // Scroll up and down to ensure all lazy loads are triggered
-      window.scrollTo(0, 0);
-      await sleep(500);
-      window.scrollTo(0, document.body.scrollHeight);
-      await sleep(500);
-      window.scrollTo(0, 0);
 static:
   include:
     - /(posts|categories|series|about|contact|projects)/**/*.html
   exclude:
     - /**/page/1/index.html
+  options:
+    - files: "/posts/**/*.html"
+      execute: |
+        // Force all lazy images to load eagerly
+        document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+          img.loading = 'eager';
+        });
+        // Scroll to trigger lazy load
+        window.scrollTo(0, 0);
+        window.scrollTo(0, document.body.scrollHeight);
