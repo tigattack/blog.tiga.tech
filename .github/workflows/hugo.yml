@@ -93,7 +93,7 @@ jobs:
         with:
           node-version: '14'
 
-      - run: npm install --save-dev @percy/cli
+      - run: npm install @percy/cli
 
       - uses: actions/download-artifact@v4
         with:
