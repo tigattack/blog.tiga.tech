@@ -3,6 +3,16 @@
 <!-- Snippet borrowed from Blowfish's layouts/partials/vendor.html to support custom gallery_glob shortcode -->
 {{ if page.HasShortcode "gallery_glob" }}
     {{ $packeryLib := resources.Get "lib/packery/packery.pkgd.min.js" }}
+    {{ $galleryCSS := resources.Get "css/components/gallery.css" }}
+    <script defer src="{{ $packeryLib.RelPermalink }}" integrity="{{ $packeryLib.Data.Integrity }}"></script>
+    {{ $galleryCSS = $galleryCSS | resources.Fingerprint "sha512" }}
+    <link
+        type="text/css"
+        rel="stylesheet"
+        href="{{ $galleryCSS.RelPermalink }}"
+        integrity="{{ $galleryCSS.Data.Integrity }}">
+
+    {{ $packeryLib := resources.Get "lib/packery/packery.pkgd.min.js" }}
     <script defer src="{{ $packeryLib.RelPermalink }}" integrity="{{ $packeryLib.Data.Integrity }}"></script>
 
     {{ $jsShortcodeGallery := resources.Get "js/shortcodes/gallery.js" }}
