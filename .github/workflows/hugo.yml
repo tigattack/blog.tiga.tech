@@ -104,7 +104,7 @@ jobs:
           mkdir $HUGO_PUBLISHDIR
           tar xvf artifact.tar -C $HUGO_PUBLISHDIR
 
-      - run: npx percy snapshot -c .github/percy.yml ${{ env.HUGO_PUBLISHDIR }}
+      - run: npx percy snapshot -c .github/percy/percy.yml .github/percy/snapshots.js
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
           PERCY_POSTINSTALL_BROWSER: true
