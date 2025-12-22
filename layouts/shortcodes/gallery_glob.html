@@ -1,7 +1,8 @@
 <!-- Mostly borrowed from hugo blowfish theme's gallery & carousel shortcodes -->
 
 <!-- Get site's image optimisation config -->
-{{ $disableImageOptimization := .Page.Site.Params.disableImageOptimization | default false }}
+{{ $disableImageOptimization := .Page.Site.Store.Get "disableImageOptimization" | default false }}
+
 <!-- Generate random ID for the div element -->
 {{ $id := delimit (slice "gallery_glob" (partial "functions/uid.html" .)) "-" }}
 
