@@ -10,3 +10,5 @@ snapshot:
 static:
   include:
     - /(posts|categories|series|about|contact|projects)/**/*.html
+  exclude:
+    - /**/page/1/index.html
