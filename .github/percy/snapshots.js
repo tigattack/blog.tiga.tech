@@ -45,6 +45,9 @@ module.exports = async () => {
     });
   });
 
+  // Allow process to exit even if server is still running
+  server.unref();
+
   // Get all HTML files matching the pattern
   const files = glob.sync('public/{posts,categories,series,about,contact,projects}/**/*.html', {
     ignore: '**/page/1/index.html'
