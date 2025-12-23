@@ -88,6 +88,107 @@ This can be disabled per-page with by setting the `hideFeatureWatermark` page pa
 | `{{< gallery >}} ... {{< /gallery >}}`                                                     | [Blowfish gallery shortcode](https://blowfish.page/docs/shortcodes/#gallery), images are processed based on method used to add include them.<br>See rows above for image inclusion methods. |
 | `{{< gallery_glob images="path-glob" class="image classes" caption="optional caption" >}}` | Builds a gallery from a glob pattern.<br>Passes images through `img` shortcode and inheriting its features. |
 
+### Image Processing Pipeline
+
+> [!IMPORTANT]
+> There may be some inaccuracies, this diagram was AI-generated.
+
+```mermaid
+graph TD
+    subgraph "Image Entry Points"
+        A1["Markdown Image<br/>![alt](path)"]
+        A2["img Shortcode<br/>{{< img >}}"]
+        A3["gallery_glob Shortcode<br/>{{< gallery_glob >}}"]
+        A4["Article List<br/>Featured Images"]
+    end
+
+    subgraph "Render/Processing Layer"
+        B1["render-image.html<br/>(Markdown processor)"]
+        B1a["RenderImageSimple<br/>(template in render-image.html)"]
+        B1b["RenderImageResponsive<br/>(template in render-image.html)"]
+        B2["shortcodes/img.html"]
+        B3["shortcodes/gallery_glob.html"]
+        B4["article-link/simple.html"]
+        C1["partials/img.html"]
+        C2["partials/process_list_featured_img.html"]
+    end
+
+    subgraph "Watermarking"
+        D1["partials/watermark.html"]
+    end
+
+    subgraph "Hugo Image Processing"
+        E1["AutoOrient filter<br/>(in img.html)"]
+        E2["Resize operation<br/>(in render-image.html)"]
+        E3["Resize for srcset<br/>(in img.html)"]
+        E4["Resize operation<br/>(in process_list)"]
+        E5["WebP conversion<br/>(in img.html)"]
+    end
+
+    subgraph "Cache/Output"
+        F1["Hugo Resource Cache"]
+        G1["HTML img tag with srcset"]
+    end
+
+    %% Entry points
+    A1 --> B1
+    A2 --> B2
+    A3 --> B3
+    A4 --> B4
+
+    %% Markdown path (render-image.html)
+    B1 -->|"Resource not found"| G1
+    B1 -->|"Remote or SVG or<br/>optimization disabled"| B1a
+    B1 -->|"Local resource +<br/>optimization enabled"| B1b
+    
+    B1a -->|"watermark=false"| G1
+    B1a -->|"watermark=true"| D1
+    D1 -->|"Watermarked image<br/>(no srcset)"| G1
+    
+    B1b -->|"Resize to 800x/1280x"| E2
+    E2 -->|"watermark=true"| D1
+    E2 -->|"watermark=false"| F1
+    D1 -->|"Watermarks all 3 sizes<br/>(800x, 1280x, original)"| F1
+
+    %% img shortcode path
+    B2 --> C1
+    
+    %% gallery_glob path
+    B3 -->|"Loop images"| C1
+
+    %% img.html path
+    C1 -->|"SVG/disabled"| G1
+    C1 -->|"Get resource + AutoOrient"| E1
+    E1 -->|"watermark=true"| D1
+    E1 -->|"watermark=false"| E5
+    D1 -->|"Watermarked original"| E5
+    E5 -->|"Convert to WebP"| E3
+    E3 -->|"Create srcset sizes"| F1
+
+    %% Article list path
+    B4 --> C2
+    C2 -->|"Resize first"| E4
+    E4 -->|"600x webp"| D1
+    E4 -->|"watermark=false"| F1
+    D1 -->|"Watermarked thumb"| F1
+
+    %% Output
+    F1 --> G1
+
+    %% Styling
+    classDef entryPoint fill:#1e3a5f,stroke:#4a90e2,stroke-width:2px,color:#fff
+    classDef render fill:#3d2817,stroke:#d4a574,stroke-width:2px,color:#fff
+    classDef watermark fill:#3d1a2b,stroke:#e91e63,stroke-width:2px,color:#fff
+    classDef hugo fill:#1b3d1b,stroke:#66bb6a,stroke-width:2px,color:#fff
+    classDef cache fill:#1a3d3a,stroke:#26a69a,stroke-width:2px,color:#fff
+
+    class A1,A2,A3,A4 entryPoint
+    class B1,B1a,B1b,B2,B3,B4,C1,C2 render
+    class D1 watermark
+    class E1,E2,E3,E4,E5 hugo
+    class F1,G1 cache
+```
+
 ## Personal Notes
 
 * [Blowfish built-in shortcodes](https://blowfish.page/docs/shortcodes/).

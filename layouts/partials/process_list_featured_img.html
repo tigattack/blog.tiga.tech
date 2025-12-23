@@ -7,20 +7,27 @@
 {{ $image := .image }}
 {{ $class := .class }}
 {{ $page := .page }}
+{{ $onlyImage := default false .onlyImage }}
 
 {{ $logo := (resources.Get "watermark.png") }}
 {{ $watermarked := false }}
 
-<!-- Disable image optimisation per site params or if image is SVG -->
-{{ $disableImageOptimization := default false (
-    or
-      $page.Site.Params.disableImageOptimization 
-      (strings.HasSuffix $image ".svg"))
-}}
+{{ $should_wm := true }}
 
-<!-- Throw an error if either the image or logo is missing -->
-{{ if or (not $image) (not $logo) }}
-  {{ errorf "watermark_post: Image or logo missing. Context: %+v" . }}
+<!-- Get image optimisation setting from caller, fallback to site params or SVG check -->
+{{ $disableImageOptimization := false }}
+{{ if isset . "disableImageOptimization" }}
+  {{ $disableImageOptimization = .disableImageOptimization }}
+{{ else }}
+  {{ $isSVG := eq $image.MediaType.SubType "svg" }}
+  {{ $siteDisabled := $page.Site.Store.Get "disableImageOptimization" }}
+  {{ $disableImageOptimization = or $siteDisabled $isSVG }}
+{{ end }}
+
+<!-- Skip watermarking and warn if image or logo not found -->
+{{ if not (and $image $logo) }}
+  {{ warnf "process_list_featured_img: Image or logo missing. Context: %+v" . }}
+  {{ $should_wm = false }}
 {{ end }}
 
 
@@ -29,8 +36,15 @@
   {{ $image = $image.Resize "600x webp" }}
 {{ end }}
 
-<!-- Watermark image unless image name contains "watermark" or hideFeatureWatermark=true in page parameters  -->
-{{ if not (or (strings.Contains (strings.ToLower $image) "watermark") $page.Params.hideFeatureWatermark) }}
+<!-- Skip watermarking if image name contains "watermark" or hideFeatureWatermark=true in page parameters  -->
+{{ if strings.Contains (strings.ToLower $image.Name) "watermark" }}
+  {{ $should_wm = false }}
+{{ end }}
+{{ if $page.Params.hideFeatureWatermark }}
+  {{ $should_wm = false }}
+{{ end }}
+
+{{ if $should_wm }}
   <!-- Set watermark size to 25% of the image height, capped at 150px -->
   {{ $size := math.Round (mul $image.Height 0.25) }}
   {{ $size = cond (ge $size 150.0) ($size) 150.0 }}
@@ -67,4 +81,15 @@
 
 {{ end }}
 
-<div class="{{ $class }}" style="background-image:url({{ $image.RelPermalink }});" data-auto-watermarked="{{ $watermarked }}"></div>
+{{ if $onlyImage }}
+  {{ return $image }}
+{{ else }}
+  <img
+    src="{{ $image.RelPermalink }}"
+    alt="{{ $page.Params.featuredImageAlt | default ($page.Title | emojify) }}"
+    loading="lazy"
+    decoding="async"
+    class="{{ $class }}"
+    data-auto-watermarked="{{ $watermarked }}"
+  >
+{{ end }}

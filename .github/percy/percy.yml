@@ -1,0 +1,17 @@
+version: 2
+percy:
+  useSystemProxy: false
+  skipBaseBuild: false
+snapshot:
+  widths:
+    - 375
+    - 1920
+  minHeight: 1024
+  enableJavaScript: true
+# static:
+#   include:
+#     - /(posts|categories|series|about|contact|projects)/**/*.html
+#   exclude:
+#     - /**/page/1/index.html
+discovery:
+  capture-srcset: true

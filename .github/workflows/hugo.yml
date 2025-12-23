@@ -93,7 +93,7 @@ jobs:
         with:
           node-version: '14'
 
-      - run: npm install --save-dev @percy/cli
+      - run: npm install @percy/cli
 
       - uses: actions/download-artifact@v4
         with:
@@ -104,7 +104,7 @@ jobs:
           mkdir $HUGO_PUBLISHDIR
           tar xvf artifact.tar -C $HUGO_PUBLISHDIR
 
-      - run: npx percy snapshot -c .github/percy.yml ${{ env.HUGO_PUBLISHDIR }}
+      - run: npx percy snapshot -c .github/percy/percy.yml .github/percy/snapshots.js
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
           PERCY_POSTINSTALL_BROWSER: true
@@ -115,7 +115,7 @@ jobs:
           arguments: >-
             --checks Links,Images,Scripts,Favicon,OpenGraph
             --ignore_missing_alt
-            --ignore_status_codes 403
+            --ignore_status_codes 403,429
             --typhoeus='{"headers":{"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:134.0) Gecko/20100101 Firefox/134.0"}}'
             --cache='{"timeframe": {"external": "30d"}}'
             --swap_urls 'https\:\/\/blog.tiga.tech/:/'

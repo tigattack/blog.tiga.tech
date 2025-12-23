@@ -16,7 +16,7 @@
 {{ end }}
 
 <!-- Skip watermarking if image name contains "watermark" -->
-{{ if strings.Contains (strings.ToLower $image) "watermark" }}
+{{ if strings.Contains (strings.ToLower $image.Name) "watermark" }}
   {{ $should_wm = false }}
 {{ end }}
 
@@ -40,7 +40,7 @@
 
   <!--
     Determine the vertical position of the logo.
-    Positions the logo slightly above the bottom of the cropped area, using a dynamic ratio to fix it ~5% above the bottom.
+    Positions the logo slightly above the bottom of the image, using a dynamic ratio to fix it ~5% above the bottom.
   -->
   {{ $y := div (sub $image.Height $logo.Height) 1.05 }}
 
@@ -53,5 +53,12 @@
 {{ if $onlyImage }}
   {{ return $image }}
 {{ else }}
-  <img alt="{{ $alt }}" src="{{ $image.RelPermalink }}" class="{{ $class }}" data-auto-watermarked="{{ $watermarked }}"/>
+  <img
+    src="{{ $image.RelPermalink }}"
+    alt="{{ $alt }}"
+    loading="lazy"
+    decoding="async"
+    class="{{ $class }}"
+    data-auto-watermarked="{{ $watermarked }}"
+  >
 {{ end }}
