@@ -57,7 +57,8 @@
     {{- $imgObj = partial "watermark" (dict "image" $imgObj "onlyImage" true) -}}
   {{- end -}}
 
-  {{- /* Create responsive srcset from the watermarked image */ -}}
+  {{- /* Convert to WebP and create responsive variants */ -}}
+  {{- $imgObj = $imgObj.Process "webp" -}}
   {{- $img800 := $imgObj -}}
   {{- $img1280 := $imgObj -}}
   {{- if gt $originalWidth 800 -}}
