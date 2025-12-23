@@ -37,7 +37,7 @@
 
     <!-- Convert to WebP for better compression -->
     {{ with $image.Process "webp" }}
-      <!-- Create responsive srcset -->
+      <!-- Create responsive srcset from the watermarked image -->
       {{ $originalWidth := .Width }}
       {{ $img800 := . }}
       {{ $img1280 := . }}

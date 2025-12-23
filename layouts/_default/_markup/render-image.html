@@ -52,6 +52,12 @@
   {{- $watermark := .watermark -}}
   {{- $originalWidth := $imgObj.Width -}}
 
+  {{- /* Apply watermark if enabled */ -}}
+  {{- if $watermark -}}
+    {{- $imgObj = partial "watermark" (dict "image" $imgObj "onlyImage" true) -}}
+  {{- end -}}
+
+  {{- /* Create responsive srcset from the watermarked image */ -}}
   {{- $img800 := $imgObj -}}
   {{- $img1280 := $imgObj -}}
   {{- if gt $originalWidth 800 -}}
@@ -59,12 +65,6 @@
   {{- end -}}
   {{- if gt $originalWidth 1280 -}}
     {{- $img1280 = $imgObj.Resize "1280x" -}}
-  {{- end -}}
-
-  {{- if $watermark -}}
-    {{- $img800 = partial "watermark" (dict "image" $img800 "onlyImage" true) -}}
-    {{- $img1280 = partial "watermark" (dict "image" $img1280 "onlyImage" true) -}}
-    {{- $imgObj = partial "watermark" (dict "image" $imgObj "onlyImage" true) -}}
   {{- end -}}
 
   {{- $srcset := printf "%s 800w, %s 1280w" $img800.RelPermalink $img1280.RelPermalink -}}
