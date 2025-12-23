@@ -79,7 +79,7 @@
   {{ end }}
 
   {{ if and (not $gallery) $caption }}
-    <figcaption>{{ $caption | markdownify }}</figcaption>
+    <figcaption>{{ $caption | safeHTML }}</figcaption>
     </figure>
   {{ end }}
 
