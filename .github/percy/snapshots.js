@@ -8,14 +8,14 @@ const PORT = 5338;
 // Simple static file server
 const server = http.createServer((req, response) => {
   const filePath = path.join(__dirname, '../../public', req.url === '/' ? 'index.html' : req.url);
-  
+
   fs.readFile(filePath, (err, data) => {
     if (err) {
       response.writeHead(404);
       response.end('Not found');
       return;
     }
-    
+
     const ext = path.extname(filePath);
     const contentType = {
       '.html': 'text/html',
@@ -30,7 +30,7 @@ const server = http.createServer((req, response) => {
       '.woff': 'font/woff',
       '.woff2': 'font/woff2'
     }[ext] || 'application/octet-stream';
-    
+
     response.writeHead(200, { 'Content-Type': contentType });
     response.end(data);
   });
@@ -55,8 +55,9 @@ module.exports = async () => {
 
   return files.map(file => {
     const relativePath = path.relative('public', file);
-    const name = relativePath.replace(/\.html$/, '');
-    
+    // Use the full path with leading slash to match static directory snapshot names
+    const name = `/${relativePath}`;
+
     const snapshot = {
       name,
       url: `http://localhost:${PORT}/${relativePath}`
